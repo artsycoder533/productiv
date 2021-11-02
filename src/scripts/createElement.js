@@ -24,4 +24,11 @@ function createLink(type, className, src, text) {
     return el;
 }
 
-export { createElement, createElementWithClass, createTextElement, createLink };
+function createElementWithDataId(type, className, text, id) {
+    const el = document.createElement(type);
+    el.classList.add(className);
+    el.textContent = text;
+    el.dataset.id = id;
+}
+
+export { createElement, createElementWithClass, createTextElement, createLink, createElementWithDataId };
