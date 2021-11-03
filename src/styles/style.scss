@@ -120,7 +120,8 @@ a {
 .header__upload {
     display: flex;
     flex-direction: column;
-    width: 225px;
+    width: 300px;
+    height: 100px;
     position: absolute;
     top: 60px;
     right: 10px;
@@ -128,7 +129,7 @@ a {
     padding: 1rem;
     z-index: 2;
     border-radius: 1rem;
-    // visibility: hidden;
+    visibility: hidden;
     /* transform: translateX(100%); */
     transition: all 0.4s ease-in-out;
     opacity: 0;
@@ -138,16 +139,16 @@ a {
     cursor: pointer;
 }
 
-// .header__upload::after {
-//     content: " ";
-//     position: absolute;
-//     bottom: 100%;  /* At the top of the tooltip */
-//     left: 75%;
-//     margin-left: -5px;
-//     border-width: 5px;
-//     border-style: solid;
-//     border-color: transparent transparent lightgray transparent;
-// }
+.header__upload::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 75%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent lightgray transparent;
+}
 
 .visible {
     visibility: visible;
@@ -368,4 +369,5 @@ a {
     top: 50px;
     width: calc(100vw - 260px);
     height: calc(100vh - 50px);
+    z-index: -1;
 }
