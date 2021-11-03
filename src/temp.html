@@ -8,6 +8,164 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+        <!-- header -->
+    <header class="header"> 
+        <section class="header__controls">
+            <i class="fas fa-bars" id="hamburger"></i>
+            <!-- <span class="header__title">Dashboard</span> -->
+        </section>
+        <section class="header__user">
+            <div class="header__title">
+                <h3 class="header__display">Dashboard</h3>
+            </div>
+            <div class="header__right">
+                <span class="header__username">artsycoder533</span>
+                <div class="header__image">
+                    <img src="user.png" alt="" id="profile">
+                </div>
+                <div class="header__upload">
+                    <label for="file">Change Profile Image</label>
+                    <input type="file" name="imageUpload" id="imgUpload" accept="image/jpg">
+                </div>
+                <i class="fas fa-sign-out-alt" id="logout"></i>
+            </div>
+            
+        </section>
+        
+    </header>
     
+
+    <!-- sidebar navigation -->
+    <nav class="sidebar">
+        <article class="sidebar__brand">
+            <span class="sidebar__company"><i class="fas fa-business-time"> Productiv</i> </span>
+        </article>
+        <ul class="sidebar__links">
+            <li>
+                <div class="sidebar__link active" data-id="Dashboard">
+                    <a href="#">
+                        <i class="fas fa-th-large"></i>
+                        <span class="sidebar__name">Dashboard</span>
+                    </a>
+                </div>
+            </li>
+
+            <li>
+                <div class="sidebar__link" data-id="Inbox">
+                    <a href="#">
+                        <i class="fas fa-inbox"></i>
+                        <span class="sidebar__name">Inbox</span>
+                    </a>
+                    <div class="notification">
+                        <div class="number">3</div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="sidebar__link" data-id="Projects">
+                    <a href="#">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="sidebar__name">Projects</span>
+                    </a>
+                    <i class="fas fa-chevron-down sub"></i>
+                </div>
+                <ul class="sidebar__sublinks">
+                    <li><a href="#">Work</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Miscellaneous</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="sidebar__link" data-id="Tasks">
+                    <a href="#">
+                        <i class="fas fa-tasks"></i>
+                        <span class="sidebar__name">Tasks</span>
+                    </a>
+                    <i class="fas fa-chevron-down sub"></i>
+                </div>
+                <ul class="sidebar__sublinks">
+                    <li><a href="#">Due Today</a></li>
+                    <li><a href="#">Upcoming</a></li>
+                    <li><a href="#">Overdue</a></li>
+                </ul>
+            </li>
+            
+
+            <li>
+                <div class="sidebar__link" data-id="Calendar">
+                    <a href="#">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="sidebar__name">Calendar</span>
+                    </a>
+                </div>
+            </li>
+            
+            <li>
+                <div class="sidebar__link" data-id="Widgets">
+                    <a href="#">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <span class="sidebar__name">Widgets</span>
+                    </a>
+                    <i class="fas fa-chevron-down sub"></i>
+                </div>
+                <ul class="sidebar__sublinks">
+                    <li><a href="#">Weather</a></li>
+                    <li><a href="#">Stopwatch</a></li>
+                    <li><a href="#">Pomodoro</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="sidebar__link" data-id="Finances">
+                    <a href="#">
+                        <i class="fas fa-wallet"></i>
+                        <span class="sidebar__name">Finances</span>
+                    </a>
+                    <i class="fas fa-chevron-down sub"></i>
+                </div>
+                <ul class="sidebar__sublinks">
+                    <li><a href="#">Income</a></li>
+                    <li><a href="#">Budget</a></li>
+                    <li><a href="#">Expenses</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="sidebar__link" data-id="Settings">
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span class="sidebar__name">Settings</span> 
+                    </a>
+                </div>
+            </li>
+
+            <li>
+                <div class="sidebar__link" data-id="Logout">
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt" id="logout"></i>
+                        <span class="sidebar__name">Logout</span>
+                    </a>
+                </div>
+            </li>
+            
+        </ul>
+    </nav>
+
+    <!-- main content -->
+    <main>
+        <div class="add__button">
+            <i class="fas fa-plus" id="add"></i>
+        </div>
+        <section class="modal">
+            <form action="" class="modal__form">
+
+            </form>
+        </section>
+        <section class="container">
+
+        </section>
+    </main>
 </body>
 </html>
