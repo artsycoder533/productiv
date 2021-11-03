@@ -41,6 +41,8 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "Productiv",
+			filename: "index.html",
+			template: path.resolve(__dirname, 'src/temp.html')
 		}),
 		new MiniCssExtractPlugin({
 			linkType: false,
