@@ -9,26 +9,48 @@ function createElementWithClass(type, className) {
     return el;
 }
 
-function createTextElement(type, className, text) {
+function createTextElementWithClass(type, className, text) {
     const el = document.createElement(type);
     el.classList.add(className);
     el.textContent = text;
     return el;
 }
 
-function createLink(type, className, src, text) {
+function createImageWithId(type, src, alt, id) {
     const el = document.createElement(type);
-    el.classList.add(className);
     el.src = src;
+    el.setAttribute("alt", alt);
+    el.setAttribute("id", id);
+    return el;
+}
+
+function createTextElementWithId(type, className, text, id) {
+    const el = document.createElement(type);
+    el.classList.add(className);
+    el.textContent = text;
+    el.setAttribute("id", id);
+    return el;
+}
+
+function createElementWithAttribute(type, className, attr, attrName) {
+    const el = document.createElement(type);
+    el.className = className;
+    el.setAttribute(attr, attrName);
+    return el;
+}
+
+function createLabelElement(type, attr, text) {
+    const el = docuemnt.createElement("label");
+    el.setAttribute("for", attrName);
     el.textContent = text;
     return el;
 }
 
-function createElementWithDataId(type, className, text, id) {
-    const el = document.createElement(type);
-    el.classList.add(className);
-    el.textContent = text;
-    el.dataset.id = id;
+function createInputElement(type, attr, name, id) {
+    const el = document.createElement("input");
+    el.setAttribute("type", attr);
+    el.setAttribute("name", name);
+    el.setAttribute("id", id);
 }
 
-export { createElement, createElementWithClass, createTextElement, createLink, createElementWithDataId };
+export { createElement, createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement };
