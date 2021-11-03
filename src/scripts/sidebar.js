@@ -1,6 +1,5 @@
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
 
-
 function addSidebarEvents() {
     sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {
@@ -8,8 +7,6 @@ function addSidebarEvents() {
     });
 });
 }
-
-
 
 function openSubMenu(e) {
     const display = document.querySelector(".header__display");
