@@ -1,11 +1,8 @@
-function createElement(type) {
-    const el = document.createElement(type);
-    return el;
-}
+
 
 function createElementWithClass(type, className) {
     const el = document.createElement(type);
-    document.classList.add(className);
+    el.classList.add(className);
     return el;
 }
 
@@ -17,7 +14,8 @@ function createTextElementWithClass(type, className, text) {
 }
 
 function createImageWithId(type, src, alt, id) {
-    const el = document.createElement(type);
+    // const el = document.createElement(type);
+    const el = new Image();
     el.src = src;
     el.setAttribute("alt", alt);
     el.setAttribute("id", id);
@@ -40,17 +38,18 @@ function createElementWithAttribute(type, className, attr, attrName) {
 }
 
 function createLabelElement(type, attr, text) {
-    const el = docuemnt.createElement("label");
-    el.setAttribute("for", attrName);
+    const el = document.createElement(type);
+    el.setAttribute("for", attr);
     el.textContent = text;
     return el;
 }
 
 function createInputElement(type, attr, name, id) {
-    const el = document.createElement("input");
+    const el = document.createElement(type);
     el.setAttribute("type", attr);
     el.setAttribute("name", name);
     el.setAttribute("id", id);
+    return el;
 }
 
-export { createElement, createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement };
+export { createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement };
