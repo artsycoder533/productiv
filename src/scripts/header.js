@@ -26,8 +26,10 @@ function uploadPic() {
 }
 
 function readUrl() {
+	console.log("clicked");
 	const profilePic = document.getElementById("profile");
-	console.log(this.value);
+	const profileContainer = document.querySelector(".header__image");
+	// console.log(this.value);
 	if (this.files) {
 		const reader = new FileReader();
 		reader.readAsDataURL(this.files[0]);
