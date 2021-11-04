@@ -52,4 +52,32 @@ function createInputElement(type, attr, name, id) {
     return el;
 }
 
-export { createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement };
+function createTextArea(type, name, id, col, row) {
+    const el = document.createElement(type);
+    el.setAttribute("name", name);
+    el.setAttribute("id", id);
+    el.setAttribute("col", col);
+    el.setAttribute("row", row);
+    return el;
+}
+
+function createElementWithTwoAttributes(type, attr1, attr1Name, attr2, attr2Name){
+    const el = document.createElement(type);
+    el.setAttribute(attr1, attr1Name);
+    el.setAttribute(attr2, attr2Name);
+    return el;
+}
+
+function createOption(value, text) {
+    const el = document.createElement("option");
+    el.setAttribute("value", value);
+    el.textContent = text;
+    return el;
+}
+
+function createSelect(name, text) {
+    
+}
+
+
+export { createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement, createTextArea, createElementWithTwoAttributes, createOption };
