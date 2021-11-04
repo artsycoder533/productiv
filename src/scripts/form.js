@@ -4,16 +4,17 @@ import {
 	createLabelElement,
 	createTextArea,
     createElementWithTwoAttributes,
-    createOption
+    createOption,
+    createTextElementWithClass
 } from "./createElement.js";
 
 function renderForm(){
-    const form = document.querySelector(".modal__form");
+    const form = createTextElementWithClass("form", "modal__form")
     // title
     const titleLabel = createLabelElement("label", "title", "Title:");
     const titleInput = createInputElement("input", "text", "title", "title");
     // description
-    const descriptionLabel = createLabelElement("label", "description", "Description");
+    const descriptionLabel = createLabelElement("label", "description", "Description:");
     const descriptionInput = createTextArea("textarea", "description", "30", "10");
     // date
     const dateLabel = createLabelElement("label", "date", "Date:");
@@ -24,7 +25,7 @@ function renderForm(){
     const normalOption = createOption("normal", "Normal");
     const highOption = createOption("high", "High");
     // project
-    const projectLabel = createLabelElement("label", "project", "Project");
+    const projectLabel = createLabelElement("label", "project", "Project:");
     const projectSelect = createElementWithTwoAttributes("select", "name", "project", "id", "project")
     const defaultOption = createOption("default", "Default");
     const workOption = createOption("work", "Work");

@@ -75,9 +75,6 @@ function createOption(value, text) {
     return el;
 }
 
-function createSelect(name, text) {
-    
-}
 
 
 export { createElementWithClass, createTextElementWithClass, createImageWithId, createTextElementWithId, createElementWithAttribute, createLabelElement, createInputElement, createTextArea, createElementWithTwoAttributes, createOption };
