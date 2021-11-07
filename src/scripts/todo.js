@@ -1,3 +1,5 @@
+import { renderTodo } from "./renderTodo.js";
+
 const todos = [];
 const projects = ["Default", "Work", "Home"];
 
@@ -67,7 +69,14 @@ function populateTodo(e) {
 		project.value,
 		id
 	);
-	todos.push(newTodo);
+    todos.push(newTodo);
+    renderTodo(
+			title.value,
+			description.value,
+			date.value,
+			priority.value,
+			project.value,
+	);
 	//form.reset();
 }
 

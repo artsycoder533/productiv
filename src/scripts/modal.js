@@ -10,7 +10,7 @@ function addButtonEvents() {
     const closeBtn = document.getElementById("close");
     closeBtn.addEventListener("click", openModal);
     // modal.addEventListener("click", openModal);
-    createBtn.addEventListener("click", populateTodo());
+    createBtn.addEventListener("click", populateTodo);
 }
 
 function openModal() {
