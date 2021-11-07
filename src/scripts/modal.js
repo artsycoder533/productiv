@@ -1,5 +1,6 @@
 // import { createElementWithClass } from "./createElement";
 // import { renderForm } from "./form";
+import {populateTodo} from "./todo.js"
 
 function addButtonEvents() {
     const addBtn = document.getElementById("add");
@@ -9,7 +10,7 @@ function addButtonEvents() {
     const closeBtn = document.getElementById("close");
     closeBtn.addEventListener("click", openModal);
     // modal.addEventListener("click", openModal);
-    // createBtn.addEventListener("click", populateTodo());
+    createBtn.addEventListener("click", populateTodo());
 }
 
 function openModal() {
