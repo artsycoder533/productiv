@@ -44,8 +44,11 @@ function renderForm(){
 
     prioritySelect.appendChild(normalOption);
     prioritySelect.appendChild(highOption);
+    form.appendChild(priorityLabel);
+    form.appendChild(prioritySelect);
 
     form.appendChild(projectLabel);
+    
 
     projectSelect.appendChild(defaultOption);
     projectSelect.appendChild(workOption);

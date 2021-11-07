@@ -343,16 +343,21 @@ a {
     transition: all 0.2s ease-in-out;
     display: grid;
     place-items: center;
+    z-index: 0;
     /* opacity: 0; */
 } 
 
 
 .modal__container {
-    position: fixed;
-    max-width: 600px;
-    width: 100%;
-    height: 500px;
-    border: 1px solid orange;
+    // position: fixed;
+    max-width: 500px;
+    width: 90%;
+    height: 600px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    // height: 400px;
+    
 } 
  
 .showModal {
@@ -364,16 +369,58 @@ a {
 
 /* form */
 .modal__form {
-    max-width: 600px;
+    // max-width: 600px;
+    // width: 100%;
+    // height: 100%;
+    // background: white;
+    z-index: 2;
+    // display: flex;
+    // flex-direction: column;
+    // // display: grid;
+    // // grid-template-columns: 1fr;
+    // padding: 1rem;
+    // border: 1px solid orange;
+
+    margin: 0 auto;
+    max-width: 500px;
     width: 100%;
-    height: 500px;
+    
+    padding: 2rem;
     background: white;
-    z-index: 1;
+}
+
+.form__group {
     display: flex;
     flex-direction: column;
-    // display: grid;
-    // grid-template-columns: 1fr;
-    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.close {
+    position: relative;
+    left: 95%;
+    font-size: 2rem;
+    color: red;
+    cursor: pointer;
+}
+
+input,
+textarea, 
+select,
+option{
+    padding: 0.5rem;
+}
+
+.modal__form button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.modal__form input, 
+.modal__form textarea
+.modal__form select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
 }
 
 /* container */

@@ -56,8 +56,8 @@ function createTextArea(type, name, id, col, row) {
     const el = document.createElement(type);
     el.setAttribute("name", name);
     el.setAttribute("id", id);
-    el.setAttribute("col", col);
-    el.setAttribute("row", row);
+    el.setAttribute("cols", col);
+    el.setAttribute("rows", row);
     return el;
 }
 

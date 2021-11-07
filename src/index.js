@@ -9,8 +9,8 @@ import { addButtonEvents } from "./scripts/modal.js";
 window.addEventListener("DOMContentLoaded", () => {
     addSidebarEvents();
     addHeaderEvents();
-    const modal = renderModal();
-    document.body.appendChild(modal);
+    // const modal = renderModal();
+    // document.body.appendChild(modal);
     addButtonEvents();
 });
 
