@@ -1,10 +1,15 @@
 import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
+import { toggleModal } from "./modal.js";
 
-const container = document.querySelector(".container");
+const todos = createElementWithClass("section", "todos");
 
-function renderTodo(title, description, date, priority, project) {
-    const todos = createElementWithClass("select", "todos");
+function renderTodo(title, description, date, priority, project, id) {
+    // console.log(title, description, date, priority, project);
+    
+    const todo__container = createElementWithClass("div", "todo__container");
     const todo = createElementWithClass("article", "todo");
+    todo.setAttribute("data-id", id);
+    todo.addEventListener("click", showDetails);
     const todo__date = createElementWithClass("div", "todo__date");
     const date1 = createTextElementWithClass("small", "date", date);
     todo__date.appendChild(date1);
@@ -13,7 +18,16 @@ function renderTodo(title, description, date, priority, project) {
     const todo__content = createElementWithClass("div", "todo__content");
     const todo__title = createTextElementWithClass("div", "todo__title", title);
     const todo__priority = createElementWithClass("div", "todo__priority");
-    const priority1 = createTextElementWithClass("small", "priority", priority);
+
+     const priority1 = createTextElementWithClass("small", "priority", priority);
+    //if priority is high
+    if (priority === "high") {
+        priority1.classList.add("high");
+    }
+    else {
+        priority1.classList.add("normal");
+    }
+   
     todo__priority.appendChild(priority1);
     todo__content.appendChild(todo__title);
     todo__content.appendChild(todo__priority);
@@ -34,13 +48,25 @@ function renderTodo(title, description, date, priority, project) {
 
     const todo__project = createTextElementWithClass("div", "todo__project", project);
     todo.appendChild(todo__project);
-    todos.appendChild(todo);
-    container.appendChild(todos);
+    todo__container.appendChild(todo);
+    
+
+    // description
+    const todo__details = createElementWithClass("div", "todo__details");
+    const todo__description = createElementWithClass("p", "description");
+    todo__description.textContent = description;
+    todo__details.appendChild(todo__description);
+    todo__container.appendChild(todo__details);
+    todos.appendChild(todo__container);
+    
+    toggleModal();
     
     //reset form
-    const form = document.querySelector(".modal__form");
-    form.reset();
     return todos;
+}
+
+function showDetails(e) {
+    e.currentTarget.nextElementSibling.classList.toggle("showDetails");
 }
 
 export { renderTodo };

@@ -1,10 +1,20 @@
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
 
+const workLink = document.getElementById("work");
+const homeLink = document.getElementById("home");
+const miscLink = document.getElementById("misc");
+
 function addSidebarEvents() {
-    sidebarDivs.map((div) => {
+	workLink.addEventListener("click", renderWork);
+	homeLink.addEventListener("click", renderHome);
+	miscLink.addEventListener("click", renderMisc);
+
+	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {
         openSubMenu(e);
-    });
+	});
+		
+	
 });
 }
 

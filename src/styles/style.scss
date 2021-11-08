@@ -10,7 +10,7 @@
 
 body {
     overflow: hidden;
-    background: snow;
+    background: rgb(245, 237, 237);
 }
 
 /* global styles */
@@ -419,4 +419,82 @@ option{
     width: calc(100vw - 260px);
     height: calc(100vh - 50px);
     z-index: -1;
+    
+}
+
+// todo
+.todos {
+    // border: 1px solid black;
+    display: grid;
+    gap: 1rem;
+    // max-width: 600px;
+    
+}
+
+.todo {
+    
+    max-width: 600px;
+    width: 90vw;
+    margin: 0 auto;
+    cursor: pointer;
+    padding: 0.5rem;
+    background: white;
+}
+
+.todo__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+// .todo__priority {
+//   padding: 0.20rem .4rem;
+//   border-radius: 1rem;
+//   letter-spacing: 1px;
+// } 
+
+.priority {
+    padding: 0.20rem .4rem;
+  border-radius: 1rem;
+  letter-spacing: 1px;
+}
+
+.priority.high {
+    background: red;
+}
+
+.priority.normal {
+    background: lightgreen;
+}
+
+.todo__delete, .todo__edit {
+    font-size: 1.2rem;
+    border: none;
+    background: transparent;
+    margin-left: 0.5rem;
+}
+
+.todo__delete {
+    color: red;
+}
+
+.todo__edit {
+    color: green;
+}
+
+.todo__details {
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid black;
+  display: none;
+}
+.description {
+  padding: 0.5rem;
+}
+
+.todo__container {
+  width: 100%;
+}
+
+.showDetails {
+  display: grid;
 }

@@ -5,15 +5,18 @@ import {populateTodo} from "./todo.js"
 function addButtonEvents() {
     const addBtn = document.getElementById("add");
     const createBtn = document.getElementById("submit");
-    addBtn.addEventListener("click", openModal);
-    const modal = document.querySelector(".modal");
+    addBtn.addEventListener("click", toggleModal);
     const closeBtn = document.getElementById("close");
-    closeBtn.addEventListener("click", openModal);
+    const cancelBtn = document.getElementById("cancel");
+    cancelBtn.addEventListener("click", toggleModal);
+    closeBtn.addEventListener("click", toggleModal);
     // modal.addEventListener("click", openModal);
-    createBtn.addEventListener("click", populateTodo);
+    createBtn.addEventListener("click", (e)=>{
+        populateTodo(e);
+    });
 }
 
-function openModal() {
+function toggleModal() {
     const modal = document.querySelector(".modal");
     const form = document.querySelector(".modal__form");
     modal.classList.toggle("showModal");
@@ -34,4 +37,4 @@ function openModal() {
 //     return modal;
 // }
 
-export { addButtonEvents, openModal };
+export { addButtonEvents, toggleModal };

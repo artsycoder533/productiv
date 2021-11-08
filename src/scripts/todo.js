@@ -1,7 +1,9 @@
 import { renderTodo } from "./renderTodo.js";
 
 const todos = [];
-const projects = ["Default", "Work", "Home"];
+const home = [];
+const work = [];
+const miscellaneous = [];
 
 class Todos {
 	constructor(title, description, dueDate, priority, project, id) {
@@ -59,25 +61,51 @@ class Todos {
 function populateTodo(e) {
 	e.preventDefault();
 	//get form values
-	const form = document.querySelector(".modal__form");
-	const id = Math.random();
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const date = document.getElementById("date").value;
+    const priority = document.getElementById("priority").value;
+    const project = document.getElementById("project").value;
+    // const submitBtn = document.getElementById("submit");
+    // const form = document.getElementById("form");
+    const id = Math.random();
+    // console.log(title, description, date, priority, project);
 	const newTodo = new Todos(
-		title.value,
-		description.value,
-		date.value,
-		priority.value,
-		project.value,
+		title,
+		description,
+		date,
+		priority,
+		project,
 		id
-	);
+    );
+
+    //add todos
     todos.push(newTodo);
-    renderTodo(
-			title.value,
-			description.value,
-			date.value,
-			priority.value,
-			project.value,
-	);
-	//form.reset();
+    //home
+    if (project === "home") {
+        home.push(newTodo);
+    }
+    //work
+    else if (project === "work") {
+        work.push(newTodo);
+    }
+    else {
+        miscellaneous.push(newTodo);
+    }
+
+    const container = document.querySelector(".container");
+    container.appendChild(
+	renderTodo(title, description, date, priority, project, id));
+}
+
+function sortTodosByProject(project) {
+    const sortedByProject = todos.filter(todo => {
+        if (todo[project] === project) {
+            return true;
+        }
+    });
+    //destructure array into parameter or render todo
+    //call renderTodo
 }
 
 export {populateTodo };
