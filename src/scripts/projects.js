@@ -1,12 +1,35 @@
 import { renderTodo } from "./renderTodo.js";
 import { createElementWithClass } from "./createElement.js";
 
-function renderProjectUI(project, projectId) {
+function renderProjectHeader(projectId) {
     const projectTitle = createElementWithClass("h2", "project__title");
-    projectTitle.textContent = projectID;
+        projectTitle.textContent = projectId;
     const container = document.querySelector(".container");
-    container.appendChild(projectTitle);
-    renderTodo({ title, description, date, project, priority, project });
+    
+    //check if container is empty
+    if (container.children.length === 0) {
+        container.appendChild(projectTitle);
+        return;
+    }
+    
 }
 
-export { renderProjectUI };
+const container = document.querySelector(".container");
+
+function renderProjectUI(projects) {
+    clearProjectsUI();
+    projects.forEach(project => {
+        console.log(project);
+        container.appendChild(renderTodo(project.title, project.description, project.dueDate, project.priority, project.project, project.id));
+        // renderTodo(title, description, date, priority, project, id)
+    });
+        
+}
+
+function clearProjectsUI() {
+    container.children.forEach(child => {
+        container.children.remove(child);
+    });
+}
+
+export { renderProjectUI, renderProjectHeader };

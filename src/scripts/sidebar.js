@@ -4,7 +4,7 @@ import { sortTodosByProject } from "./todo.js";
 
 const workLink = document.getElementById("work");
 const homeLink = document.getElementById("home");
-const miscLink = document.getElementById("misc");
+const miscLink = document.getElementById("miscellaneous");
 
 function addSidebarEvents() {
 	// workLink.addEventListener("click", renderWork);

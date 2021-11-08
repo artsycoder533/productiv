@@ -4,7 +4,7 @@ import { toggleModal } from "./modal.js";
 const todos = createElementWithClass("section", "todos");
 
 function renderTodo(title, description, date, priority, project, id) {
-    // console.log(title, description, date, priority, project);
+    console.log(title, description, date, priority, project, id);
     
     const todo__container = createElementWithClass("div", "todo__container");
     const todo = createElementWithClass("article", "todo");
@@ -59,7 +59,7 @@ function renderTodo(title, description, date, priority, project, id) {
     todo__container.appendChild(todo__details);
     todos.appendChild(todo__container);
     
-    toggleModal();
+    // toggleModal();
     
     //reset form
     return todos;

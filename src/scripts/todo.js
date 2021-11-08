@@ -1,6 +1,6 @@
 import { toggleModal } from "./modal.js";
 import { renderTodo } from "./renderTodo.js";
-import { renderProjectUI } from "./projects.js";
+import { renderProjectUI, renderProjectHeader } from "./projects.js";
 
 const todos = [];
 const home = [];
@@ -66,8 +66,9 @@ function populateTodo(e) {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const date = document.getElementById("date").value;
-    const priority = document.getElementById("priority").value;
-    const project = document.getElementById("project").value;
+	const priority = document.getElementById("priority").value;
+	// console.log(priority);
+	const project = document.getElementById("project").value;
     // const submitBtn = document.getElementById("submit");
     // const form = document.getElementById("form");
     const id = Math.random();
@@ -112,8 +113,8 @@ function sortTodosByProject(e) {
         
     });
     //destructure array into parameter or render todo
-	console.log(sortedByProject);
-	renderProjectUI(sortedByProject, e.currentTarget.id);
+	renderProjectHeader(e.currentTarget.id);
+	renderProjectUI(sortedByProject);
 	// return sortedByProject;
     //call renderTodo
 }
