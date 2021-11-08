@@ -1,13 +1,19 @@
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
+import { sortTodosByProject } from "./todo.js";
+// import {renderWork, renderHome, renderMisc} from "./projects.js"
 
 const workLink = document.getElementById("work");
 const homeLink = document.getElementById("home");
 const miscLink = document.getElementById("misc");
 
 function addSidebarEvents() {
-	workLink.addEventListener("click", renderWork);
-	homeLink.addEventListener("click", renderHome);
-	miscLink.addEventListener("click", renderMisc);
+	// workLink.addEventListener("click", renderWork);
+	// homeLink.addEventListener("click", renderHome);
+	// miscLink.addEventListener("click", renderMisc);
+
+	workLink.addEventListener("click", sortTodosByProject);
+	homeLink.addEventListener("click", sortTodosByProject);
+	miscLink.addEventListener("click", sortTodosByProject);
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {

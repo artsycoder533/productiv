@@ -1,4 +1,6 @@
+import { toggleModal } from "./modal.js";
 import { renderTodo } from "./renderTodo.js";
+import { renderProjectUI } from "./projects.js";
 
 const todos = [];
 const home = [];
@@ -80,32 +82,40 @@ function populateTodo(e) {
     );
 
     //add todos
-    todos.push(newTodo);
+	todos.push(newTodo);
+	toggleModal();
     //home
-    if (project === "home") {
-        home.push(newTodo);
-    }
-    //work
-    else if (project === "work") {
-        work.push(newTodo);
-    }
-    else {
-        miscellaneous.push(newTodo);
-    }
+    // if (project === "home") {
+    //     home.push(newTodo);
+    // }
+    // //work
+    // else if (project === "work") {
+    //     work.push(newTodo);
+    // }
+    // else {
+    //     miscellaneous.push(newTodo);
+    // }
 
-    const container = document.querySelector(".container");
-    container.appendChild(
-	renderTodo(title, description, date, priority, project, id));
+    // const container = document.querySelector(".container");
+    // container.appendChild(
+	// renderTodo(title, description, date, priority, project, id));
 }
 
-function sortTodosByProject(project) {
-    const sortedByProject = todos.filter(todo => {
-        if (todo[project] === project) {
-            return true;
-        }
+function sortTodosByProject(e) {
+	console.log(e.currentTarget.id);
+	const sortedByProject = todos.filter(todo => {
+		for (const prop in todo) {
+			if (todo[prop] === e.currentTarget.id) {
+				return true;
+			}
+		}
+        
     });
     //destructure array into parameter or render todo
+	console.log(sortedByProject);
+	renderProjectUI(sortedByProject, e.currentTarget.id);
+	// return sortedByProject;
     //call renderTodo
 }
 
-export {populateTodo };
+export {populateTodo, sortTodosByProject };
