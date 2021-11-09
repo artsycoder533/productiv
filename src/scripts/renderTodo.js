@@ -4,7 +4,7 @@ import { toggleModal } from "./modal.js";
 const todos = createElementWithClass("section", "todos");
 
 function renderTodo(title, description, date, priority, project, id) {
-    console.log(title, description, date, priority, project, id);
+    // console.log(title, description, date, priority, project, id);
     
     const todo__container = createElementWithClass("div", "todo__container");
     const todo = createElementWithClass("article", "todo");
@@ -36,11 +36,13 @@ function renderTodo(title, description, date, priority, project, id) {
     const todo__edit = createElementWithAttribute("button", "todo__edit", "id", "edit");
     const editBtn = createElementWithClass("i", "fas");
     editBtn.classList.add("fa-edit");
+    editBtn.addEventListener("click", editTodo);
     todo__edit.appendChild(editBtn);
     todo__buttons.appendChild(todo__edit);
     const todo__delete = createElementWithAttribute("button", "todo__delete", "id", "delete");
     const deleteBtn = createElementWithClass("i", "fas");
     deleteBtn.classList.add("fa-trash-alt");
+    deleteBtn.addEventListener("click", deleteTodo);
     todo__delete.appendChild(deleteBtn);
     todo__buttons.appendChild(todo__delete);
     todo__content.append(todo__buttons);
@@ -57,16 +59,24 @@ function renderTodo(title, description, date, priority, project, id) {
     todo__description.textContent = description;
     todo__details.appendChild(todo__description);
     todo__container.appendChild(todo__details);
-    todos.appendChild(todo__container);
-    
+    // todos.appendChild(todo__container);
+    console.log("renderTodo called");
     // toggleModal();
     
     //reset form
-    return todos;
+    return todo__container;
 }
 
 function showDetails(e) {
     e.currentTarget.nextElementSibling.classList.toggle("showDetails");
+}
+
+function deleteTodo(e) {
+    
+}
+
+function editTodo(e) {
+    
 }
 
 export { renderTodo };

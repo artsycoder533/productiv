@@ -107,7 +107,7 @@ function sortTodosByProject(e) {
 	const sortedByProject = todos.filter(todo => {
 		for (const prop in todo) {
 			if (todo[prop] === e.currentTarget.id) {
-				return true;
+				return todo;
 			}
 		}
         

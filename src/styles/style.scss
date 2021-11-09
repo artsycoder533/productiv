@@ -484,8 +484,8 @@ option{
 .todo__details {
   max-width: 600px;
   margin: 0 auto;
-  border: 1px solid black;
   display: none;
+  background: white;
 }
 .description {
   padding: 0.5rem;
@@ -497,4 +497,10 @@ option{
 
 .showDetails {
   display: grid;
+}
+
+.project__title {
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: underline;
 }
