@@ -1,5 +1,6 @@
 import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
 import { toggleModal } from "./modal.js";
+import { getTodoById} from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
@@ -76,6 +77,30 @@ function deleteTodo(e) {
 }
 
 function editTodo(e) {
+	console.log(e.currentTarget.id);
+
+	//make update button visible
+	
+	//populate form values
+	const form = document.getElementById("form");
+	const todo = getTodoById(e.curentTarget.id);
+	//open modal
+	const modal = document.querySelector(".modal");
+	//hide create button
+	const createBtn = document.getElementById("create");
+    createBtn.classList.add("hide");
+    const updateBtn = document.getElementById("update");
+	updateBtn.classList.remove("hide");
+	//when create button pressed, get the id of that todo and update object
+
+	//update UI
+	//hide create button
+	//unhide create button
+	//hide udpate button
+	//close modal
+}
+
+function updateTodo(e) {
     
 }
 

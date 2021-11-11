@@ -57,7 +57,9 @@ class Todos {
 		this.id = id;
 	}
 
-	deleteTodos(id) {}
+	deleteTodos(id) {
+
+	}
 }
 
 function populateTodo(e) {
@@ -119,4 +121,12 @@ function sortTodosByProject(e) {
     //call renderTodo
 }
 
-export {populateTodo, sortTodosByProject };
+function getTodoById(id) {
+	todos.forEach(todo => {
+		if (todo.getId === id) {
+			return todo;
+		}
+	});
+}
+
+export {populateTodo, sortTodosByProject, getTodoById };
