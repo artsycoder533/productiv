@@ -122,11 +122,15 @@ function sortTodosByProject(e) {
 }
 
 function getTodoById(id) {
+	const match = [];
 	todos.forEach(todo => {
-		if (todo.getId === id) {
-			return todo;
+		console.log(todo.getId(), Number(id), todo.getId() === Number(id));
+		if (todo.getId() === Number(id)) {
+			console.log("matching to is: ", todo);
+			match.push(todo);
 		}
 	});
+	return match[0];
 }
 
 export {populateTodo, sortTodosByProject, getTodoById };

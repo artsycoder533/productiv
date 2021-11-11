@@ -8,9 +8,10 @@ function renderTodo(title, description, date, priority, project, id) {
     // console.log(title, description, date, priority, project, id);
     
     const todo__container = createElementWithClass("div", "todo__container");
+    todo__container.setAttribute("data-id", id);
     const todo = createElementWithClass("article", "todo");
-    todo.setAttribute("data-id", id);
-    todo.addEventListener("click", showDetails);
+    // todo.setAttribute("data-id", id);
+    // todo.addEventListener("click", showDetails);
     const todo__date = createElementWithClass("div", "todo__date");
     const date1 = createTextElementWithClass("small", "date", date);
     todo__date.appendChild(date1);
@@ -77,20 +78,24 @@ function deleteTodo(e) {
 }
 
 function editTodo(e) {
-	console.log(e.currentTarget.id);
+	// console.log(e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id);
 
 	//make update button visible
 	
 	//populate form values
 	const form = document.getElementById("form");
-	const todo = getTodoById(e.curentTarget.id);
+	const todo2 = getTodoById(
+		e.currentTarget.parentElement.parentElement.parentElement.parentElement
+			.parentElement.dataset.id
+    );
+    console.log(todo2);
 	//open modal
 	const modal = document.querySelector(".modal");
 	//hide create button
-	const createBtn = document.getElementById("create");
-    createBtn.classList.add("hide");
-    const updateBtn = document.getElementById("update");
-	updateBtn.classList.remove("hide");
+	// const createBtn = document.getElementById("create");
+    // createBtn.classList.add("hide");
+    // const updateBtn = document.getElementById("update");
+	// updateBtn.classList.remove("hide");
 	//when create button pressed, get the id of that todo and update object
 
 	//update UI
