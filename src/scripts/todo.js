@@ -142,7 +142,16 @@ function getTodoById(id) {
 }
 
 function updateTodo(title, description, date, priority, project, id) {
-	
+	todos.forEach(todo => {
+		if (todo.getId() === Number(id)) {
+			todo.setTitle(title);
+			todo.setDescription(description);
+			todo.setDueDate(date);
+			todo.setPriority(priority);
+			todo.setProject(project);
+			console.log("new to: ", todo);
+		}
+	});
 }
 
 export {populateTodo, sortTodosByProject, getTodoById, updateTodo };

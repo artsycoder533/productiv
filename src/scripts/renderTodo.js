@@ -78,6 +78,7 @@ function deleteTodo(e) {
 }
 
 function editTodo(e) {
+    
 	// console.log(e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id);
 
 	//make update button visible
@@ -105,8 +106,10 @@ function editTodo(e) {
     
 	//hide create button
     const createBtn = document.getElementById("create");
-    createBtn.addEventListener("click", () => {
+    createBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         updateTodoUI(todo2);
+        toggleModal();
     });
     console.log(createBtn);
     createBtn.classList.add("hide");
@@ -122,6 +125,7 @@ function editTodo(e) {
 }
 
 function updateTodoUI(todo) {
+    // e.preventDefault();
     //grab values from form 
     const form = document.getElementById("form");
     const title = form.elements.namedItem("title").value;
@@ -145,7 +149,7 @@ function updateTodoUI(todo) {
     //update todo object
     updateTodo(title, description, date, priority, project, todo.getID());
     //close modal
-    toggleModal();
+    
 }
 
 export { renderTodo };
