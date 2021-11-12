@@ -64,10 +64,6 @@ class Todos {
 	setId(id) {
 		this.id = id;
 	}
-
-	deleteTodos(id) {
-
-	}
 }
 
 function populateTodo(e) {
@@ -154,4 +150,14 @@ function updateTodo(title, description, date, priority, project, id) {
 	});
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo };
+function deleteTodo(id) {
+	console.log(todos);
+	todos.forEach((todo, index) => {
+		if (todo.getId() === Number(id)) {
+			todos.splice(index, 1);
+		}
+	});
+	console.log(todos);
+}
+
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo };

@@ -1,6 +1,6 @@
 import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
 import { toggleModal } from "./modal.js";
-import { getTodoById, Todos, updateTodo} from "./todo.js";
+import { getTodoById, Todos, updateTodo, deleteTodo} from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
@@ -44,7 +44,7 @@ function renderTodo(title, description, date, priority, project, id) {
     const todo__delete = createElementWithAttribute("button", "todo__delete", "id", "delete");
     const deleteBtn = createElementWithClass("i", "fas");
     deleteBtn.classList.add("fa-trash-alt");
-    deleteBtn.addEventListener("click", deleteTodo);
+    deleteBtn.addEventListener("click", deleteTodoUI);
     todo__delete.appendChild(deleteBtn);
     todo__buttons.appendChild(todo__delete);
     todo__content.append(todo__buttons);
@@ -73,7 +73,7 @@ function showDetails(e) {
     e.currentTarget.nextElementSibling.classList.toggle("showDetails");
 }
 
-function deleteTodo(e) {
+function deleteTodoUI(e) {
     const todoContainer = document.querySelector(".container");
     //remove child from todo container
     console.log(
@@ -85,6 +85,7 @@ function deleteTodo(e) {
 				.parentElement;
     todoContainer.removeChild(todo);
     //remove todo from array
+    deleteTodo(todo.dataset.id);
 }
 
 function editTodo(e) {

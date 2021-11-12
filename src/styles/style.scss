@@ -419,12 +419,12 @@ option{
     width: calc(100vw - 260px);
     height: calc(100vh - 50px);
     z-index: -1;
-    
+    border: 1px solid blue;
 }
 
 // todo
 .todos {
-    // border: 1px solid black;
+    
     display: grid;
     gap: 1rem;
     // max-width: 600px;
@@ -432,7 +432,7 @@ option{
 }
 
 .todo {
-    
+    border: 1px solid red;
     max-width: 600px;
     width: 90vw;
     margin: 0 auto;
