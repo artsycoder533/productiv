@@ -453,16 +453,16 @@ option{
 // } 
 
 .priority {
-    padding: 0.20rem .4rem;
+  padding: 0.20rem .4rem;
   border-radius: 1rem;
   letter-spacing: 1px;
 }
 
-.priority.high {
+.high {
     background: red;
 }
 
-.priority.normal {
+.normal {
     background: lightgreen;
 }
 

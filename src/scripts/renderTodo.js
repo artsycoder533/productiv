@@ -106,15 +106,13 @@ function editTodo(e) {
     
 	//hide create button
     const createBtn = document.getElementById("create");
-    createBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+    createBtn.classList.add("hide");
+    const updateBtn = document.getElementById("update");
+    updateBtn.classList.remove("hide");
+    updateBtn.addEventListener("click", () => {
         updateTodoUI(todo2);
         toggleModal();
     });
-    console.log(createBtn);
-    createBtn.classList.add("hide");
-    const updateBtn = document.getElementById("update");
-	updateBtn.classList.remove("hide");
 	//when create button pressed, get the id of that todo and update object
 
 	//update UI
@@ -125,6 +123,7 @@ function editTodo(e) {
 }
 
 function updateTodoUI(todo) {
+    console.log("inside ipdateTodoUI");
     // e.preventDefault();
     //grab values from form 
     const form = document.getElementById("form");
@@ -135,19 +134,21 @@ function updateTodoUI(todo) {
     const date = form.elements.namedItem("date").value;
     //update that todos UI
     document.querySelector(".todo__title").textContent = title;
-    document.querySelector(".todo__priority").textContent = priority;
+    document.querySelector(".priority").textContent = priority;
     if (priority === "normal") {
-        document.querySelector("todo__priority").classList.add("normal");
+        document.querySelector(".priority").classList.remove("high");
+        document.querySelector(".priority").classList.add("normal");
     }
     else if (priority === "high") {
-        document.querySelector("todo__priority").classList.add("high");
+        document.querySelector(".priority").classList.remove("normal");
+        document.querySelector(".priority").classList.add("high");
     }
     document.querySelector(".todo__date").textContent = date;
-    document.querySelector(".todo__description").textContent = description;
+    document.querySelector(".description").textContent = description;
     document.querySelector(".todo__project").textContent = project;
 
     //update todo object
-    updateTodo(title, description, date, priority, project, todo.getID());
+    updateTodo(title, description, date, priority, project, todo.getId());
     //close modal
     
 }
