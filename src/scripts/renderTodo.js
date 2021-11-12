@@ -74,7 +74,17 @@ function showDetails(e) {
 }
 
 function deleteTodo(e) {
-    
+    const todoContainer = document.querySelector(".container");
+    //remove child from todo container
+    console.log(
+			e.currentTarget.parentElement.parentElement.parentElement.parentElement
+				.parentElement
+    );
+    const todo =
+			e.currentTarget.parentElement.parentElement.parentElement.parentElement
+				.parentElement;
+    todoContainer.removeChild(todo);
+    //remove todo from array
 }
 
 function editTodo(e) {
