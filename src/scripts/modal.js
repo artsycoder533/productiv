@@ -4,7 +4,7 @@ import {populateTodo} from "./todo.js"
 
 function addButtonEvents() {
     const addBtn = document.getElementById("add");
-    const createBtn = document.getElementById("submit");
+    const createBtn = document.getElementById("create");
     addBtn.addEventListener("click", toggleModal);
     const closeBtn = document.getElementById("close");
     const cancelBtn = document.getElementById("cancel");

@@ -1,6 +1,6 @@
 import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
 import { toggleModal } from "./modal.js";
-import { getTodoById} from "./todo.js";
+import { getTodoById, Todos, updateTodo} from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
@@ -88,14 +88,30 @@ function editTodo(e) {
 		e.currentTarget.parentElement.parentElement.parentElement.parentElement
 			.parentElement.dataset.id
     );
-    console.log(todo2);
 	//open modal
-	const modal = document.querySelector(".modal");
+    const modal = document.querySelector(".modal");
+    toggleModal();
+    //set values of form elements from todo values
+    form.elements.namedItem("title").value = todo2.getTitle();
+    console.log(todo2.getTitle());
+    form.elements.namedItem("description").value = todo2.getDescription();
+    console.log(todo2.getDescription());
+    form.elements.namedItem("priority").value = todo2.getPriority();
+    console.log(todo2.getPriority());
+    form.elements.namedItem("project").value = todo2.getProject();
+    console.log(todo2.getProject());
+    form.elements.namedItem("date").value = todo2.getDueDate();
+    console.log(todo2.getDueDate());
+    
 	//hide create button
-	// const createBtn = document.getElementById("create");
-    // createBtn.classList.add("hide");
-    // const updateBtn = document.getElementById("update");
-	// updateBtn.classList.remove("hide");
+    const createBtn = document.getElementById("create");
+    createBtn.addEventListener("click", () => {
+        updateTodoUI(todo2);
+    });
+    console.log(createBtn);
+    createBtn.classList.add("hide");
+    const updateBtn = document.getElementById("update");
+	updateBtn.classList.remove("hide");
 	//when create button pressed, get the id of that todo and update object
 
 	//update UI
@@ -105,8 +121,31 @@ function editTodo(e) {
 	//close modal
 }
 
-function updateTodo(e) {
-    
+function updateTodoUI(todo) {
+    //grab values from form 
+    const form = document.getElementById("form");
+    const title = form.elements.namedItem("title").value;
+    const description = form.elements.namedItem("description").value;
+    const priority = form.elements.namedItem("priority").value;
+    const project = form.elements.namedItem("project").value;
+    const date = form.elements.namedItem("date").value;
+    //update that todos UI
+    document.querySelector(".todo__title").textContent = title;
+    document.querySelector(".todo__priority").textContent = priority;
+    if (priority === "normal") {
+        document.querySelector("todo__priority").classList.add("normal");
+    }
+    else if (priority === "high") {
+        document.querySelector("todo__priority").classList.add("high");
+    }
+    document.querySelector(".todo__date").textContent = date;
+    document.querySelector(".todo__description").textContent = description;
+    document.querySelector(".todo__project").textContent = project;
+
+    //update todo object
+    updateTodo(title, description, date, priority, project, todo.getID());
+    //close modal
+    toggleModal();
 }
 
 export { renderTodo };

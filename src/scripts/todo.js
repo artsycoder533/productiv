@@ -53,6 +53,14 @@ class Todos {
 		return this.id;
 	}
 
+	getProject() {
+		return this.project;
+	}
+
+	setProject(project) {
+		this.project = project;
+	}
+
 	setId(id) {
 		this.id = id;
 	}
@@ -133,4 +141,8 @@ function getTodoById(id) {
 	return match[0];
 }
 
-export {populateTodo, sortTodosByProject, getTodoById };
+function updateTodo(title, description, date, priority, project, id) {
+	
+}
+
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo };
