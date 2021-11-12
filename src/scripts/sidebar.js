@@ -1,16 +1,12 @@
-const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
 import { sortTodosByProject } from "./todo.js";
-// import {renderWork, renderHome, renderMisc} from "./projects.js"
 
+
+const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
 const workLink = document.getElementById("work");
 const homeLink = document.getElementById("home");
 const miscLink = document.getElementById("miscellaneous");
 
 function addSidebarEvents() {
-	// workLink.addEventListener("click", renderWork);
-	// homeLink.addEventListener("click", renderHome);
-	// miscLink.addEventListener("click", renderMisc);
-
 	workLink.addEventListener("click", sortTodosByProject);
 	homeLink.addEventListener("click", sortTodosByProject);
 	miscLink.addEventListener("click", sortTodosByProject);
@@ -19,14 +15,11 @@ function addSidebarEvents() {
     div.addEventListener("click", (e) => {
         openSubMenu(e);
 	});
-		
-	
 });
 }
 
 function openSubMenu(e) {
     const display = document.querySelector(".header__display");
-	// console.log(e.currentTarget.dataset.id);
 	display.textContent = e.currentTarget.dataset.id;
 	removeActiveLinks(e);
 	closeSubMenus();
