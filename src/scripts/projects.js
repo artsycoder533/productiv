@@ -10,18 +10,13 @@ function renderProjectHeader(projectId) {
     projectTitle.textContent = projectId;
     const container = document.querySelector(".container");
     const todos = createElementWithClass("section", "todos");
-    //check if container is empty
     container.appendChild(projectTitle);
     container.appendChild(todos);
 }
 
 
 function renderProjectUI(projects) {
-    console.log(projects.length);
-    // clearProjectsUI();
-    console.log(container);
     projects.map(project => {
-        // console.log(project);
         const todos = document.querySelector(".todos");
         todos.appendChild(
 					renderTodo(
@@ -34,8 +29,6 @@ function renderProjectUI(projects) {
 					)
         );
         container.appendChild(todos);
-        // container.appendChild(renderTodo(project.title, project.description, project.dueDate, project.priority, project.project, project.id));
-        // renderTodo(title, description, date, priority, project, id)
     });
         
 }
@@ -43,7 +36,6 @@ function renderProjectUI(projects) {
 function clearProjectsUI() {
     const children = [...container.children];
     children.forEach(child => {
-        
         child.remove();
     });
 }
