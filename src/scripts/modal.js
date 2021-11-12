@@ -1,5 +1,3 @@
-// import { createElementWithClass } from "./createElement";
-// import { renderForm } from "./form";
 import {populateTodo} from "./todo.js"
 
 function addButtonEvents() {
@@ -10,7 +8,6 @@ function addButtonEvents() {
     const cancelBtn = document.getElementById("cancel");
     cancelBtn.addEventListener("click", toggleModal);
     closeBtn.addEventListener("click", toggleModal);
-    // modal.addEventListener("click", openModal);
     createBtn.addEventListener("click", (e)=>{
         populateTodo(e);
     });
@@ -22,19 +19,5 @@ function toggleModal() {
     modal.classList.toggle("showModal");
     form.reset();
 }
-
-
-// function renderModal() {
-//     const modal = createElementWithClass("section", "modal");
-//     const modalContainer = createElementWithClass(
-// 			"article",
-// 			"modal__container"
-//     );
-//     const form = renderForm();
-//     modalContainer.appendChild(form);
-//     modal.appendChild(modalContainer);
-//     console.log(modal);
-//     return modal;
-// }
 
 export { addButtonEvents, toggleModal };
