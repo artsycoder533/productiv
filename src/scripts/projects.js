@@ -30,7 +30,6 @@ function renderProjectUI(projects) {
         );
         container.appendChild(todos);
     });
-        
 }
 
 function clearProjectsUI() {

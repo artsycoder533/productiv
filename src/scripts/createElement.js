@@ -1,5 +1,4 @@
 
-
 function createElementWithClass(type, className) {
     const el = document.createElement(type);
     el.classList.add(className);
@@ -14,7 +13,6 @@ function createTextElementWithClass(type, className, text) {
 }
 
 function createImageWithId(type, src, alt, id) {
-    // const el = document.createElement(type);
     const el = new Image();
     el.src = src;
     el.setAttribute("alt", alt);
