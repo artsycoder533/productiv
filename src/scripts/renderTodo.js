@@ -35,6 +35,12 @@ function renderTodo(title, description, date, priority, project, id) {
     todo__content.appendChild(todo__priority);
 
     const todo__buttons = createElementWithClass("div", "todo__buttons");
+    const todo__more = createElementWithAttribute("button", "todo__more", "id", "more");
+    const moreBtn = createElementWithClass("i", "fas");
+    moreBtn.classList.add("fa-caret-down");
+    moreBtn.addEventListener("click", showDetails);
+    todo__more.appendChild(moreBtn);
+    todo__buttons.appendChild(todo__more);
     const todo__edit = createElementWithAttribute("button", "todo__edit", "id", "edit");
     const editBtn = createElementWithClass("i", "fas");
     editBtn.classList.add("fa-edit");
@@ -70,7 +76,10 @@ function renderTodo(title, description, date, priority, project, id) {
 }
 
 function showDetails(e) {
-    e.currentTarget.nextElementSibling.classList.toggle("showDetails");
+    console.log(e.currentTarget.parentElement.parentElement.parentElement.parentElement.nextElementSibling);
+    e.currentTarget.parentElement.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle(
+			"showDetails"
+		);
 }
 
 function deleteTodoUI(e) {

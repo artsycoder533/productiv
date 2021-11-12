@@ -419,12 +419,10 @@ option{
     width: calc(100vw - 260px);
     height: calc(100vh - 50px);
     z-index: -1;
-    border: 1px solid blue;
 }
 
 // todo
 .todos {
-    
     display: grid;
     gap: 1rem;
     // max-width: 600px;
@@ -432,7 +430,6 @@ option{
 }
 
 .todo {
-    border: 1px solid red;
     max-width: 600px;
     width: 90vw;
     margin: 0 auto;
@@ -466,7 +463,7 @@ option{
     background: lightgreen;
 }
 
-.todo__delete, .todo__edit {
+.todo__delete, .todo__edit, .todo__more {
     font-size: 1.2rem;
     border: none;
     background: transparent;
