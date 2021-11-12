@@ -109,7 +109,7 @@ function populateTodo(e) {
 }
 
 function sortTodosByProject(e) {
-	console.log(e.currentTarget.id);
+	console.log("inside sorttodosbyproject: " + e.currentTarget.id);
 	const sortedByProject = todos.filter(todo => {
 		for (const prop in todo) {
 			if (todo[prop] === e.currentTarget.id) {

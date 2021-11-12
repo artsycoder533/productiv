@@ -130,8 +130,76 @@ function editTodo(e) {
     const updateBtn = document.getElementById("update");
     updateBtn.classList.remove("hide");
     updateBtn.addEventListener("click", () => {
-        updateTodoUI(todo2);
-        toggleModal();
+        const display = document.querySelector(".project__title");
+        //get current project page youre on is the same as new project, re render UI
+        if (form.elements.namedItem("project").value === display.textContent) {
+            updateTodoUI(todo2);
+            toggleModal();
+            return;
+        }
+    
+        const projectType = display.textContent;
+        const misc = document.getElementById("miscellaneous");
+        const home = document.getElementById("home");
+        const work = document.getElementById("work");
+        const title = form.elements.namedItem("title").value;
+        const description = form.elements.namedItem("description").value;
+        const priority = form.elements.namedItem("priority").value;
+        const project = form.elements.namedItem("project").value;
+        const date = form.elements.namedItem("date").value;
+
+        if (projectType === "work") {
+            //update todo array
+            //update todo object
+            updateTodo(title, description, date, priority, project, todo2.getId());
+            //toggle modal
+            toggleModal();
+            work.click();
+        }
+        if (projectType === "home") {
+            updateTodo(title, description, date, priority, project, todo2.getId());
+            //toggle modal
+            toggleModal();
+            home.click();
+        }
+        if (projectType === "miscellaneous") {
+            updateTodo(title, description, date, priority, project, todo2.getId());
+            //toggle modal
+            toggleModal();
+            misc.click();
+        }
+        //if not, simulate clicking on the page you were just on again to show the todo has been moved
+        // const project = document.querySelector(".todo__project"); 
+        // else if (form.elements.namedItem("project").value === "Miscellaneous" && display.textContent != "Miscellaneous") {
+        //     const misc = document.getElementById("miscellaneous");
+        //     console.log(misc);
+        //     misc.click();
+        //     toggleModal();
+        //     //switch todo fro
+        // }
+        // else if (
+        //     form.elements.namedItem("project").value === "home" &&
+        //     display.textContent !== "Home"
+        // ) {
+        //     const home = document.getElementById("home");
+        //     console.log(home);
+        //     home.click();
+        //     toggleModal();
+        // }
+        // else if (
+        //     form.elements.namedItem("project").value === "work" &&
+        //     display.textContent !== "Work"
+		// 		) {
+		// 			const work = document.getElementById("work");
+        //     console.log(work);
+        //     work.click();
+        //     toggleModal();
+		// 		}
+        // console.log(form.elements.namedItem("project").value);
+        // const links = [...document.querySelectorAll(".sidebar__sublinks")];
+        // links.forEach(link => {
+        //     console.log(link.children);
+        // });
     });
 	//when create button pressed, get the id of that todo and update object
 
@@ -169,7 +237,6 @@ function updateTodoUI(todo) {
 
     //update todo object
     updateTodo(title, description, date, priority, project, todo.getId());
-    //close modal
     
 }
 
