@@ -1,5 +1,7 @@
 import { toggleModal } from "./modal.js";
 import { renderProjectUI, renderProjectHeader } from "./projects.js";
+import { renderTasksUI, renderTasksHeader } from "./tasks.js";
+import { renderTodo } from "./renderTodo.js";
 
 const todos = [];
 
@@ -96,6 +98,11 @@ function sortTodosByProject(e) {
 	renderProjectUI(sortedByProject);
 }
 
+function showAllTasks(e) {
+	renderTasksHeader(e.currentTarget.id);
+  	renderTasksUI(todos);
+}
+
 function getTodoById(id) {
 	const match = [];
 	todos.forEach(todo => {
@@ -126,4 +133,4 @@ function deleteTodo(id) {
 	});
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo };
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks };

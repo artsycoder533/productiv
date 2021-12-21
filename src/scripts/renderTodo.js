@@ -72,11 +72,11 @@ function showDetails(e) {
 }
 
 function deleteTodoUI(e) {
-    const todoContainer = document.querySelector(".container");
+    const todos = document.querySelector(".todos");
     const todo =
 			e.currentTarget.parentElement.parentElement.parentElement.parentElement
-				.parentElement;
-    todoContainer.removeChild(todo);
+            .parentElement;
+    todos.removeChild(todo);
     deleteTodo(todo.dataset.id);
 }
 

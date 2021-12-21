@@ -1,4 +1,4 @@
-import { sortTodosByProject } from "./todo.js";
+import { sortTodosByProject, showAllTasks } from "./todo.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -7,6 +7,16 @@ const homeLink = document.getElementById("home");
 const miscLink = document.getElementById("miscellaneous");
 
 function addSidebarEvents() {
+	const allTasks = document.getElementById("all");
+	const today = document.getElementById("today");
+	const upcoming = document.getElementById("upcoming");
+	const overdue = document.getElementById("overdue");
+
+	allTasks.addEventListener("click", showAllTasks);
+	// today.addEventListener("click", sortTodosByTask);
+	// upcoming.addEventListener("click", sortTodosByTask);
+	// overdue.addEventListener("click", sortTodosByTask);
+
 	workLink.addEventListener("click", sortTodosByProject);
 	homeLink.addEventListener("click", sortTodosByProject);
 	miscLink.addEventListener("click", sortTodosByProject);
