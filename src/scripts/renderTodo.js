@@ -81,7 +81,9 @@ function deleteTodoUI(e) {
 }
 
 function editTodo(e) {
-	const form = document.getElementById("form");
+    const form = document.getElementById("form");
+    const title = document.querySelector(".form__heading");
+    title.textContent = "Edit Task";
 	const todo2 = getTodoById(
 		e.currentTarget.parentElement.parentElement.parentElement.parentElement
 			.parentElement.dataset.id

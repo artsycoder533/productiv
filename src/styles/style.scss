@@ -398,6 +398,10 @@ a {
     cursor: pointer;
 }
 
+.close:hover {
+    transform: scale(1.1);
+}
+
 input,
 textarea, 
 select,
