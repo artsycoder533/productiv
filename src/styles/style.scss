@@ -112,7 +112,8 @@ a {
 .header__image img {
     height: 36px;
     width: 36px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-radius: 50%;
 }
 
@@ -377,6 +378,12 @@ a {
     background: white;
 }
 
+.form__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .form__group {
     display: flex;
     flex-direction: column;
@@ -384,8 +391,8 @@ a {
 }
 
 .close {
-    position: relative;
-    left: 95%;
+    // position: relative;
+    // left: 95%;
     font-size: 2rem;
     color: red;
     cursor: pointer;
