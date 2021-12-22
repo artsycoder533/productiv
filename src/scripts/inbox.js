@@ -36,8 +36,8 @@ function showInbox(todos) {
         );
         const trashIcon = createElementWithClass("i", "fas");
         trashIcon.classList.add("fa-trash-alt");
-        trashBtn.addEventListener("click", function () {
-            deleteMessage(todo.id);
+      trashBtn.addEventListener("click", function (e) {
+            deleteMessage(todo.id, e.currentTarget.parentElement);
         });
         trashBtn.appendChild(trashIcon);
         if (todo.status === "unread") {
@@ -83,10 +83,9 @@ function deleteSelected(todos) {
     const kids = container.children;
     const containerChildren = Array.from(kids);
     containerChildren.forEach((child, index) => {
-        console.log(child);
         if (child.children[0]) {
             if (child.children[0].checked) {
-                deleteMessage(child.dataset.id);
+                deleteMessage(child.dataset.id, child);
                 if (child.children[1].classList.contains("bold")) {
                     updateInboxCount("subtract");
                 }
@@ -96,11 +95,12 @@ function deleteSelected(todos) {
     });
 }
 
-function deleteMessage(id) {
+function deleteMessage(id, todo) {
     const container = document.querySelector(".container");
     const message = document.querySelector(".inbox");
-    container.removeChild(message);
-    deleteInboxMessage(id);
+  todo.remove();
+  deleteInboxMessage(id);
+  getInbox();
 }
 
 function showMessage(todo, subject, todos) {
