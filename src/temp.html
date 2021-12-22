@@ -154,18 +154,21 @@
                             <h3 class="form__heading"></h3>
                         <span class="close" id="close"><i class="fas fa-times"></i></span>
                         </div>
-                        <label for="title" class="float">Title:</label>
+                        <label for="title" class="float">Title:<span class="red">*</span></label>
                         <input type="text" name="title" id="title">
+                        <small class="title__error"> </small>
                     </div>
 
                     <div class="form__group">
-                        <label for="description" class="float">Description:</label>
+                        <label for="description" class="float">Description:<span class="red">*</span></label>
                         <textarea name="description" id="description" cols="20" rows="10"></textarea>
+                        <small class="message__error"> </small>
                     </div>
 
                     <div class="form__group">
-                        <label for="date">Due Date:</label>
+                        <label for="date">Due Date:<span class="red">*</span></label>
                         <input type="date" id="date" name ="date">
+                        <small class="date__error"> </small>
                     </div>
 
                     <div class="form__group">

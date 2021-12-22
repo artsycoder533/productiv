@@ -418,8 +418,20 @@ option{
 .modal__form input, 
 .modal__form textarea
 .modal__form select {
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     padding: 0.5rem;
+}
+
+.date__error,
+.message__error,
+.title__error {
+    color:red;
+    transition: all 0.2ms ease-in-out;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
 }
 
 /* container */
@@ -508,7 +520,8 @@ option{
   display: grid;
 }
 
-.project__title {
+.project__title,
+ .task__title {
     text-align: center;
     text-transform: capitalize;
     text-decoration: underline;
