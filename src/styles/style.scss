@@ -411,6 +411,12 @@ option{
     padding: 0.5rem;
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+    outline-color: blue;
+}
+
 select, 
 input[type=date]{
     cursor: pointer;
