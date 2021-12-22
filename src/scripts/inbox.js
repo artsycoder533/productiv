@@ -1,15 +1,18 @@
 import {
   createElementWithClass,
   createInputElement,
-  createTextElementWithClass,
+    createTextElementWithClass,
+  createElementWithAttribute
 } from "./createElement";
+import { deleteInboxMessage, getInbox } from "./todo";
 
 let count = 0;
 
 function showInbox(todos) {
   clearInboxUI();
   const container = document.querySelector(".container");
-  const title = createTextElementWithClass("h2", "inbox__title", "Inbox");
+    const title = createTextElementWithClass("h2", "inbox__title", "Inbox");
+    container.appendChild(title);
   if (todos.length === 0) {
     const status = createTextElementWithClass(
       "p",
@@ -23,6 +26,18 @@ function showInbox(todos) {
         const inbox = createElementWithClass("div", "inbox");
       const subject = createElementWithClass("p", "inbox__subject");
         subject.textContent = "You have a task that's due today";
+        const trashBtn = createElementWithAttribute(
+          "button",
+          "todo__delete",
+          "id",
+          "delete"
+        );
+        const trashIcon = createElementWithClass("i", "fas");
+        trashIcon.classList.add("fa-trash-alt");
+        trashBtn.addEventListener("click", function () {
+            deleteMessage(todo.id);
+        });
+        trashBtn.appendChild(trashIcon);
         if (todo.status === "unread") {
             subject.classList.add("bold");
         }
@@ -40,8 +55,9 @@ function showInbox(todos) {
         showMessage(todo, subject.textContent, todos);
       });
       inbox.appendChild(checkbox);
-      inbox.appendChild(subject);
-      container.appendChild(title);
+        inbox.appendChild(subject);
+        inbox.appendChild(trashBtn);
+
       container.appendChild(inbox);
       return container;
     });
@@ -50,8 +66,15 @@ function showInbox(todos) {
   return container;
 }
 
+function deleteMessage(id) {
+    console.log(id);
+    const container = document.querySelector(".container");
+    const message = document.querySelector(".inbox");
+    container.removeChild(message);
+    deleteInboxMessage(id);
+}
+
 function showMessage(todo, subject, todos) {
-    console.log(subject);
   clearInboxUI();
   const container = document.querySelector(".container");
   const message = createElementWithClass("div", "message__container");
@@ -87,7 +110,7 @@ function showMessage(todo, subject, todos) {
     );
     backToInbox.classList.add("button");
     backToInbox.addEventListener("click", function () {
-        showInbox(todos);
+        getInbox();
     });
   message.appendChild(messageSubject);
   message.appendChild(messageTitle);

@@ -171,8 +171,16 @@ function deleteTodo(id) {
 	});
 }
 
+function deleteInboxMessage(id) {
+	inbox.forEach((todo, index) => {
+    if (todo.getId() === Number(id)) {
+      inbox.splice(index, 1);
+    }
+  });
+}
+
 function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox};
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage};
