@@ -1,4 +1,5 @@
-import { sortTodosByProject, showAllTasks, sortTodosByTask } from "./todo.js";
+import { sortTodosByProject, showAllTasks, sortTodosByTask, getInbox } from "./todo.js";
+import { showInbox } from "./inbox.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -20,6 +21,9 @@ function addSidebarEvents() {
 	workLink.addEventListener("click", sortTodosByProject);
 	homeLink.addEventListener("click", sortTodosByProject);
 	miscLink.addEventListener("click", sortTodosByProject);
+
+	const index = document.getElementById("inbox");
+	index.addEventListener("click", getInbox);
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {

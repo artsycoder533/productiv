@@ -535,7 +535,8 @@ input[type=date]{
 }
 
 .project__title,
- .task__title {
+ .task__title,
+ .inbox__title {
     text-align: center;
     text-transform: capitalize;
     text-decoration: underline;
@@ -543,4 +544,34 @@ input[type=date]{
 
 .hide {
     display: none;
+}
+
+// inbox
+.inbox {
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.message__container{
+    padding: 2rem;
+}
+
+.inbox__subject{
+    margin-left: 2rem;
+} 
+
+.inbox__button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: white;
+    background: red;
+    border: none;
+}
+
+.bold{
+    font-weight: bold;
 }

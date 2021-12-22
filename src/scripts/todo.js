@@ -2,8 +2,10 @@ import { toggleModal, getTodaysDate } from "./modal.js";
 import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
+import { showInbox, updateInboxCount } from "./inbox.js";
 
 const todos = [];
+const inbox = [];
 
 class Todos {
 	constructor(title, description, dueDate, priority, project, id) {
@@ -82,6 +84,10 @@ function populateTodo(e) {
     );
 
 	todos.push(newTodo);
+	if (date === getTodaysDate()) {
+		inbox.push(newTodo);
+		updateInboxCount("add");
+	}
 	toggleModal();
 }
 
@@ -154,4 +160,8 @@ function deleteTodo(id) {
 	});
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask };
+function getInbox() {
+	showInbox(inbox);
+}
+
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox };
