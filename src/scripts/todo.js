@@ -1,4 +1,4 @@
-import { toggleModal } from "./modal.js";
+import { toggleModal, getTodaysDate } from "./modal.js";
 import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
@@ -98,6 +98,27 @@ function sortTodosByProject(e) {
 	renderProjectUI(sortedByProject);
 }
 
+function sortTodosByTask(e) {
+	let sortedTodos = [];
+	if (e.currentTarget.id === "today") {
+		sortedTodos = todos.filter((todo) => {
+			return todo.dueDate === getTodaysDate();
+		});
+	}
+	else if (e.currentTarget.id === "overdue") {
+		sortedTodos = todos.filter(todo => {
+			return todo.dueDate < getTodaysDate();
+		});
+	}
+	else if (e.currentTarget.id === "upcoming") {
+		sortedTodos = todos.filter(todo => {
+			return todo.dueDate > getTodaysDate();
+		});
+	}
+	renderTasksHeader(e.currentTarget.id);
+  	renderTasksUI(sortedTodos);
+}
+
 function showAllTasks(e) {
 	renderTasksHeader(e.currentTarget.id);
   	renderTasksUI(todos);
@@ -133,4 +154,4 @@ function deleteTodo(id) {
 	});
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks };
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask };

@@ -27,11 +27,7 @@ function validateForm(e) {
     const titleError = document.querySelector(".title__error");
     const messageError = document.querySelector(".message__error");
     const dateError = document.querySelector(".date__error");
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const fullDate = `${year}-${month}-${day}`;
+    
     if (title.trim() === "") {
         titleError.textContent = "Title must not be blank";
         setTimeout(function () {
@@ -51,7 +47,7 @@ function validateForm(e) {
             dateError.textContent = " ";
         }, 2000);
     }
-    if (date < fullDate) {
+    if (date < getTodaysDate()) {
         
         dateError.textContent = "Date must not be in the past";
         setTimeout(function () {
@@ -63,6 +59,15 @@ function validateForm(e) {
     }
 }
 
+function getTodaysDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const fullDate = `${year}-${month}-${day}`;
+    return fullDate;
+}
+
 function toggleModal() {
     const modal = document.querySelector(".modal");
     const form = document.querySelector(".modal__form");
@@ -70,4 +75,4 @@ function toggleModal() {
     form.reset();
 }
 
-export { addButtonEvents, toggleModal };
+export { addButtonEvents, toggleModal, getTodaysDate };

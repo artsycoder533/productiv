@@ -376,6 +376,8 @@ a {
     width: 100%;
     padding: 2rem;
     background: white;
+    display: grid;
+    gap: 1fr;
 }
 
 .form__title {
