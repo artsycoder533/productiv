@@ -1,5 +1,7 @@
 /* google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&family=Play&family=Titan+One&display=swap');
+
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -604,4 +606,92 @@ input[type=date]{
 
 .bold{
     font-weight: bold;
+}   
+
+/* calculator */
+.calc__wrapper{
+    height: 100%;
+}
+
+.calc__container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 500px;
+    width: 300px;
+    background-color: white;   
+    padding: 10px; 
+    border-radius: 10px;
+}
+
+.display-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: right;
+    height: 100px;
+    background-color: black;
+    box-shadow: inset 2px 2px 2px 2px darkgray;
+    width: 100%;
+    overflow: hidden;
+    padding-left: 1rem;
+}
+
+.display {
+    width: 95%;
+    color: lightgray;
+    font-family: 'Play', sans-serif;
+    overflow: hidden;
+}
+
+.calc {
+    margin-right: 2px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    margin: auto;
+    font-size: 25px;
+    box-shadow: inset 2px 2px 2px 2px darkgray;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.equals {
+    width: 125px;
+    border-radius: 25px;
+    grid-column: 3 / 5;
+}
+
+.btn:hover {
+    opacity: 0.8;
+    box-shadow: inset 2px 2px 2px 2px black;
+}
+
+.divide, .multiply, .subtract, .add, .equals {
+    background-color: red;
+    box-shadow: inset 2px 2px 2px 2px darkred;
+}
+
+.clear, .negative, .percent, .backspace {
+    background-color: lightseagreen;
+    background-color: rgb(35,35,35);
+    color: white;
+    box-shadow: inset 2px 2px 2px 2px seagreen;
+    box-shadow: inset 2px 2px 2px 2px black;
 }
