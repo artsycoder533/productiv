@@ -25,7 +25,6 @@ function validateForm(e) {
     const priority = document.getElementById("priority").value;
     const project = document.getElementById("project").value;
     const titleError = document.querySelector(".title__error");
-    const messageError = document.querySelector(".message__error");
     const dateError = document.querySelector(".date__error");
     
     if (title.trim() === "") {
@@ -34,12 +33,6 @@ function validateForm(e) {
             titleError.textContent = " ";
         }, 2000);
         
-    }
-    if (description.trim()=== "") {
-        messageError.textContent = "Message must not be blank";
-        setTimeout(function () {
-            messageError.textContent = " ";
-        }, 2000);
     }
     if (date === "") {
         dateError.textContent = "Please select a date";
