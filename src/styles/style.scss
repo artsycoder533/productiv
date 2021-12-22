@@ -409,12 +409,24 @@ option{
     padding: 0.5rem;
 }
 
+select, 
+input[type=date]{
+    cursor: pointer;
+}
+
 .modal__form button {
     margin-top: 1rem;
     padding: 0.5rem;
     cursor: pointer;
 }
 
+.form__button {
+    background: red;
+    color: white;
+    font-weight: bold;
+    border: none;
+    letter-spacing: 1px;
+}
 .modal__form input, 
 .modal__form textarea
 .modal__form select {

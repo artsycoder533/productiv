@@ -28,24 +28,34 @@ function validateForm(e) {
     const messageError = document.querySelector(".message__error");
     const dateError = document.querySelector(".date__error");
     const currentDate = new Date();
-    console.log(currentDate);
-    if (title.trim().match(/\s*/)) {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const fullDate = `${year}-${month}-${day}`;
+    if (title.trim() === "") {
         titleError.textContent = "Title must not be blank";
         setTimeout(function () {
             titleError.textContent = " ";
-        }, 3000);
+        }, 2000);
         
     }
-    if (description.trim().match(/\s*/)) {
+    if (description.trim()=== "") {
         messageError.textContent = "Message must not be blank";
         setTimeout(function () {
             messageError.textContent = " ";
-        }, 3000);
+        }, 2000);
     }
     if (date === "") {
         dateError.textContent = "Please select a date";
         setTimeout(function () {
             dateError.textContent = " ";
+        }, 2000);
+    }
+    if (date < fullDate) {
+        
+        dateError.textContent = "Date must not be in the past";
+        setTimeout(function () {
+          dateError.textContent = " ";
         }, 3000);
     }
     else {
