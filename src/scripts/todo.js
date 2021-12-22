@@ -96,10 +96,14 @@ function populateTodo(e) {
 
 	todos.push(newTodo);
 	if (date === getTodaysDate()) {
-		inbox.push(newTodo);
+		inbox.unshift(newTodo);
 		updateInboxCount("add");
 	}
 	toggleModal();
+	const mainTitle = document.querySelector(".header__display");
+	if (mainTitle.textContent === "Inbox") {
+		showInbox(inbox);
+	}
 }
 
 function sortTodosByProject(e) {

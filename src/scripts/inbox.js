@@ -20,10 +20,12 @@ function showInbox(todos) {
       "Your inbox is empty"
     );
     container.appendChild(title);
-    container.appendChild(status);
+      container.appendChild(status);
+      return container;
   } else {
     todos.map((todo) => {
         const inbox = createElementWithClass("div", "inbox");
+        inbox.setAttribute("data-id", todo.id);
       const subject = createElementWithClass("p", "inbox__subject");
         subject.textContent = "You have a task that's due today";
         const trashBtn = createElementWithAttribute(
@@ -51,6 +53,7 @@ function showInbox(todos) {
         "checkbox"
         );
         checkbox.classList.add("checkbox");
+        
       subject.addEventListener("click", function () {
         showMessage(todo, subject.textContent, todos);
       });
@@ -58,16 +61,42 @@ function showInbox(todos) {
         inbox.appendChild(subject);
         inbox.appendChild(trashBtn);
 
-      container.appendChild(inbox);
-      return container;
+        container.appendChild(inbox);
+        
     });
-  }
+    }
+    const deleteAll = createTextElementWithClass(
+      "button",
+      "inbox__button",
+      "Delete Selected"
+    );
+    deleteAll.addEventListener("click", function () {
+      deleteSelected(todos);
+    });
+container.appendChild(deleteAll);
 
   return container;
 }
 
+function deleteSelected(todos) {
+    const container = document.querySelector(".container");
+    const kids = container.children;
+    const containerChildren = Array.from(kids);
+    containerChildren.forEach((child, index) => {
+        console.log(child);
+        if (child.children[0]) {
+            if (child.children[0].checked) {
+                deleteMessage(child.dataset.id);
+                if (child.children[1].classList.contains("bold")) {
+                    updateInboxCount("subtract");
+                }
+            }
+        }
+        getInbox();
+    });
+}
+
 function deleteMessage(id) {
-    console.log(id);
     const container = document.querySelector(".container");
     const message = document.querySelector(".inbox");
     container.removeChild(message);
