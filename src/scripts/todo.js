@@ -8,13 +8,14 @@ const todos = [];
 const inbox = [];
 
 class Todos {
-	constructor(title, description, dueDate, priority, project, id) {
+	constructor(title, description, dueDate, priority, project, id, status) {
 		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 		this.priority = priority;
 		this.project = project;
 		this.id = id;
+		this.status = status;
 	}
 
 	getTitle() {
@@ -64,6 +65,14 @@ class Todos {
 	setId(id) {
 		this.id = id;
 	}
+
+	getStatus() {
+		return this.status;
+	}
+
+	setStatus(status) {
+		this.status = status;
+	}
 }
 
 function populateTodo(e) {
@@ -73,14 +82,16 @@ function populateTodo(e) {
     const date = document.getElementById("date").value;
 	const priority = document.getElementById("priority").value;
 	const project = document.getElementById("project").value;
-    const id = Math.random();
+	const id = Math.random();
+	const status = "unread";
 	const newTodo = new Todos(
 		title,
 		description,
 		date,
 		priority,
 		project,
-		id
+		id,
+		status
     );
 
 	todos.push(newTodo);
@@ -164,4 +175,4 @@ function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox };
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox};

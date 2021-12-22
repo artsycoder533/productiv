@@ -456,6 +456,7 @@ input[type=date]{
     width: calc(100vw - 260px);
     height: calc(100vh - 50px);
     z-index: -1;
+    border: 2px solid blue;
 }
 
 // todo
@@ -553,14 +554,31 @@ input[type=date]{
     align-items: center;
     padding: 1rem;
     cursor: pointer;
+    background: white;
+    margin: 0 2rem;
+}
+
+.checkbox {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 .message__container{
     padding: 2rem;
+    max-width: 700px;
+    width: 90vw;
+    margin: auto;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .inbox__subject{
     margin-left: 2rem;
+    display:block;
+    width: 100%;
 } 
 
 .inbox__button {
@@ -570,6 +588,8 @@ input[type=date]{
     color: white;
     background: red;
     border: none;
+    letter-spacing: 1px;
+    font-weight: bold;
 }
 
 .bold{

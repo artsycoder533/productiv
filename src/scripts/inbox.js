@@ -11,7 +11,7 @@ function showInbox(todos) {
   const container = document.querySelector(".container");
   const title = createTextElementWithClass("h2", "inbox__title", "Inbox");
   if (todos.length === 0) {
-    const status = document.createTextElementWithClass(
+    const status = createTextElementWithClass(
       "p",
       "inbox__status",
       "Your inbox is empty"
@@ -20,16 +20,23 @@ function showInbox(todos) {
     container.appendChild(status);
   } else {
     todos.map((todo) => {
-      const inbox = createElementWithClass("div", "inbox");
+        const inbox = createElementWithClass("div", "inbox");
       const subject = createElementWithClass("p", "inbox__subject");
-      subject.textContent = "You have a task that's due today";
+        subject.textContent = "You have a task that's due today";
+        if (todo.status === "unread") {
+            subject.classList.add("bold");
+        }
+        if (todo.status === "read") {
+            subject.classList.remove("bold");
+        }
       const checkbox = createInputElement(
         "input",
         "checkbox",
         "checkbox",
         "checkbox"
-      );
-      inbox.addEventListener("click", function () {
+        );
+        checkbox.classList.add("checkbox");
+      subject.addEventListener("click", function () {
         showMessage(todo, subject.textContent, todos);
       });
       inbox.appendChild(checkbox);
@@ -89,7 +96,8 @@ function showMessage(todo, subject, todos) {
   message.appendChild(messageDescription);
   message.appendChild(backToInbox);
   container.appendChild(message);
-  updateInboxCount("subtract");
+    updateInboxCount("subtract");
+    todo.status = "read";
   return container;
 }
 
