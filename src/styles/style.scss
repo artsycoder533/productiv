@@ -648,10 +648,14 @@ input[type=date]{
     color: lightgray;
     font-family: 'Play', sans-serif;
     overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .calc {
     margin-right: 2px;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .buttons {
