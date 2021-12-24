@@ -77,7 +77,7 @@ function calc() {
   btnOne.addEventListener("click", () => {
     populateDisplay(1);
   });
-
+  
   btnTwo.addEventListener("click", () => {
     populateDisplay(2);
   });
@@ -151,9 +151,7 @@ function calc() {
     calc.length = 0;
   });
 
-  btnBackspace.addEventListener("click", () => {
-    //delete one digit from keyPressedDisplay
-    // if only one number make key pressed display say 0
+  function backspace() {
     if (keyPressedDisplay.textContent.length === 1) {
       keyPressedDisplay.textContent = "0";
       expressionDisplay.textContent = expressionDisplay.textContent.slice(
@@ -174,7 +172,9 @@ function calc() {
       );
       displayString = displayString.slice(0, -1);
     }
-  });
+  }
+
+  btnBackspace.addEventListener("click", backspace);
 
   btnNegative.addEventListener("click", () => {
     populateDisplay("+/-");
@@ -321,11 +321,8 @@ function calc() {
         break;
 
       // if the input is a number
-        default:
-            
-            expressionDisplay.textContent += input;
-            
-        
+      default:
+        expressionDisplay.textContent += input;
 
         if (calc.length === 3 && typeof calc[1] === "string") {
           keyPressedDisplay.textContent = "";
@@ -333,13 +330,12 @@ function calc() {
           keyPressedDisplay.textContent = "";
         } else if (calc.length === 4 && typeof calc[1] === "number") {
           calc.shift();
-            }
-            if (displayString.length < 10) {
-                displayString += input;
-                keyPressedDisplay.textContent = displayString;
-                displayExpression += input;
-            }
-        
+        }
+        if (displayString.length < 10) {
+          displayString += input;
+          keyPressedDisplay.textContent = displayString;
+          displayExpression += input;
+        }
     }
 
     if (calc.length === 4) {
