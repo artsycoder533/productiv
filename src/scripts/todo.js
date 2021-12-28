@@ -3,6 +3,8 @@ import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { showInbox, updateInboxCount } from "./inbox.js";
+import { addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { colRef, db } from "../index.js";
 
 const todos = [];
 const inbox = [];
@@ -93,8 +95,19 @@ function populateTodo(e) {
 		id,
 		status
     );
-
+	
 	todos.push(newTodo);
+	//add to database
+	addDoc(colRef, {
+		title:title,
+		description:description,
+		date: date,
+		priority:priority,
+		project:project,
+		id:id,
+		status:status,
+	});
+
 	if (date === getTodaysDate()) {
 		inbox.unshift(newTodo);
 		updateInboxCount("add");
@@ -104,6 +117,10 @@ function populateTodo(e) {
 	if (mainTitle.textContent === "Inbox") {
 		showInbox(inbox);
 	}
+}
+
+function getFirebaseID(id) {
+	return id;
 }
 
 function sortTodosByProject(e) {
@@ -173,6 +190,9 @@ function deleteTodo(id) {
 			todos.splice(index, 1);
 		}
 	});
+	console.log(id);
+	const docRef = doc(db, 'tasks', id);
+	deleteDoc(docRef);
 }
 
 function deleteInboxMessage(id) {
@@ -187,4 +207,4 @@ function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage};
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getFirebaseID};

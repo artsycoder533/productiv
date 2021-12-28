@@ -11,6 +11,11 @@ function addHeaderEvents() {
 	profileContainer.addEventListener("click", uploadPic);
 }
 
+function addUserName(name) {
+	const username = document.querySelector(".header__username");
+	username.textContent = name;
+}
+
 function addProfilePlaceholder(profileContainer) {
     profileContainer.children[0].src = profile;
 }
@@ -38,4 +43,4 @@ function readUrl() {
 	profileContainer.click();
 }
 
-export { addHeaderEvents };
+export { addHeaderEvents, addUserName };
