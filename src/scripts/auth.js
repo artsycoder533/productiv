@@ -51,6 +51,7 @@ function showLogin() {
 }
 
 function addAuthEvents() {
+    const form = document.querySelector(".form");
     const signup = document.querySelector(".form__signup");
     const login = document.querySelector(".form__login");
     const cover = document.querySelector(".form__cover");
@@ -60,6 +61,7 @@ function addAuthEvents() {
     const signupBtn = document.getElementById("signup");
     const logoutBtn = document.getElementById("logout");
     const loginScreen = document.querySelector(".login__container");
+    const sidebarLogout = document.getElementById("sidebar__logout");
     let loggedIn;
 
     let active = "signup";
@@ -114,7 +116,7 @@ function addAuthEvents() {
             console.log(err.message);
         });
         //make login screen show again
-
+        form.reset();
     }
 
     function signupUser(e) {
@@ -133,11 +135,14 @@ function addAuthEvents() {
           .catch((err) => {
             console.log(err.message);
           });
-        
+        form.reset();
     }
 
     onAuthStateChanged(auth, (user) => {
-        
+        if (user) {
+            //loginScreen.classList.remove("display");
+            loginScreen.classList.add("hide");
+        }
     })
 
     login.addEventListener("click", addActiveLogin);
@@ -145,6 +150,7 @@ function addAuthEvents() {
     loginBtn.addEventListener("click", loginUser);
     signupBtn.addEventListener("click", signupUser);
     logoutBtn.addEventListener("click", logoutUser);
+    sidebarLogout.addEventListener("click", logoutUser);
 }
 
 function formValidation(active) {
