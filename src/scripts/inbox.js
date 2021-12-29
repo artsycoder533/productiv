@@ -4,7 +4,7 @@ import {
     createTextElementWithClass,
   createElementWithAttribute
 } from "./createElement";
-import { deleteInboxMessage, getInbox } from "./todo";
+import { deleteInboxMessage, getInbox, updateDocument } from "./todo";
 
 let count = 0;
 
@@ -149,7 +149,9 @@ function showMessage(todo, subject, todos) {
   message.appendChild(backToInbox);
   container.appendChild(message);
     updateInboxCount("subtract");
-    todo.status = "read";
+  todo.status = "read";
+  updateDocument(todo.title, todo.description, todo.dueDate, todo.priority, todo.project, String(todo.id), todo.status);
+  console.log(todo);
   return container;
 }
 

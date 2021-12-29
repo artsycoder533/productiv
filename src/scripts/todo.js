@@ -30,6 +30,10 @@ async function getAllData() {
 
 	querySnapshot.forEach(doc => {
 		console.log(doc.data());
+		if (doc.data().dueDate === getTodaysDate() && doc.data().status === "unread") {
+			inbox.push(doc.data());
+			updateInboxCount("add");
+		}
 		todos.push(doc.data())
 	})
 }
@@ -279,7 +283,7 @@ function getTodoById(id) {
 	return match[0];
 }
 
-function updateTodo(title, description, date, priority, project, id) {
+function updateTodo(title, description, date, priority, project, id, status) {
 	todos.forEach(todo => {
 		if (todo.getId() === Number(id)) {
 			todo.setTitle(title);
@@ -287,6 +291,7 @@ function updateTodo(title, description, date, priority, project, id) {
 			todo.setDueDate(date);
 			todo.setPriority(priority);
 			todo.setProject(project);
+			todo.setStatus(status);
 		}
 	});
 	updateDocument(title, description, dueDate, priority, project, id, status);
@@ -316,4 +321,4 @@ function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument};
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument, updateDocument};
