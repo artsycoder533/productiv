@@ -3,11 +3,129 @@ import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { showInbox, updateInboxCount } from "./inbox.js";
-import { addDoc, deleteDoc, doc } from 'firebase/firestore';
-import { colRef, db } from "../index.js";
+import { getFirestore, doc, getDoc, setDoc, collection, updateDoc, deleteDoc, addDoc, getDocs, onSnapshot} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
 
-const todos = [];
+
 const inbox = [];
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBPwH-PsSrwzFjr6v8LUMwbZkbFs8x7Uac",
+  authDomain: "productiv-932c9.firebaseapp.com",
+  projectId: "productiv-932c9",
+  storageBucket: "productiv-932c9.appspot.com",
+  messagingSenderId: "232110405285",
+  appId: "1:232110405285:web:d37d1437bc93f077c13f4c",
+  measurementId: "G-CR193YXW7R",
+};
+
+initializeApp(firebaseConfig);
+
+const db = getFirestore();
+const todos = [];
+
+window.addEventListener('load', getAllData);
+async function getAllData() {
+	const querySnapshot = await getDocs(collection(db, "tasks"));
+
+	querySnapshot.forEach(doc => {
+		console.log(doc.data());
+		todos.push(doc.data())
+	})
+}
+
+
+
+//add to firestore auto id
+async function addDocument(
+  title,
+  description,
+  dueDate,
+  priority,
+  project,
+  id,
+  status
+) {
+  const ref = collection(db, "tasks");
+	const docref = await addDoc(ref, {
+		title: title,
+		desciption: description,
+		dueDate: dueDate,
+		priority: priority,
+		project: project,
+		id: id,
+		status: status
+  });
+}
+
+//add to firestore custom id
+async function addDocumentCustomID(
+  title,
+  description,
+  dueDate,
+  priority,
+  project,
+  id,
+  status
+) {
+  const ref = doc(db, "tasks", String(id));
+  await setDoc(ref, {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    project: project,
+    id: id,
+    status: status,
+  });
+}
+
+//get a document
+async function getADocument() {
+	const ref = doc(db, "tasks", id);
+	const docSnap = await getDoc(ref);
+	if (docSnap.exists()) {
+		title.value = docSnap.data().title;
+		description.value = docSnap.data().description;
+		dueDate.value = docSnap.data().dueDate;
+		priority.value = docSnap.data().priority;
+		project.value = docSnap.data().project;
+		id.value = docSnap.data().id;
+		
+	}
+}
+
+//update a document
+async function updateDocument(
+  title,
+  description,
+  dueDate,
+  priority,
+  project,
+  id,
+  status
+) {
+  const ref = doc(db, "tasks", id);
+  await updateDoc(ref, {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    project: project,
+    id: id,
+    status: status,
+  });
+}
+
+//delete a document
+async function deleteDocument(id) {
+	const ref = doc(db, "tasks", id);
+	const docSnap = await getDoc(ref);
+
+	if (docSnap.exists()) {
+		deleteDoc(ref);
+	}
+}
 
 class Todos {
 	constructor(title, description, dueDate, priority, project, id, status) {
@@ -97,17 +215,7 @@ function populateTodo(e) {
     );
 	
 	todos.push(newTodo);
-	//add to database
-	addDoc(colRef, {
-		title:title,
-		description:description,
-		date: date,
-		priority:priority,
-		project:project,
-		id:id,
-		status:status,
-	});
-
+	addDocumentCustomID(title, description, date, priority, project, id, status);
 	if (date === getTodaysDate()) {
 		inbox.unshift(newTodo);
 		updateInboxCount("add");
@@ -119,9 +227,6 @@ function populateTodo(e) {
 	}
 }
 
-function getFirebaseID(id) {
-	return id;
-}
 
 function sortTodosByProject(e) {
 	const sortedByProject = todos.filter(todo => {
@@ -165,7 +270,9 @@ function showAllTasks(e) {
 function getTodoById(id) {
 	const match = [];
 	todos.forEach(todo => {
-		if (todo.getId() === Number(id)) {
+		console.log(typeof todo.id, typeof id);
+		if (todo.id == id) {
+			
 			match.push(todo);
 		}
 	});
@@ -182,17 +289,19 @@ function updateTodo(title, description, date, priority, project, id) {
 			todo.setProject(project);
 		}
 	});
+	updateDocument(title, description, dueDate, priority, project, id, status);
 }
 
 function deleteTodo(id) {
 	todos.forEach((todo, index) => {
-		if (todo.getId() === Number(id)) {
+		console.log(todo);
+		if (todo.id === Number(id)) {
 			todos.splice(index, 1);
+			console.log("here");
+			deleteDocument(id);
 		}
 	});
-	console.log(id);
-	const docRef = doc(db, 'tasks', id);
-	deleteDoc(docRef);
+	
 }
 
 function deleteInboxMessage(id) {
@@ -207,4 +316,4 @@ function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getFirebaseID};
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument};

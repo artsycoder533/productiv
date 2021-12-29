@@ -1,6 +1,6 @@
 import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
 import { toggleModal } from "./modal.js";
-import { getTodoById, updateTodo, deleteTodo} from "./todo.js";
+import { getTodoById, updateTodo, deleteTodo, getADocument} from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
@@ -95,7 +95,7 @@ function editTodo(e) {
     form.elements.namedItem("priority").value = todo2.getPriority();
     form.elements.namedItem("project").value = todo2.getProject();
     form.elements.namedItem("date").value = todo2.getDueDate();
-    
+    //getADocument();
     const createBtn = document.getElementById("create");
     createBtn.classList.add("hide");
     const updateBtn = document.getElementById("update");
