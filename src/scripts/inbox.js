@@ -4,6 +4,7 @@ import {
     createTextElementWithClass,
   createElementWithAttribute
 } from "./createElement";
+import { getTodaysDate } from "./modal";
 import { deleteInboxMessage, getInbox, updateDocument } from "./todo";
 
 let count = 0;
@@ -25,9 +26,15 @@ function showInbox(todos) {
   } else {
     todos.map((todo) => {
         const inbox = createElementWithClass("div", "inbox");
-        inbox.setAttribute("data-id", todo.id);
+      inbox.setAttribute("data-id", todo.id);
       const subject = createElementWithClass("p", "inbox__subject");
+      if (todo.dueDate === getTodaysDate()) {
         subject.textContent = "You have a task that's due today";
+      }
+      else if (todo.dueDate < getTodaysDate()) {
+        subject.textContent = "You have a task that's overdue!";
+      }
+        
         const trashBtn = createElementWithAttribute(
           "button",
           "todo__delete",

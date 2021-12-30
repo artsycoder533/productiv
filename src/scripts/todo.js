@@ -32,7 +32,7 @@ async function getAllData(username) {
 
 	querySnapshot.forEach(doc => {
 		console.log(doc.data());
-		if (doc.data().dueDate === getTodaysDate() && doc.data().status === "unread") {
+		if (doc.data().dueDate <= getTodaysDate() && doc.data().status === "unread") {
 			inbox.push(doc.data());
 			updateInboxCount("add");
 		}

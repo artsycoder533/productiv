@@ -7,8 +7,8 @@ import { getAllData } from "./todo";
 const container = document.querySelector(".container");
 
 function showLogin() {
-  clearUI();
-  
+  //clearUI();
+  addLoginScreen();
   const loginContainer = createElementWithClass("div", "login__container");
   
   loginContainer.innerHTML = `
@@ -35,6 +35,7 @@ function showLogin() {
             <label class="form__label" for="username">Username</label>
         </div>
         <button type="submit" id="signup" class="form__button">Sign-Up</button>
+        <button type="submit" id="demo" class="form__button">Sign-Up As Demo User</button>
       </div>
         
        <div class="form__section login hide">
@@ -54,6 +55,7 @@ function showLogin() {
   </div>
     `;
   container.appendChild(loginContainer);
+  addAuthEvents();
     return container;
 }
 
@@ -86,18 +88,20 @@ function addAuthEvents() {
     const signupBtn = document.getElementById("signup");
     const logoutBtn = document.getElementById("logout");
     const loginScreen = document.querySelector(".login__container");
-    const sidebarLogout = document.getElementById("sidebar__logout");
+  const sidebarLogout = document.getElementById("sidebar__logout");
+  const demo = document.getElementById("demo");
     let loggedIn;
 
     let active = "signup";
 
     if (loggedIn) {
-        loginScreen.classList.add("hide");
+        //loginScreen.classList.add("hide");
     }
 
     function addActiveLogin() {
       // login.classList.add("active");
       // signup.classList.remove("active");
+      console.log("login clicked");
       cover.classList.add("moveRight");
       cover.classList.remove("moveLeft");
       loginForm.classList.remove("hide");
@@ -108,6 +112,7 @@ function addAuthEvents() {
     function addActiveSignup() {
       // signup.classList.add("active");
       // login.classList.remove("active");
+      console.log("signup clicked");
       cover.classList.add("moveLeft");
       cover.classList.remove("moveRight");
       signupForm.classList.remove("hide");
@@ -126,6 +131,7 @@ function addAuthEvents() {
               addUserName(cred.user.displayName);
               hideLogin();
               clearUI();
+              document.location.reload();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -134,15 +140,15 @@ function addAuthEvents() {
 
     function logoutUser() {
         signOut(auth).then(() => {
-            console.log("user signed out");
-          addLoginScreen();
-            
-            //loginBtn.click();
+          console.log("user signed out");
+          showLogin();
+          form.reset();
+          document.location.reload();
         }).catch((err) => {
             console.log(err.message);
         });
         //make login screen show again
-      form.reset();
+      
   }
   
 
@@ -157,14 +163,24 @@ function addAuthEvents() {
           .then((cred) => {
             console.log(cred.user);
             updateProfile(auth.currentUser, { displayName: username });
-            addUserName(cred.user.displayName);
+            addUserName(username);
             hideLogin();
+            //document.location.reload();
           })
           .catch((err) => {
             console.log(err.message);
           });
       form.reset();
-      toggleLogin();
+  }
+
+  function addDemoCredentials(e) {
+    e.preventDefault;
+    const email = document.getElementById("signup__email");
+    const password = document.getElementById("signup__password");
+    const username = document.getElementById("username");
+    email.value = "demo@email.com";
+    password.value = "demo1234";
+    username.value = "demo1234";
   }
   
 
@@ -177,7 +193,10 @@ function addAuthEvents() {
             //loginScreen.classList.remove("display");
           //loginScreen.classList.add("hide");
           getAllData(user.displayName);
-        }
+      }
+      // else {
+      //   logoutUser();
+      // }
     })
 
     login.addEventListener("click", addActiveLogin);
@@ -185,7 +204,8 @@ function addAuthEvents() {
     loginBtn.addEventListener("click", loginUser);
     signupBtn.addEventListener("click", signupUser);
     logoutBtn.addEventListener("click", logoutUser);
-    sidebarLogout.addEventListener("click", logoutUser);
+  sidebarLogout.addEventListener("click", logoutUser);
+  demo.addEventListener("click", addDemoCredentials);
 }
 
 function getUsername() {

@@ -23,14 +23,14 @@ const auth = getAuth();
 
 
 
-if (!auth.currentUser) {
+
     document.body.appendChild(showLogin());
-}
+
 
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    addAuthEvents();
+    //addAuthEvents();
     addSidebarEvents();
     addHeaderEvents();
     // const modal = renderModal();

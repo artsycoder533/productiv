@@ -1,7 +1,7 @@
 import { createElementWithClass, createTextElementWithClass } from "./createElement";
 
 const container = document.querySelector(".container");
-let startingMinutes = 0.5;
+let startingMinutes = 25;
 let time = startingMinutes * 60;
 let count = 0;
 

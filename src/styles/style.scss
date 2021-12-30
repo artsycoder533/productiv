@@ -479,7 +479,7 @@ input[type=date]{
     max-width: 600px;
     width: 90vw;
     margin: 0 auto;
-    cursor: pointer;
+    //cursor: pointer;
     padding: 0.5rem;
     background: white;
 }
@@ -714,7 +714,7 @@ input[type=date]{
   //mix-blend-mode: difference;
   display: grid;
   place-items: center;
-  z-index: 3;
+  z-index: 1;
   //display: none;
 }
 
