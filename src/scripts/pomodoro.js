@@ -44,7 +44,7 @@ function getPomodoro() {
 
 
 function startTime() {
-    console.log("startTime called");
+    const pomodoro = document.querySelector(".pomodoro");
     const timer = document.getElementById("timer");
     const stop = document.getElementById("stop");
     const interval = setInterval(function () {
@@ -56,8 +56,6 @@ function startTime() {
         seconds < 10 ? (seconds = `0` + seconds) : (seconds = seconds);
         timer.textContent = `${minutesLeft}:${seconds}`;
         if (minutesLeft < 1 && seconds < 1) {
-            const pomodoro = document.querySelector(".pomodoro");
-            pomodoro.classList.add("end");
             stopTimer(interval);
             count++;
             if (count > 0) {
@@ -65,8 +63,11 @@ function startTime() {
             }
             else {
                 startingMinutes = 25;
-                count--;
             }
+            count--;
+            startingMinutes === 5
+              ? pomodoro.classList.add("end")
+              : pomodoro.classList.remove("end");
             time = startingMinutes * 60;
             let minutesLeft = Math.floor(time / 60);
             let seconds = time % 60;
@@ -92,7 +93,12 @@ function stopTimer(interval) {
 function resetTime() {
     const timer = document.getElementById("timer");
     const pomodoro = document.querySelector(".pomodoro");
-    pomodoro.classList.remove("end");
+    startingMinutes === 5
+      ? pomodoro.classList.add("end")
+      : pomodoro.classList.remove("end");
+    if (startingMinutes !== 5) {
+        startingMinutes = 25;
+    }
     time = startingMinutes * 60;
     let minutesLeft = Math.floor(time / 60);
     let seconds = time % 60;

@@ -1,11 +1,17 @@
 import { createElementWithClass } from "./createElement";
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { auth } from "..";
 import { addUserName } from "./header";
+import { getAllData } from "./todo";
+
+const container = document.querySelector(".container");
 
 function showLogin() {
-    const container = createElementWithClass("div", "login__container");
-    container.innerHTML = `
+  clearUI();
+  
+  const loginContainer = createElementWithClass("div", "login__container");
+  
+  loginContainer.innerHTML = `
         <div class="form__container">
     <form action="" class="form">
     <h2 class="login__title"><i class="fas fa-business-time"> Productiv</i></h2>
@@ -47,7 +53,26 @@ function showLogin() {
     </form>
   </div>
     `;
+  container.appendChild(loginContainer);
     return container;
+}
+
+function addLoginScreen() {
+  const sidebar = document.querySelector(".sidebar");
+  const header = document.querySelector(".header");
+  const addBtn = document.querySelector(".add__button");
+  sidebar.classList.add("hide");
+  header.classList.add("hide");
+  addBtn.classList.add("hide");
+}
+
+function hideLogin() {
+  const sidebar = document.querySelector(".sidebar");
+  const header = document.querySelector(".header");
+  const addBtn = document.querySelector(".add__button");
+  sidebar.classList.remove("hide");
+  header.classList.remove("hide");
+  addBtn.classList.remove("hide");
 }
 
 function addAuthEvents() {
@@ -97,51 +122,61 @@ function addAuthEvents() {
         const password = document.getElementById("login__password").value;
         signInWithEmailAndPassword(auth, email, password)
             .then((cred) => {
-                console.log("user logged in", cred.user);
-                loggedIn = true;
-                loginScreen.classList.add("hide");
+              console.log("user logged in", cred.user.displayName);
+              addUserName(cred.user.displayName);
+              hideLogin();
+              clearUI();
             }).catch((err) => {
                 console.log(err.message);
-        });
+            });
+      
     }
 
     function logoutUser() {
         signOut(auth).then(() => {
             console.log("user signed out");
-            loginScreen.classList.remove("hide");
-            loginScreen.classList.add("display");
-            loggedIn = false;
+          addLoginScreen();
+            
             //loginBtn.click();
         }).catch((err) => {
             console.log(err.message);
         });
         //make login screen show again
-        form.reset();
-    }
+      form.reset();
+  }
+  
 
     function signupUser(e) {
         e.preventDefault;
         const email = document.getElementById("signup__email").value;
         const password = document.getElementById("signup__password").value;
-        const username = document.getElementById("username").value;
-        addUserName(username);
+      const username = document.getElementById("username").value;
+      console.log(username);
         //form validation
         createUserWithEmailAndPassword(auth, email, password)
           .then((cred) => {
-              console.log(cred.user);
-              loggedIn = true;
-              loginScreen.classList.add("hide");
+            console.log(cred.user);
+            updateProfile(auth.currentUser, { displayName: username });
+            addUserName(cred.user.displayName);
+            hideLogin();
           })
           .catch((err) => {
             console.log(err.message);
           });
-        form.reset();
-    }
+      form.reset();
+      toggleLogin();
+  }
+  
 
     onAuthStateChanged(auth, (user) => {
-        if (user) {
+      if (user) {
+        console.log(user);
+        addUserName(user.displayName);
+        hideLogin();
+        clearUI();
             //loginScreen.classList.remove("display");
-            loginScreen.classList.add("hide");
+          //loginScreen.classList.add("hide");
+          getAllData(user.displayName);
         }
     })
 
@@ -153,9 +188,22 @@ function addAuthEvents() {
     sidebarLogout.addEventListener("click", logoutUser);
 }
 
+function getUsername() {
+  const username = document.querySelector(".header__username").textContent;
+  return username;
+}
+
+function clearUI() {
+  const container = document.querySelector(".container");
+  const children = [...container.children];
+  children.forEach((child) => {
+    child.remove();
+  });
+}
+
 function formValidation(active) {
     //if active is login
     //if active is signup
 }
 
-export { showLogin, addAuthEvents };
+export { showLogin, addAuthEvents, getUsername };

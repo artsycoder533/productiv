@@ -12,6 +12,7 @@ function addHeaderEvents() {
 }
 
 function addUserName(name) {
+	console.log(name);
 	const username = document.querySelector(".header__username");
 	username.textContent = name;
 }

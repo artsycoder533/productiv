@@ -23,9 +23,11 @@ const auth = getAuth();
 
 
 
+if (!auth.currentUser) {
+    document.body.appendChild(showLogin());
+}
 
 
-document.body.appendChild(showLogin());
 
 window.addEventListener("DOMContentLoaded", () => {
     addAuthEvents();

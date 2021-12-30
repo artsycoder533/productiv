@@ -3,6 +3,7 @@ import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { showInbox, updateInboxCount } from "./inbox.js";
+import { getUsername } from "./auth.js";
 import { getFirestore, doc, getDoc, setDoc, collection, updateDoc, deleteDoc, addDoc, getDocs, onSnapshot} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
@@ -24,9 +25,10 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const todos = [];
 
-window.addEventListener('load', getAllData);
-async function getAllData() {
-	const querySnapshot = await getDocs(collection(db, "tasks"));
+async function getAllData(username) {
+	console.log("get all data called");
+	console.log(username);
+	const querySnapshot = await getDocs(collection(db, `${username}tasks`));
 
 	querySnapshot.forEach(doc => {
 		console.log(doc.data());
@@ -50,7 +52,7 @@ async function addDocument(
   id,
   status
 ) {
-  const ref = collection(db, "tasks");
+  const ref = collection(db, `${getUsername()}tasks`);
 	const docref = await addDoc(ref, {
 		title: title,
 		desciption: description,
@@ -72,7 +74,7 @@ async function addDocumentCustomID(
   id,
   status
 ) {
-  const ref = doc(db, "tasks", String(id));
+  const ref = doc(db, `${getUsername()}tasks`, String(id));
   await setDoc(ref, {
     title: title,
     description: description,
@@ -86,7 +88,7 @@ async function addDocumentCustomID(
 
 //get a document
 async function getADocument() {
-	const ref = doc(db, "tasks", id);
+	const ref = doc(db, `${getUsername()}tasks`, id);
 	const docSnap = await getDoc(ref);
 	if (docSnap.exists()) {
 		title.value = docSnap.data().title;
@@ -109,7 +111,7 @@ async function updateDocument(
   id,
   status
 ) {
-  const ref = doc(db, "tasks", id);
+  const ref = doc(db, `${getUsername()}tasks`, id);
   await updateDoc(ref, {
     title: title,
     description: description,
@@ -123,7 +125,7 @@ async function updateDocument(
 
 //delete a document
 async function deleteDocument(id) {
-	const ref = doc(db, "tasks", id);
+	const ref = doc(db, `${getUsername()}tasks`, id);
 	const docSnap = await getDoc(ref);
 
 	if (docSnap.exists()) {
@@ -311,7 +313,7 @@ function deleteTodo(id) {
 
 function deleteInboxMessage(id) {
 	inbox.forEach((todo, index) => {
-    if (todo.getId() === Number(id)) {
+    if (todo.id === Number(id)) {
       inbox.splice(index, 1);
     }
   });
@@ -321,4 +323,4 @@ function getInbox() {
 	showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument, updateDocument};
+export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument, updateDocument, getAllData};
