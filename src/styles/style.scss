@@ -545,7 +545,8 @@ input[type=date]{
 
 .project__title,
  .task__title,
- .inbox__title {
+ .inbox__title,
+ .pomodoro__title {
     text-align: center;
     text-transform: capitalize;
     text-decoration: underline;
@@ -840,4 +841,49 @@ input[type=date]{
 
 .login__title {
     text-align: center;
+}
+
+
+/* pomodoro */
+.pomodoro__container{
+    height: 100%;
+    width: 100%;
+    border: 2px solid orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pomodoro {
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    color: white;
+}
+
+.pomodoro__timer {
+    font-size: 8rem;
+    font-family: Play;
+    font-weight: bold;
+}
+
+.pomodoro__buttons{
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+}
+.pomodoro__button{
+    padding: 0.75rem;
+    background: red;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
