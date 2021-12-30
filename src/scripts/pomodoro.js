@@ -1,6 +1,9 @@
 import { createElementWithClass, createTextElementWithClass } from "./createElement";
 
 const container = document.querySelector(".container");
+let startingMinutes = 0.5;
+let time = startingMinutes * 60;
+let count = 0;
 
 function getPomodoro() {
   clearUI();
@@ -10,16 +13,9 @@ function getPomodoro() {
     
     const pomodoroContainer = createElementWithClass("div", "pomodoro__container");
     const pomodoro = createElementWithClass("div", "pomodoro");
-    const minutes = createTextElementWithClass("span", "pomodoro__timer", "25");
-    const colon = createTextElementWithClass("span", "pomodoro__timer", ":");
-    const seconds = createTextElementWithClass(
-      "span",
-      "pomodoro__timer",
-      "00"
-    );
-    pomodoro.appendChild(minutes);
-    pomodoro.appendChild(colon);
-    pomodoro.appendChild(seconds);
+    const timer = createTextElementWithClass("span", "pomodoro__timer", "25:00");
+    timer.setAttribute("id", "timer");
+    pomodoro.appendChild(timer);
     pomodoroContainer.appendChild(pomodoro);
     const buttonContainer = createElementWithClass("div", "pomodoro__buttons");
     const startBtn = createTextElementWithClass("button", "pomodoro__button", "Start");
@@ -28,13 +24,14 @@ function getPomodoro() {
       "pomodoro__button",
       "Stop"
     );
+    stopBtn.setAttribute("id", "stop");
     const resetBtn = createTextElementWithClass(
       "button",
       "pomodoro__button",
       "Reset"
     );
+    resetBtn.setAttribute("id", "reset");
     startBtn.addEventListener("click", startTime);
-    stopBtn.addEventListener("click", stopTime);
     resetBtn.addEventListener("click", resetTime);
     buttonContainer.appendChild(startBtn);
     buttonContainer.appendChild(stopBtn);
@@ -45,16 +42,63 @@ function getPomodoro() {
   return container;
 }
 
+
 function startTime() {
+    console.log("startTime called");
+    const timer = document.getElementById("timer");
+    const stop = document.getElementById("stop");
+    const interval = setInterval(function () {
+        let minutesLeft = Math.floor(time / 60);
+        minutesLeft < 10
+          ? (minutesLeft = `0` + minutesLeft)
+          : (minutesLeft = minutesLeft);
+        let seconds = time % 60;
+        seconds < 10 ? (seconds = `0` + seconds) : (seconds = seconds);
+        timer.textContent = `${minutesLeft}:${seconds}`;
+        if (minutesLeft < 1 && seconds < 1) {
+            const pomodoro = document.querySelector(".pomodoro");
+            pomodoro.classList.add("end");
+            stopTimer(interval);
+            count++;
+            if (count > 0) {
+              startingMinutes = 5;
+            }
+            else {
+                startingMinutes = 25;
+                count--;
+            }
+            time = startingMinutes * 60;
+            let minutesLeft = Math.floor(time / 60);
+            let seconds = time % 60;
+            minutesLeft < 10
+              ? (minutesLeft = `0${minutesLeft}`)
+              : (minutesLeft = minutesLeft);
+            seconds < 10 ? (seconds = `0${seconds}`) : (seconds = seconds);
+            timer.textContent = `${minutesLeft}:${seconds}`;
+        }
+        time--;
+    }, 1000);
     
+    stop.addEventListener("click", function () {
+        stopTimer(interval);
+    });
 }
 
-function stopTime() {
-    
+
+function stopTimer(interval) {
+    clearInterval(interval);
 }
 
 function resetTime() {
-    
+    const timer = document.getElementById("timer");
+    const pomodoro = document.querySelector(".pomodoro");
+    pomodoro.classList.remove("end");
+    time = startingMinutes * 60;
+    let minutesLeft = Math.floor(time / 60);
+    let seconds = time % 60;
+    minutesLeft < 10 ? minutesLeft = `0${minutesLeft}` : minutesLeft = minutesLeft;
+    seconds < 10 ? seconds = `0${seconds}` : seconds = seconds;
+    timer.textContent = `${minutesLeft}:${seconds}`;
 }
 
 function clearUI() {

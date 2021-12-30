@@ -848,7 +848,6 @@ input[type=date]{
 .pomodoro__container{
     height: 100%;
     width: 100%;
-    border: 2px solid orange;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -872,11 +871,16 @@ input[type=date]{
     font-weight: bold;
 }
 
+.end {
+    background: red;
+}
+
 .pomodoro__buttons{
     display: flex;
     width: 50%;
     justify-content: space-evenly;
     margin-top: 3rem;
+    gap: 2rem;
 }
 .pomodoro__button{
     padding: 0.75rem;
