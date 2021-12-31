@@ -4,10 +4,12 @@ import {
 } from "./createElement";
 import { closeSidebar } from "./header";
 
+const container = document.querySelector(".container");
+
 function renderCalculator() {
   clearUI();
   closeSidebar();
-  const container = document.querySelector(".container");
+  
   const wrapper = createElementWithClass("div", "calc__wrapper");
   const body = createTextElementWithClass("div", "calc__container");
   body.innerHTML = `
