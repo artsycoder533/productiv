@@ -179,7 +179,7 @@ function addAuthEvents() {
   }
 
   function addDemoCredentials(e) {
-    e.preventDefault;
+    e.preventDefault();
     const email = document.getElementById("login__email");
     const password = document.getElementById("login__password");
    // const username = document.getElementById("username");

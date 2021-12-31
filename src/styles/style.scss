@@ -61,6 +61,7 @@ a {
     display: flex;
     align-items: center;
     gap: 1rem;
+    z-index: 2;
     /* width: 100%; */
 }
 
@@ -349,7 +350,7 @@ a {
     right: 20px;
     bottom: 20px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
 }
 
 .add__button i {
@@ -370,7 +371,7 @@ a {
     transition: all 0.2s ease-in-out;
     display: grid;
     place-items: center;
-    z-index: 0;
+    z-index: 1;
     /* opacity: 0; */
 } 
 

@@ -1,4 +1,5 @@
 import { createElementWithClass, createTextElementWithClass } from "./createElement";
+import { closeSidebar } from "./header";
 
 const container = document.querySelector(".container");
 let startingMinutes = 25;
@@ -6,6 +7,7 @@ let time = startingMinutes * 60;
 let count = 0;
 
 function getPomodoro() {
+  closeSidebar();
   clearUI();
 
   const title = createTextElementWithClass("h2", "pomodoro__title", "Pomodoro");

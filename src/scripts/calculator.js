@@ -2,8 +2,10 @@ import {
   createElementWithClass,
   createTextElementWithClass,
 } from "./createElement";
+import { closeSidebar } from "./header";
 
 function renderCalculator() {
+  closeSidebar();
   const container = document.querySelector(".container");
   const wrapper = createElementWithClass("div", "calc__wrapper");
   const body = createTextElementWithClass("div", "calc__container");

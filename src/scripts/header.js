@@ -23,7 +23,12 @@ function addProfilePlaceholder(profileContainer) {
 
 function closeSidebar() {
 	const sidebar = document.querySelector(".sidebar");
-	sidebar.classList.toggle("hide");
+	if (!sidebar.classList.contains("hide")) {
+		sidebar.classList.add("hide");
+	}
+	else {
+		sidebar.classList.remove("hide");
+	}
 }
 
 function uploadPic() {
@@ -45,4 +50,4 @@ function readUrl() {
 	profileContainer.click();
 }
 
-export { addHeaderEvents, addUserName };
+export { addHeaderEvents, addUserName, closeSidebar };

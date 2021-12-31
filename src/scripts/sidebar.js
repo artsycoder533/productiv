@@ -3,6 +3,7 @@ import { showInbox } from "./inbox.js";
 import { renderCalculator } from "./calculator.js";
 import { getPomodoro } from "./pomodoro.js";
 import { displaySettings } from "./settings.js";
+import { closeSidebar } from "./header.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -36,6 +37,11 @@ function addSidebarEvents() {
 
 	// const settings = document.getElementById("settings");
 	// settings.addEventListener("click", displaySettings);
+
+	const dashboard = document.getElementById("dashboard");
+	dashboard.addEventListener("click", function () {
+		closeSidebar();
+	})
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {

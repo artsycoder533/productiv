@@ -6,6 +6,7 @@ import { showInbox, updateInboxCount } from "./inbox.js";
 import { getUsername } from "./auth.js";
 import { getFirestore, doc, getDoc, setDoc, collection, updateDoc, deleteDoc, addDoc, getDocs, onSnapshot} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import { closeSidebar } from "./header.js";
 
 
 const inbox = [];
@@ -236,6 +237,7 @@ function populateTodo(e) {
 
 
 function sortTodosByProject(e) {
+	closeSidebar();
 	const sortedByProject = todos.filter(todo => {
 		for (const prop in todo) {
 			if (todo[prop] === e.currentTarget.id) {
@@ -249,6 +251,7 @@ function sortTodosByProject(e) {
 }
 
 function sortTodosByTask(e) {
+	closeSidebar();
 	let sortedTodos = [];
 	if (e.currentTarget.id === "today") {
 		sortedTodos = todos.filter((todo) => {
@@ -270,6 +273,7 @@ function sortTodosByTask(e) {
 }
 
 function showAllTasks(e) {
+	closeSidebar();
 	renderTasksHeader(e.currentTarget.id);
   	renderTasksUI(todos);
 }
@@ -321,6 +325,7 @@ function deleteInboxMessage(id) {
 }
 
 function getInbox() {
+	closeSidebar();
 	showInbox(inbox);
 }
 
