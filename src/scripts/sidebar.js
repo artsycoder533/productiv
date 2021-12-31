@@ -2,6 +2,7 @@ import { sortTodosByProject, showAllTasks, sortTodosByTask, getInbox } from "./t
 import { showInbox } from "./inbox.js";
 import { renderCalculator } from "./calculator.js";
 import { getPomodoro } from "./pomodoro.js";
+import { displaySettings } from "./settings.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -32,6 +33,9 @@ function addSidebarEvents() {
 
 	const pomodoro = document.getElementById("pomodoro");
 	pomodoro.addEventListener("click", getPomodoro);
+
+	const settings = document.getElementById("settings");
+	settings.addEventListener("click", displaySettings);
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {

@@ -25,6 +25,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const todos = [];
 
+
 async function getAllData(username) {
 	console.log("get all data called");
 	console.log(username);

@@ -11,7 +11,14 @@ function renderTodo(title, description, date, priority, project, id) {
     const todo__date = createElementWithClass("div", "todo__date");
     const date1 = createTextElementWithClass("small", "date", date);
     todo__date.appendChild(date1);
+    const todo__project = createTextElementWithClass(
+      "div",
+      "todo__project",
+      project
+    );
+    todo__date.appendChild(todo__project);
     todo.appendChild(todo__date);
+    
 
     const todo__content = createElementWithClass("div", "todo__content");
     const todo__title = createTextElementWithClass("div", "todo__title", title);
@@ -51,8 +58,8 @@ function renderTodo(title, description, date, priority, project, id) {
     todo__content.append(todo__buttons);
     todo.appendChild(todo__content);
 
-    const todo__project = createTextElementWithClass("div", "todo__project", project);
-    todo.appendChild(todo__project);
+    
+    //todo.appendChild(todo__project);
     todo__container.appendChild(todo);
     
 
@@ -60,6 +67,9 @@ function renderTodo(title, description, date, priority, project, id) {
     const todo__details = createElementWithClass("div", "todo__details");
     const todo__description = createElementWithClass("p", "description");
     todo__description.textContent = description;
+    const todo__fulltitle = createElementWithClass("p", "fulltitle");
+    todo__fulltitle.textContent = title;
+    todo__details.appendChild(todo__fulltitle);
     todo__details.appendChild(todo__description);
     todo__container.appendChild(todo__details);
     return todo__container;

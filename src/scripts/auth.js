@@ -35,7 +35,7 @@ function showLogin() {
             <label class="form__label" for="username">Username</label>
         </div>
         <button type="submit" id="signup" class="form__button">Sign-Up</button>
-        <button type="submit" id="demo" class="form__button">Sign-Up As Demo User</button>
+        
       </div>
         
        <div class="form__section login hide">
@@ -48,6 +48,7 @@ function showLogin() {
             <label class="form__label" for="password">Password</label>
          </div>
         <button type="submit" id="login" class="form__button">Login</button>
+        <button type="submit" id="demo" class="form__button">Login As Demo User</button>
       </div>
       </div>
       </div>
@@ -129,6 +130,10 @@ function addAuthEvents() {
             .then((cred) => {
               console.log("user logged in", cred.user.displayName);
               addUserName(cred.user.displayName);
+              if (cred.user.photoURL) {
+                const profilePic = document.getElementById("profile");
+                profilePic.src = cred.user.photoURL;
+              }
               hideLogin();
               clearUI();
               document.location.reload();
@@ -175,12 +180,12 @@ function addAuthEvents() {
 
   function addDemoCredentials(e) {
     e.preventDefault;
-    const email = document.getElementById("signup__email");
-    const password = document.getElementById("signup__password");
-    const username = document.getElementById("username");
+    const email = document.getElementById("login__email");
+    const password = document.getElementById("login__password");
+   // const username = document.getElementById("username");
     email.value = "demo@email.com";
     password.value = "demo1234";
-    username.value = "demo1234";
+    //username.value = "demo1234";
   }
   
 

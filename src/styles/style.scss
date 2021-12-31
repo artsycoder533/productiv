@@ -15,6 +15,16 @@ body {
     background: rgb(245, 237, 237);
 }
 
+.dark {
+    background: rgb(27, 27, 27);
+    color: white;
+}
+
+.black {
+    background: black;
+    color: white;
+}
+
 /* global styles */
 a {
     cursor: pointer;
@@ -96,6 +106,13 @@ a {
 
 .header__username {
     color: white;
+    display: none;
+}
+
+@media screen and (min-width: 768px){
+    .header__username{
+        display: block;
+    }
 }
 
 .header__image {
@@ -169,6 +186,13 @@ a {
     /* background: #11101d; */
     background: rgb(0, 0, 0);
     transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+
+@media screen and (min-width: 992px){
+    .sidebar {
+        z-index: 1;
+    }
 }
 
 .sidebar.hide {
@@ -382,6 +406,7 @@ a {
     gap: 1fr;
 }
 
+
 .form__title {
     display: flex;
     align-items: center;
@@ -456,15 +481,55 @@ input[type=date]{
     font-weight: bold;
 }
 
+/* footer */
+footer{
+    position: fixed;
+    bottom: 0;
+    left:0;
+    height: 80px;
+    width: 100%;
+    background: black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.footer__link{
+    color: white;
+    padding-left: 0.3rem;
+    cursor: pointer;
+}
+
+.footer__text{
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
 /* container */
 .container {
     position: fixed;
-    left: 260px;
+    //left: 260px;
     top: 50px;
-    width: calc(100vw - 260px);
+    width: 100%;
     height: calc(100vh - 50px);
+    height: calc(100vh - 125px);
     z-index: -1;
-    //border: 2px solid blue;
+    overflow-y: scroll;
+    border-bottom: 1px dotted lightgray;
+}
+
+
+@media screen and (min-width: 992px){
+    .container {
+        position: fixed;
+        left: 260px;
+        top: 50px;
+        width: calc(100vw - 260px);
+        z-index: -1;
+    }
 }
 
 // todo
@@ -475,7 +540,8 @@ input[type=date]{
     
 }
 
-.todo {
+.todo, 
+.description {
     max-width: 600px;
     width: 90vw;
     margin: 0 auto;
@@ -487,8 +553,14 @@ input[type=date]{
 .todo__content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
+.todo__date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 // .todo__priority {
 //   padding: 0.20rem .4rem;
 //   border-radius: 1rem;
@@ -531,16 +603,39 @@ input[type=date]{
   display: none;
   background: white;
 }
-.description {
-  padding: 0.5rem;
+
+
+.todo__more {
+    font-size: 1.9rem;
 }
 
+.todo__title{
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 992px){
+    .todo__title{
+        //width: 100%;
+        white-space:unset;
+        overflow:visible;
+        text-overflow:unset;
+    }
+}
 .todo__container {
   width: 100%;
 }
 
 .showDetails {
   display: grid;
+  max-width: 90vw;
+  border-top: 1px dotted lightgray;
+}
+
+.fulltitle{
+    padding: 0.5rem;
 }
 
 .project__title,
@@ -561,10 +656,12 @@ input[type=date]{
     border: 1px solid gray;
     display: flex;
     align-items: center;
-    padding: 1rem;
     cursor: pointer;
     background: white;
-    margin: 0 2rem;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 90vw;
+    padding: 0.5rem;
 }
 
 .checkbox {
@@ -595,7 +692,7 @@ input[type=date]{
 }
 
 .inbox__button {
-    margin-top: 1rem;
+    
     padding: 0.5rem;
     cursor: pointer;
     color: white;
@@ -603,6 +700,9 @@ input[type=date]{
     border: none;
     letter-spacing: 1px;
     font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .bold{
@@ -715,11 +815,11 @@ input[type=date]{
   display: grid;
   place-items: center;
   z-index: 1;
-  //display: none;
 }
 
+
 .form__container {
-  width: 500px;
+  max-width: 500px;
   background: white;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
 }
@@ -776,9 +876,16 @@ input[type=date]{
 
 .form{
   display: grid;
+  //padding: 2rem;
   padding: 3rem 4rem;
   gap: 2rem;
   position: relative;
+}
+
+@media screen and (min-width: 768px){
+    .form{
+        padding: 3rem 4rem;
+    }
 }
 
 .form__group{
@@ -852,11 +959,12 @@ input[type=date]{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    
 }
 
 .pomodoro {
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -889,5 +997,34 @@ input[type=date]{
     font-size: 1.1rem;
     font-weight: bold;
     border: none;
+    cursor: pointer;
+}
+
+//settings
+.settings{
+  display: grid;
+  max-width: 500px;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.settings__form{
+  padding: 1rem;
+  gap: 1rem;
+  display: grid;
+  background: white;
+}
+
+.settings__wrapper{
+  width: 100%;
+}
+
+.settings__button{
+    padding: 0.75rem;
+    background: red;
+    color: white;
+    font-weight: bold;
+    border: none;
+    font-size: 1.1rem;
     cursor: pointer;
 }

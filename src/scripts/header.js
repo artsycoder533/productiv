@@ -39,6 +39,7 @@ function readUrl() {
 		reader.readAsDataURL(this.files[0]);
 		reader.addEventListener("load", () => {
 			profilePic.src = reader.result;
+			console.log(profilePic.src);
 		});
 	}
 	profileContainer.click();
