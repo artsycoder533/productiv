@@ -98,13 +98,14 @@ function editTodo(e) {
 		e.currentTarget.parentElement.parentElement.parentElement.parentElement
 			.parentElement.dataset.id
     );
+    console.log(todo2);
     const modal = document.querySelector(".modal");
     toggleModal();
-    form.elements.namedItem("title").value = todo2.getTitle();
-    form.elements.namedItem("description").value = todo2.getDescription();
-    form.elements.namedItem("priority").value = todo2.getPriority();
-    form.elements.namedItem("project").value = todo2.getProject();
-    form.elements.namedItem("date").value = todo2.getDueDate();
+    form.elements.namedItem("title").value = todo2.title;
+    form.elements.namedItem("description").value = todo2.description;
+    form.elements.namedItem("priority").value = todo2.priority;
+    form.elements.namedItem("project").value = todo2.project;
+    form.elements.namedItem("date").value = todo2.dueDate;
     //getADocument();
     const createBtn = document.getElementById("create");
     createBtn.classList.add("hide");
@@ -112,14 +113,21 @@ function editTodo(e) {
     updateBtn.classList.remove("hide");
     updateBtn.addEventListener("click", () => {
         const display = document.querySelector(".project__title");
+        console.log(display);
         //get current project page youre on is the same as new project, re render UI
-        if (form.elements.namedItem("project").value === display.textContent) {
-            updateTodoUI(todo2);
-            toggleModal();
-            return;
+        if (display) {
+            if (
+              form.elements.namedItem("project").value === display.textContent
+            ) {
+                console.log(todo2);
+              updateTodoUI(todo2);
+              toggleModal();
+              return;
+            }
         }
-    
-        const projectType = display.textContent;
+        
+    updateTodoUI(todo2);
+        //const projectType = display.textContent;
         const misc = document.getElementById("miscellaneous");
         const home = document.getElementById("home");
         const work = document.getElementById("work");
@@ -129,18 +137,18 @@ function editTodo(e) {
         const project = form.elements.namedItem("project").value;
         const date = form.elements.namedItem("date").value;
 
-        if (projectType === "work") {
-            updateTodo(title, description, date, priority, project, todo2.getId());
+        if (project === "work") {
+            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
             toggleModal();
             work.click();
         }
-        if (projectType === "home") {
-            updateTodo(title, description, date, priority, project, todo2.getId());
+        if (project === "home") {
+            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
             toggleModal();
             home.click();
         }
-        if (projectType === "miscellaneous") {
-            updateTodo(title, description, date, priority, project, todo2.getId());
+        if (project === "miscellaneous") {
+            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
             toggleModal();
             misc.click();
         }
@@ -150,12 +158,16 @@ function editTodo(e) {
 function updateTodoUI(todo) {
     const form = document.getElementById("form");
     const title = form.elements.namedItem("title").value;
+    //const title = document.querySelector(".todo__title").value;
     const description = form.elements.namedItem("description").value;
     const priority = form.elements.namedItem("priority").value;
     const project = form.elements.namedItem("project").value;
     const date = form.elements.namedItem("date").value;
+    console.log(title, description, priority, project, date);
     document.querySelector(".todo__title").textContent = title;
+    document.querySelector(".description").textContent = description;
     document.querySelector(".priority").textContent = priority;
+   
     if (priority === "normal") {
         document.querySelector(".priority").classList.remove("high");
         document.querySelector(".priority").classList.add("normal");
@@ -166,10 +178,12 @@ function updateTodoUI(todo) {
     }
     document.querySelector(".todo__date").textContent = date;
     document.querySelector(".description").textContent = description;
-    document.querySelector(".todo__project").textContent = project;
-
-    updateTodo(title, description, date, priority, project, todo.getId());
-    
+    //console.log(document.querySelector(".todo__project"));
+    // document.querySelector(".todo__project").textContent = project;
+    // document.querySelector(".fulltitle").textContent = title;
+    console.log(todo.id);
+    updateTodo(title, description, date, priority, project, todo.id, todo.status);
+    //document.location.reload();
 }
 
 export { renderTodo };

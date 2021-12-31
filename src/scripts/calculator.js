@@ -5,6 +5,7 @@ import {
 import { closeSidebar } from "./header";
 
 function renderCalculator() {
+  clearUI();
   closeSidebar();
   const container = document.querySelector(".container");
   const wrapper = createElementWithClass("div", "calc__wrapper");
@@ -344,6 +345,13 @@ function calc() {
       const x = operate(calc[0], calc[1], calc[2]);
     }
   }
+}
+
+function clearUI() {
+  const children = [...container.children];
+  children.forEach((child) => {
+    child.remove();
+  });
 }
 
 export { renderCalculator };

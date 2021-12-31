@@ -290,24 +290,35 @@ function getTodoById(id) {
 	return match[0];
 }
 
-function updateTodo(title, description, date, priority, project, id, status) {
+function updateTodo(title, description, dueDate, priority, project, id, status) {
 	todos.forEach(todo => {
-		if (todo.getId() === Number(id)) {
-			todo.setTitle(title);
-			todo.setDescription(description);
-			todo.setDueDate(date);
-			todo.setPriority(priority);
-			todo.setProject(project);
-			todo.setStatus(status);
+		console.log(todo.id, id);
+		if (todo.id === id) {
+			// todo.setTitle(title);
+			// todo.setDescription(description);
+			// todo.setDueDate(dueDate);
+			// todo.setPriority(priority);
+			// todo.setProject(project);
+			// todo.setStatus(status);
+			todo.title = title;
+			todo.description = description;
+			todo.dueDate = dueDate;
+			todo.priority = priority;
+			todo.project = project;
+			todo.status = status;
 		}
+		console.log(todo);
 	});
+	console.log(title, description, dueDate, priority, project, id, status);
+	console.log(todos);
 	updateDocument(title, description, dueDate, priority, project, id, status);
+	//getAllData();
 }
 
 function deleteTodo(id) {
 	todos.forEach((todo, index) => {
 		console.log(todo);
-		if (todo.id === Number(id)) {
+		if (todo.id === id) {
 			todos.splice(index, 1);
 			console.log("here");
 			deleteDocument(id);
@@ -318,7 +329,7 @@ function deleteTodo(id) {
 
 function deleteInboxMessage(id) {
 	inbox.forEach((todo, index) => {
-    if (todo.id === Number(id)) {
+    if (todo.id === id) {
       inbox.splice(index, 1);
     }
   });
