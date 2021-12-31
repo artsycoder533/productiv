@@ -34,8 +34,8 @@ function addSidebarEvents() {
 	const pomodoro = document.getElementById("pomodoro");
 	pomodoro.addEventListener("click", getPomodoro);
 
-	const settings = document.getElementById("settings");
-	settings.addEventListener("click", displaySettings);
+	// const settings = document.getElementById("settings");
+	// settings.addEventListener("click", displaySettings);
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {
