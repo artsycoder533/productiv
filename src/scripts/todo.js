@@ -113,7 +113,7 @@ async function updateDocument(
   id,
   status
 ) {
-  const ref = doc(db, `${getUsername()}tasks`, id);
+  const ref = doc(db, `${getUsername()}tasks`, String(id));
   await updateDoc(ref, {
     title: title,
     description: description,
