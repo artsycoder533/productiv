@@ -365,7 +365,7 @@ a {
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.7);
     transform: translateX(100%);
     transition: all 0.2s ease-in-out;
@@ -373,7 +373,7 @@ a {
     place-items: center;
     z-index: 1;
     /* opacity: 0; */
-    border: 2px solid blue;
+    overflow-y: scroll;
 } 
 
 
@@ -394,8 +394,7 @@ a {
     min-height: 100vh;
     transform: translateX(0);
     /* opacity: 1; */
-    border: 2px solid red;
-    overflow-y: scroll;
+    
 }
 
 /* form */
