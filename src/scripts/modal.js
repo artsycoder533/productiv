@@ -41,7 +41,7 @@ function validateForm(e) {
         }, 2000);
     }
     if (date < getTodaysDate()) {
-        
+        console.log(date, getTodaysDate());
         dateError.textContent = "Date must not be in the past";
         setTimeout(function () {
           dateError.textContent = " ";
@@ -55,8 +55,14 @@ function validateForm(e) {
 function getTodaysDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
+    let month = currentDate.getMonth() + 1;
+    if (month < 10) {
+        month = `0${month}`;
+    }
+    let day = currentDate.getDate();
+    if (day < 10) {
+        day = `0${day}`;
+    }
     const fullDate = `${year}-${month}-${day}`;
     return fullDate;
 }
