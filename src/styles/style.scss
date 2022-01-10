@@ -1077,8 +1077,9 @@ footer{
 .quote-container {
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
+  background: white;
 }
 
 .quote {
@@ -1123,9 +1124,10 @@ blockquote {
   text-align: center;
   padding: 2rem;
   cursor: pointer;
-  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   color: black;
   height: 400px;
+  background: white;
 }
 
 .today-count,
@@ -1149,10 +1151,12 @@ blockquote {
 .dashboard-unread:hover,
 .dashboard-overdue:hover,
 .dashboard-today:hover {
-  opacity: 0.5rem;
+  background: lightgray;
 }
 
 .greeting {
   font-size: 2rem;
   font-weight: bold;
+  text-align: left;
+  width: 100%;
 }
