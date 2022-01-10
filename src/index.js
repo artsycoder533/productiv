@@ -4,7 +4,7 @@ import { addSidebarEvents } from "./scripts/sidebar.js";
 import { addHeaderEvents } from "./scripts/header.js";
 import { renderModal } from "./scripts/modal.js";
 import { addButtonEvents } from "./scripts/modal.js";
-
+import { renderDashboard } from "./scripts/dashboard";
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { addAuthEvents, showLogin } from "./scripts/auth";

@@ -1,3 +1,5 @@
+import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks } from "./todo";
+
 const container = document.querySelector(".container");
 
 function renderDashboard(){
@@ -16,28 +18,28 @@ function renderDashboard(){
   <div class="dashboard-tasks">
     <i class="fas fa-tasks"></i>
     <span class="tasks-count">
-      5
+      ${getNumTasks()}
     </span>
     <span>total tasks</span>
   </div>
   <div class="dashboard-unread">
     <i class="far fa-envelope"></i>
     <span class="unread-count">
-      5
+      ${getUpcomingTasks()}
     </span>
-    <span>unread tasks</span>
+    <span>upcoming tasks</span>
   </div>
   <div class="dashboard-overdue">
     <i class="fas fa-exclamation-triangle"></i>
     <span class="overdue-count">
-      5
+      ${getOverdueTasks}
     </span>
     <span>overdue tasks</span>
   </div>
   <div class="dashboard-today">
     <i class="fas fa-calendar-day"></i>
     <span class="today-count">
-      5
+      ${getTodaysNumTasks()}
     </span>
     <span>tasks due today</span>
   </div>

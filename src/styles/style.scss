@@ -656,7 +656,7 @@ footer{
 
 .showDetails {
   display: grid;
-  max-width: 90vw;
+//   max-width: 90vw;
   border-top: 1px dotted lightgray;
 }
 
@@ -1095,6 +1095,7 @@ footer{
 
 blockquote {
   font-size: 1.3rem;
+  font-style: italic;
 }
 
 .author {

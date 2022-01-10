@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, on
 import { auth } from "..";
 import { addUserName } from "./header";
 import { getAllData } from "./todo";
+import { renderDashboard } from "./dashboard";
+import { render } from "sass";
 
 const container = document.querySelector(".container");
 
@@ -137,6 +139,7 @@ function addAuthEvents() {
               hideLogin();
               clearUI();
               document.location.reload();
+              renderDashboard();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -171,6 +174,7 @@ function addAuthEvents() {
             addUserName(username);
             hideLogin();
             //document.location.reload();
+            renderDashboard();
           })
           .catch((err) => {
             console.log(err.message);

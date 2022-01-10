@@ -4,10 +4,20 @@ import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { showInbox, updateInboxCount } from "./inbox.js";
 import { getUsername } from "./auth.js";
-import { getFirestore, doc, getDoc, setDoc, collection, updateDoc, deleteDoc, addDoc, getDocs, onSnapshot} from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  updateDoc,
+  deleteDoc,
+  addDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { closeSidebar } from "./header.js";
-
 
 const inbox = [];
 
@@ -26,23 +36,23 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const todos = [];
 
-
 async function getAllData(username) {
-	console.log("get all data called");
-	console.log(username);
-	const querySnapshot = await getDocs(collection(db, `${username}tasks`));
+  console.log("get all data called");
+  console.log(username);
+  const querySnapshot = await getDocs(collection(db, `${username}tasks`));
 
-	querySnapshot.forEach(doc => {
-		console.log(doc.data());
-		if (doc.data().dueDate <= getTodaysDate() && doc.data().status === "unread") {
-			inbox.push(doc.data());
-			updateInboxCount("add");
-		}
-		todos.push(doc.data())
-	})
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data());
+    if (
+      doc.data().dueDate <= getTodaysDate() &&
+      doc.data().status === "unread"
+    ) {
+      inbox.push(doc.data());
+      updateInboxCount("add");
+    }
+    todos.push(doc.data());
+  });
 }
-
-
 
 //add to firestore auto id
 async function addDocument(
@@ -55,14 +65,14 @@ async function addDocument(
   status
 ) {
   const ref = collection(db, `${getUsername()}tasks`);
-	const docref = await addDoc(ref, {
-		title: title,
-		desciption: description,
-		dueDate: dueDate,
-		priority: priority,
-		project: project,
-		id: id,
-		status: status
+  const docref = await addDoc(ref, {
+    title: title,
+    desciption: description,
+    dueDate: dueDate,
+    priority: priority,
+    project: project,
+    id: id,
+    status: status,
   });
 }
 
@@ -90,17 +100,16 @@ async function addDocumentCustomID(
 
 //get a document
 async function getADocument() {
-	const ref = doc(db, `${getUsername()}tasks`, id);
-	const docSnap = await getDoc(ref);
-	if (docSnap.exists()) {
-		title.value = docSnap.data().title;
-		description.value = docSnap.data().description;
-		dueDate.value = docSnap.data().dueDate;
-		priority.value = docSnap.data().priority;
-		project.value = docSnap.data().project;
-		id.value = docSnap.data().id;
-		
-	}
+  const ref = doc(db, `${getUsername()}tasks`, id);
+  const docSnap = await getDoc(ref);
+  if (docSnap.exists()) {
+    title.value = docSnap.data().title;
+    description.value = docSnap.data().description;
+    dueDate.value = docSnap.data().dueDate;
+    priority.value = docSnap.data().priority;
+    project.value = docSnap.data().project;
+    id.value = docSnap.data().id;
+  }
 }
 
 //update a document
@@ -127,208 +136,210 @@ async function updateDocument(
 
 //delete a document
 async function deleteDocument(id) {
-	const ref = doc(db, `${getUsername()}tasks`, id);
-	const docSnap = await getDoc(ref);
+  const ref = doc(db, `${getUsername()}tasks`, id);
+  const docSnap = await getDoc(ref);
 
-	if (docSnap.exists()) {
-		deleteDoc(ref);
-	}
+  if (docSnap.exists()) {
+    deleteDoc(ref);
+  }
 }
 
 class Todos {
-	constructor(title, description, dueDate, priority, project, id, status) {
-		this.title = title;
-		this.description = description;
-		this.dueDate = dueDate;
-		this.priority = priority;
-		this.project = project;
-		this.id = id;
-		this.status = status;
-	}
+  constructor(title, description, dueDate, priority, project, id, status) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.project = project;
+    this.id = id;
+    this.status = status;
+  }
 
-	getTitle() {
-		return this.title;
-	}
+  getTitle() {
+    return this.title;
+  }
 
-	setTitle(title) {
-		this.title = title;
-	}
+  setTitle(title) {
+    this.title = title;
+  }
 
-	getDescription() {
-		return this.description;
-	}
+  getDescription() {
+    return this.description;
+  }
 
-	setDescription(description) {
-		this.description = description;
-	}
+  setDescription(description) {
+    this.description = description;
+  }
 
-	getDueDate() {
-		return this.dueDate;
-	}
+  getDueDate() {
+    return this.dueDate;
+  }
 
-	setDueDate(dueDate) {
-		this.dueDate = dueDate;
-	}
+  setDueDate(dueDate) {
+    this.dueDate = dueDate;
+  }
 
-	getPriority() {
-		return this.priority;
-	}
+  getPriority() {
+    return this.priority;
+  }
 
-	setPriority(priority) {
-		this.priority = priority;
-	}
+  setPriority(priority) {
+    this.priority = priority;
+  }
 
-	getId() {
-		return this.id;
-	}
+  getId() {
+    return this.id;
+  }
 
-	getProject() {
-		return this.project;
-	}
+  getProject() {
+    return this.project;
+  }
 
-	setProject(project) {
-		this.project = project;
-	}
+  setProject(project) {
+    this.project = project;
+  }
 
-	setId(id) {
-		this.id = id;
-	}
+  setId(id) {
+    this.id = id;
+  }
 
-	getStatus() {
-		return this.status;
-	}
+  getStatus() {
+    return this.status;
+  }
 
-	setStatus(status) {
-		this.status = status;
-	}
+  setStatus(status) {
+    this.status = status;
+  }
 }
 
 function populateTodo(e) {
-	e.preventDefault();
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-    const date = document.getElementById("date").value;
-	const priority = document.getElementById("priority").value;
-	const project = document.getElementById("project").value;
-	const id = Math.random();
-	const status = "unread";
-	const newTodo = new Todos(
-		title,
-		description,
-		date,
-		priority,
-		project,
-		id,
-		status
-    );
-	
-	todos.push(newTodo);
-	addDocumentCustomID(title, description, date, priority, project, id, status);
-	if (date === getTodaysDate()) {
-		inbox.unshift(newTodo);
-		updateInboxCount("add");
-	}
-	toggleModal();
-	const mainTitle = document.querySelector(".header__display");
-	if (mainTitle.textContent === "Inbox") {
-		showInbox(inbox);
-	}
+  e.preventDefault();
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+  const date = document.getElementById("date").value;
+  const priority = document.getElementById("priority").value;
+  const project = document.getElementById("project").value;
+  const id = Math.random();
+  const status = "unread";
+  const newTodo = new Todos(
+    title,
+    description,
+    date,
+    priority,
+    project,
+    id,
+    status
+  );
+
+  todos.push(newTodo);
+  addDocumentCustomID(title, description, date, priority, project, id, status);
+  if (date === getTodaysDate()) {
+    inbox.unshift(newTodo);
+    updateInboxCount("add");
+  }
+  toggleModal();
+  const mainTitle = document.querySelector(".header__display");
+  if (mainTitle.textContent === "Inbox") {
+    showInbox(inbox);
+  }
 }
 
-
 function sortTodosByProject(e) {
-	closeSidebar();
-	const sortedByProject = todos.filter(todo => {
-		for (const prop in todo) {
-			if (todo[prop] === e.currentTarget.id) {
-				return todo;
-			}
-		}
-        
-    });
-	renderProjectHeader(e.currentTarget.id);
-	renderProjectUI(sortedByProject);
+  closeSidebar();
+  const sortedByProject = todos.filter((todo) => {
+    for (const prop in todo) {
+      if (todo[prop] === e.currentTarget.id) {
+        return todo;
+      }
+    }
+  });
+  renderProjectHeader(e.currentTarget.id);
+  renderProjectUI(sortedByProject);
 }
 
 function sortTodosByTask(e) {
-	closeSidebar();
-	let sortedTodos = [];
-	if (e.currentTarget.id === "today") {
-		sortedTodos = todos.filter((todo) => {
-			return todo.dueDate === getTodaysDate();
-		});
-	}
-	else if (e.currentTarget.id === "overdue") {
-		sortedTodos = todos.filter(todo => {
-			return todo.dueDate < getTodaysDate();
-		});
-	}
-	else if (e.currentTarget.id === "upcoming") {
-		sortedTodos = todos.filter(todo => {
-			return todo.dueDate > getTodaysDate();
-		});
-	}
-	renderTasksHeader(e.currentTarget.id);
-  	renderTasksUI(sortedTodos);
+  closeSidebar();
+  let sortedTodos = [];
+  if (e.currentTarget.id === "today") {
+    sortedTodos = todos.filter((todo) => {
+      return todo.dueDate === getTodaysDate();
+    });
+  } else if (e.currentTarget.id === "overdue") {
+    sortedTodos = todos.filter((todo) => {
+      return todo.dueDate < getTodaysDate();
+    });
+  } else if (e.currentTarget.id === "upcoming") {
+    sortedTodos = todos.filter((todo) => {
+      return todo.dueDate > getTodaysDate();
+    });
+  }
+  renderTasksHeader(e.currentTarget.id);
+  renderTasksUI(sortedTodos);
 }
 
 function showAllTasks(e) {
-	closeSidebar();
-	renderTasksHeader(e.currentTarget.id);
-  	renderTasksUI(todos);
+  closeSidebar();
+  renderTasksHeader(e.currentTarget.id);
+  renderTasksUI(todos);
 }
 
 function getTodoById(id) {
-	const match = [];
-	todos.forEach(todo => {
-		console.log(typeof todo.id, typeof id);
-		if (todo.id == id) {
-			
-			match.push(todo);
-		}
-	});
-	return match[0];
+  const match = [];
+  todos.forEach((todo) => {
+    console.log(typeof todo.id, typeof id);
+    if (todo.id == id) {
+      match.push(todo);
+    }
+  });
+  return match[0];
 }
 
-function updateTodo(title, description, dueDate, priority, project, id, status) {
-	todos.forEach(todo => {
-		console.log(todo.id, id);
-		if (todo.id === id) {
-			// todo.setTitle(title);
-			// todo.setDescription(description);
-			// todo.setDueDate(dueDate);
-			// todo.setPriority(priority);
-			// todo.setProject(project);
-			// todo.setStatus(status);
-			todo.title = title;
-			todo.description = description;
-			todo.dueDate = dueDate;
-			todo.priority = priority;
-			todo.project = project;
-			todo.status = status;
-		}
-		console.log(todo);
-	});
-	console.log(title, description, dueDate, priority, project, id, status);
-	console.log(todos);
-	updateDocument(title, description, dueDate, priority, project, id, status);
-	//getAllData();
+function updateTodo(
+  title,
+  description,
+  dueDate,
+  priority,
+  project,
+  id,
+  status
+) {
+  todos.forEach((todo) => {
+    console.log(todo.id, id);
+    if (todo.id === id) {
+      // todo.setTitle(title);
+      // todo.setDescription(description);
+      // todo.setDueDate(dueDate);
+      // todo.setPriority(priority);
+      // todo.setProject(project);
+      // todo.setStatus(status);
+      todo.title = title;
+      todo.description = description;
+      todo.dueDate = dueDate;
+      todo.priority = priority;
+      todo.project = project;
+      todo.status = status;
+    }
+    console.log(todo);
+  });
+  console.log(title, description, dueDate, priority, project, id, status);
+  console.log(todos);
+  updateDocument(title, description, dueDate, priority, project, id, status);
+  //getAllData();
 }
 
 function deleteTodo(id) {
-	todos.forEach((todo, index) => {
-		console.log(todo);
-		if (todo.id === id) {
-			todos.splice(index, 1);
-			console.log("here");
-			deleteDocument(id);
-		}
-	});
-	
+  todos.forEach((todo, index) => {
+    console.log(todo);
+    if (todo.id === id) {
+      todos.splice(index, 1);
+      console.log("here");
+      deleteDocument(id);
+    }
+  });
 }
 
 function deleteInboxMessage(id) {
-	inbox.forEach((todo, index) => {
+  inbox.forEach((todo, index) => {
     if (todo.id === id) {
       inbox.splice(index, 1);
     }
@@ -336,8 +347,63 @@ function deleteInboxMessage(id) {
 }
 
 function getInbox() {
-	closeSidebar();
-	showInbox(inbox);
+  closeSidebar();
+  showInbox(inbox);
 }
 
-export {populateTodo, sortTodosByProject, getTodoById, updateTodo, deleteTodo, showAllTasks, sortTodosByTask, getInbox, deleteInboxMessage, getADocument, updateDocument, getAllData};
+//get # tasks
+function getNumTasks() {
+	getAllData();
+  let count;
+  todos.length > 0 ? (count = todos.length) : (count = 0);
+  return count;
+}
+
+//get unread tasks
+function getUpcomingTasks() {
+	getAllData();
+  let count;
+  const unread = todos.filter((todo) => {
+    return todo.date > getTodaysDate();
+  });
+  unread.length > 0 ? (count = unread.length) : (count = 0);
+  return count;
+}
+
+//get overdue tasks
+function getOverdueTasks() {
+	let count;
+	const overdue = todos.filter((todo) => {
+    return todo.date < getTodaysDate();
+  });
+  overdue.length > 0 ? (count = overdue.length) : (count = 0);
+  return count;
+}
+//get due today tasks
+function getTodaysNumTasks() {
+  let count;
+  const today = todos.filter((todo) => {
+    return todo.date === getTodaysDate();
+  });
+  today.length > 0 ? (count = today.length) : (count = 0);
+  return count;
+}
+
+export {
+  populateTodo,
+  sortTodosByProject,
+  getTodoById,
+  updateTodo,
+  deleteTodo,
+  showAllTasks,
+  sortTodosByTask,
+  getInbox,
+  deleteInboxMessage,
+  getADocument,
+  updateDocument,
+  getAllData,
+  getNumTasks,
+	getTodaysNumTasks,
+	getUpcomingTasks,
+  getOverdueTasks
+};
