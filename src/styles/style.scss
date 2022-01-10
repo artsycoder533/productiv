@@ -1062,3 +1062,97 @@ footer{
     font-size: 1.1rem;
     cursor: pointer;
 }
+
+// dashboard
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  padding: 2rem;
+  align-items: center;
+  text-align: left;
+}
+
+.quote-container {
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.quote {
+  display: flex;
+  flex-direction:column;
+  gap: 2rem;
+}
+
+.motivation {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+blockquote {
+  font-size: 1.3rem;
+}
+
+.author {
+  display: inline-block;
+  align-self: flex-end;
+  margin-right: 5rem;
+  font-size: 1.1rem;
+}
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100vh;
+  width: 100%;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.dashboard-tasks,
+.dashboard-unread,
+.dashboard-overdue,
+.dashboard-today {
+  border-radius: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  cursor: pointer;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+  color: black;
+  height: 400px;
+}
+
+.today-count,
+.overdue-count,
+.unread-count,
+.tasks-count {
+  font-size: 5rem;
+  font-weight: bold;
+  color: red;
+}
+
+.dashboard-wrapper i {
+  font-size: 3rem;
+  background: black;
+  border-radius: 50%;
+  padding: 2rem;
+  color: white;
+}
+
+.dashboard-tasks:hover,
+.dashboard-unread:hover,
+.dashboard-overdue:hover,
+.dashboard-today:hover {
+  opacity: 0.5rem;
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: bold;
+}

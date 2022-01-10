@@ -4,6 +4,7 @@ import { renderCalculator } from "./calculator.js";
 import { getPomodoro } from "./pomodoro.js";
 import { displaySettings } from "./settings.js";
 import { closeSidebar } from "./header.js";
+import { renderDashboard } from "./dashboard.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -40,7 +41,8 @@ function addSidebarEvents() {
 
 	const dashboard = document.getElementById("dashboard");
 	dashboard.addEventListener("click", function () {
-		closeSidebar();
+		// closeSidebar();
+		renderDashboard();
 	})
 
 	sidebarDivs.map((div) => {
