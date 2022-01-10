@@ -2,7 +2,8 @@ import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks } fro
 
 const container = document.querySelector(".container");
 
-function renderDashboard(){
+function renderDashboard() {
+    console.log("dashboard clicked");
     clearTasksUI();
     container.innerHTML = `
     <div class="dashboard-wrapper">
@@ -32,7 +33,7 @@ function renderDashboard(){
   <div class="dashboard-overdue">
     <i class="fas fa-exclamation-triangle"></i>
     <span class="overdue-count">
-      ${getOverdueTasks}
+      ${getOverdueTasks()}
     </span>
     <span>overdue tasks</span>
   </div>

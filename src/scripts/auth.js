@@ -4,9 +4,10 @@ import { auth } from "..";
 import { addUserName } from "./header";
 import { getAllData } from "./todo";
 import { renderDashboard } from "./dashboard";
-import { render } from "sass";
+// import { render } from "sass";
 
 const container = document.querySelector(".container");
+const dashboard = document.getElementById("dashboard");
 
 function showLogin() {
   //clearUI();
@@ -138,8 +139,9 @@ function addAuthEvents() {
               }
               hideLogin();
               clearUI();
-              document.location.reload();
-              renderDashboard();
+              //document.location.reload();
+              //renderDashboard();
+              dashboard.click();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -174,7 +176,8 @@ function addAuthEvents() {
             addUserName(username);
             hideLogin();
             //document.location.reload();
-            renderDashboard();
+            //renderDashboard();
+            dashboard.click();
           })
           .catch((err) => {
             console.log(err.message);

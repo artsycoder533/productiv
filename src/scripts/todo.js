@@ -353,7 +353,7 @@ function getInbox() {
 
 //get # tasks
 function getNumTasks() {
-	getAllData();
+	// getAllData();
   let count;
   todos.length > 0 ? (count = todos.length) : (count = 0);
   return count;
@@ -361,7 +361,7 @@ function getNumTasks() {
 
 //get unread tasks
 function getUpcomingTasks() {
-	getAllData();
+	// getAllData();
   let count;
   const unread = todos.filter((todo) => {
     return todo.date > getTodaysDate();

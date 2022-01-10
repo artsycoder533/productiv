@@ -82,4 +82,4 @@ function closeSubMenus() {
 	});
 }
 
-export { addSidebarEvents };
+export { addSidebarEvents};
