@@ -139,9 +139,11 @@ function addAuthEvents() {
               }
               hideLogin();
               clearUI();
+              console.log("user loggin in");
               //document.location.reload();
               //renderDashboard();
-              dashboard.click();
+              //dashboard.click();
+               //dashboard.click();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -175,9 +177,10 @@ function addAuthEvents() {
             updateProfile(auth.currentUser, { displayName: username });
             addUserName(username);
             hideLogin();
+            console.log("user siged up");
             //document.location.reload();
             //renderDashboard();
-            dashboard.click();
+           // dashboard.click();
           })
           .catch((err) => {
             console.log(err.message);
@@ -198,13 +201,15 @@ function addAuthEvents() {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        console.log("auth state changed");
         addUserName(user.displayName);
         hideLogin();
         clearUI();
             //loginScreen.classList.remove("display");
           //loginScreen.classList.add("hide");
-          getAllData(user.displayName);
+       getAllData(user.displayName);
+        //document.location.reload();
+       //dashboard.click();
       }
       // else {
       //   logoutUser();
@@ -238,4 +243,4 @@ function formValidation(active) {
     //if active is signup
 }
 
-export { showLogin, addAuthEvents, getUsername };
+export { showLogin, addAuthEvents, getUsername, dashboard };

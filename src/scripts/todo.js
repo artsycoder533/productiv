@@ -2,7 +2,7 @@ import { toggleModal, getTodaysDate } from "./modal.js";
 import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
-import { showInbox, updateInboxCount } from "./inbox.js";
+import { resetInboxCount, showInbox, updateInboxCount } from "./inbox.js";
 import { getUsername } from "./auth.js";
 import {
   getFirestore,
@@ -19,7 +19,8 @@ import {
 import { initializeApp } from "firebase/app";
 import { closeSidebar } from "./header.js";
 
-const inbox = [];
+let inbox = [];
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBPwH-PsSrwzFjr6v8LUMwbZkbFs8x7Uac",
@@ -34,15 +35,20 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
-const todos = [];
+let todos = [];
 
 async function getAllData(username) {
-  console.log("get all data called");
-  console.log(username);
+  console.log("get all data called", username);
   const querySnapshot = await getDocs(collection(db, `${username}tasks`));
-
-  querySnapshot.forEach((doc) => {
-    console.log(doc.data());
+	console.log(querySnapshot);
+	inbox = [];
+  todos = [];
+  //reset inbox count
+  resetInboxCount();
+	querySnapshot.forEach((doc) => {
+	  //empty inbox and todos
+		
+   // console.log(doc.data());
     if (
       doc.data().dueDate <= getTodaysDate() &&
       doc.data().status === "unread"
@@ -50,9 +56,11 @@ async function getAllData(username) {
       inbox.push(doc.data());
       updateInboxCount("add");
     }
-    todos.push(doc.data());
+		todos.push(doc.data());
+		//console.log(todos.length);
   });
 }
+
 
 //add to firestore auto id
 async function addDocument(
@@ -353,15 +361,17 @@ function getInbox() {
 
 //get # tasks
 function getNumTasks() {
-	// getAllData();
-  let count;
+ getAllData(getUsername());
+	let count;
+	console.log("todos", todos.length);
   todos.length > 0 ? (count = todos.length) : (count = 0);
   return count;
 }
 
 //get unread tasks
 function getUpcomingTasks() {
-	// getAllData();
+	getAllData(getUsername());
+	console.log("todos", todos.length);
   let count;
   const unread = todos.filter((todo) => {
     return todo.date > getTodaysDate();
@@ -372,6 +382,8 @@ function getUpcomingTasks() {
 
 //get overdue tasks
 function getOverdueTasks() {
+	getAllData(getUsername());
+	console.log("todos", todos.length);
 	let count;
 	const overdue = todos.filter((todo) => {
     return todo.date < getTodaysDate();
@@ -381,12 +393,24 @@ function getOverdueTasks() {
 }
 //get due today tasks
 function getTodaysNumTasks() {
+	getAllData(getUsername());
+	console.log("todos", todos.length);
   let count;
   const today = todos.filter((todo) => {
     return todo.date === getTodaysDate();
   });
   today.length > 0 ? (count = today.length) : (count = 0);
   return count;
+}
+
+function getDashboardCounts() {
+	let dashboardCounts = [];
+	dashboardCounts[0] = getNumTasks();
+	dashboardCounts[1] = getUpcomingTasks();
+	dashboardCounts[2] = getOverdueTasks();
+	dashboardCounts[3] = getTodaysNumTasks();
+	console.log(dashboardCounts);
+	return dashboardCounts;
 }
 
 export {
@@ -405,5 +429,6 @@ export {
   getNumTasks,
 	getTodaysNumTasks,
 	getUpcomingTasks,
-  getOverdueTasks
+	getOverdueTasks,
+  getDashboardCounts
 };

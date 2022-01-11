@@ -189,4 +189,12 @@ function updateInboxCount(status) {
   }
 }
 
-export { showInbox, updateInboxCount };
+function resetInboxCount() {
+  const background = document.getElementById("number");
+  const countUI = document.getElementById("count");
+  count = 0;
+  countUI.textContent = count;
+  background.classList.remove("number");
+}
+
+export { showInbox, updateInboxCount, resetInboxCount };

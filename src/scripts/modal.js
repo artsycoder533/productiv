@@ -1,3 +1,4 @@
+import { reload } from "firebase/auth";
 import {populateTodo} from "./todo.js"
 
 function addButtonEvents() {
@@ -7,6 +8,7 @@ function addButtonEvents() {
         const title = document.querySelector(".form__heading");
         title.textContent = "Add Task";
         toggleModal();
+        //check for open tab
     });
     const closeBtn = document.getElementById("close");
     const cancelBtn = document.getElementById("cancel");
@@ -14,7 +16,32 @@ function addButtonEvents() {
     closeBtn.addEventListener("click", toggleModal);
     createBtn.addEventListener("click", (e)=>{
         validateForm(e);
+        reloadActivePage();
     });
+}
+
+function reloadActivePage() {
+    const display = document.querySelector(".header__display");
+    const dashboard = document.getElementById("dashboard");
+    const inbox = document.getElementById("inbox");
+    const projects = document.getElementById("projects");
+    const tasks = document.getElementById("tasks");
+    const widgets = document.getElementById("widgets");
+    if (display.textContent === "Dashboard") {
+        dashboard.click();
+    }
+    else if (display.textContent === "Inbox") {
+        inbox.click();
+    }
+    else if (display.textContent === "Projects") {
+        projects.click();
+    }
+    else if (display.textContent === "Tasks") {
+        tasks.click();
+    }
+    else if (display.textContent === "Widgets") {
+        widgets.click();
+    }
 }
 
 function validateForm(e) {
@@ -74,4 +101,4 @@ function toggleModal() {
     form.reset();
 }
 
-export { addButtonEvents, toggleModal, getTodaysDate };
+export { addButtonEvents, toggleModal, getTodaysDate, reloadActivePage };

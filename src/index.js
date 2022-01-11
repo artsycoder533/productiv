@@ -3,9 +3,10 @@ import { addSidebarEvents } from "./scripts/sidebar.js";
 import { addHeaderEvents } from "./scripts/header.js";
 import { renderModal } from "./scripts/modal.js";
 import { addButtonEvents } from "./scripts/modal.js";
-
+import { dashboard } from "./scripts/auth";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addAuthEvents, showLogin } from "./scripts/auth";
+
 
 //init firebase app
 
@@ -22,7 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
   addHeaderEvents();
   // const modal = renderModal();
   // document.body.appendChild(modal);
-  addButtonEvents();
+    addButtonEvents();
 });
 
 //arguments email and password

@@ -1,13 +1,17 @@
-import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks } from "./todo";
+import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks, getAllData, getDashboardCounts } from "./todo";
+import { auth } from "..";
+import { getUsername } from "./auth";
 
 const container = document.querySelector(".container");
+//const dashCount = getDashboardCounts();
 
 function renderDashboard() {
     console.log("dashboard clicked");
+    //getAllData(getUsername());
     clearTasksUI();
     container.innerHTML = `
     <div class="dashboard-wrapper">
-  <p class="greeting">Hello <span class="username-greeting">artsycoder533</span>,</p>
+  <p class="greeting">Hello <span class="username-greeting">${getUsername()}</span>,</p>
   <section class="quote-container">
     <div class="quote">
       <p class="motivation">Quote of the Day: </p>
@@ -19,7 +23,7 @@ function renderDashboard() {
   <div class="dashboard-tasks">
     <i class="fas fa-tasks"></i>
     <span class="tasks-count">
-      ${getNumTasks()}
+        ${getNumTasks()}
     </span>
     <span>total tasks</span>
   </div>
@@ -49,6 +53,11 @@ function renderDashboard() {
     `;
     return container;
 }
+
+// function getUsername() {
+//     console.log(auth);
+//     return;
+// }
 
 function clearTasksUI() {
   const children = [...container.children];
