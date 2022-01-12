@@ -143,7 +143,7 @@ function addAuthEvents() {
               //document.location.reload();
               //renderDashboard();
               //dashboard.click();
-               //dashboard.click();
+               dashboard.click();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -180,7 +180,7 @@ function addAuthEvents() {
             console.log("user siged up");
             //document.location.reload();
             //renderDashboard();
-           // dashboard.click();
+           dashboard.click();
           })
           .catch((err) => {
             console.log(err.message);
