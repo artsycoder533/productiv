@@ -369,7 +369,7 @@ function getInbox() {
 function getNumTasks() {
  getAllData(getUsername());
 	let count;
-	console.log("todos", todos.length);
+	// console.log("todos", todos.length);
   todos.length > 0 ? (count = todos.length) : (count = 0);
   return count;
 }
@@ -377,10 +377,10 @@ function getNumTasks() {
 //get unread tasks
 function getUpcomingTasks() {
 	getAllData(getUsername());
-	console.log("todos", todos.length);
+	// console.log("todos", todos.length);
   let count;
   const unread = todos.filter((todo) => {
-    return todo.date > getTodaysDate();
+    return todo.dueDate > getTodaysDate();
   });
   unread.length > 0 ? (count = unread.length) : (count = 0);
   return count;
@@ -389,11 +389,13 @@ function getUpcomingTasks() {
 //get overdue tasks
 function getOverdueTasks() {
 	getAllData(getUsername());
-	console.log("todos", todos.length);
+	console.log("overdue todos", todos);
 	let count;
-	const overdue = todos.filter((todo) => {
-    return todo.date < getTodaysDate();
+  const overdue = todos.filter((todo) => {
+    console.log(todo.dueDate < getTodaysDate());
+    return todo.dueDate < getTodaysDate();
   });
+  console.log("overdue tasks", overdue);
   overdue.length > 0 ? (count = overdue.length) : (count = 0);
   return count;
 }
@@ -403,7 +405,7 @@ function getTodaysNumTasks() {
 	console.log("todos", todos.length);
   let count;
   const today = todos.filter((todo) => {
-    return todo.date === getTodaysDate();
+    return todo.dueDate === getTodaysDate();
   });
   today.length > 0 ? (count = today.length) : (count = 0);
   return count;
