@@ -1,9 +1,11 @@
 import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks, getAllData, getDashboardCounts } from "./todo";
 import { auth } from "..";
 import { getUsername } from "./auth";
+import { getQuotes, quoteObj } from "./quotes";
 
 const container = document.querySelector(".container");
 //const dashCount = getDashboardCounts();
+
 
 function renderDashboard() {
     console.log("dashboard clicked");
@@ -14,9 +16,9 @@ function renderDashboard() {
   <p class="greeting">Hello <span class="username-greeting">${getUsername()}</span>,</p>
   <section class="quote-container">
     <div class="quote">
-      <p class="motivation">Quote of the Day: </p>
-      <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia incidunt ullam saepe officia illo doloremque vel vero minus deserunt dolore?</blockquote>
-      <span class="author">-author name</span>
+      <p class="motivation">For your motivation: </p>
+      <blockquote class="quote-text"></blockquote>
+      <span class="author"></span>
     </div>
   </section>
   <section class="dashboard">
@@ -51,6 +53,7 @@ function renderDashboard() {
 </section>
 </div>
     `;
+  addDashboardEvents();
     return container;
 }
 
@@ -59,6 +62,31 @@ function renderDashboard() {
 //     return;
 // }
 
+function addDashboardEvents() {
+  const allTasks = document.getElementById("all");
+  const today = document.getElementById("today");
+  const upcoming = document.getElementById("upcoming");
+  const overdue = document.getElementById("overdue");
+
+  const tasks = document.querySelector(".dashboard-tasks");
+  const unread = document.querySelector(".dashboard-unread");
+  const overdueTasks = document.querySelector(".dashboard-overdue");
+  const todaysTask = document.querySelector(".dashboard-today");
+
+  tasks.addEventListener("click", function () {
+    allTasks.click();
+  });
+  unread.addEventListener("click", function () {
+    upcoming.click();
+  });
+   todaysTask.addEventListener("click", function () {
+     today.click();
+   });
+   overdueTasks.addEventListener("click", function () {
+     overdue.click();
+   });
+}
+
 function clearTasksUI() {
   const children = [...container.children];
   children.forEach((child) => {
@@ -66,4 +94,4 @@ function clearTasksUI() {
   });
 }
 
-export { renderDashboard };
+export { renderDashboard, addDashboardEvents };

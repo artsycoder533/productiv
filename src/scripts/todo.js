@@ -18,6 +18,8 @@ import {
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { closeSidebar } from "./header.js";
+import { getQuotes } from "./quotes.js";
+import { addDashboardEvents } from "./dashboard.js";
 
 let inbox = [];
 
@@ -63,6 +65,9 @@ async function getAllData(username) {
   if (getLoginStatus() === true) {
     console.log("first login");
     dashboard.click();
+    addDashboardEvents();
+    getQuotes();
+    // getStatus();
     setLoginStatus(false);
   }
 }
@@ -416,7 +421,8 @@ function getDashboardCounts() {
 	dashboardCounts[0] = getNumTasks();
 	dashboardCounts[1] = getUpcomingTasks();
 	dashboardCounts[2] = getOverdueTasks();
-	dashboardCounts[3] = getTodaysNumTasks();
+  dashboardCounts[3] = getTodaysNumTasks();
+  // dashboardCounts[4] = getQuotes();
 	console.log(dashboardCounts);
 	return dashboardCounts;
 }
