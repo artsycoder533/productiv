@@ -43,7 +43,7 @@ function addSidebarEvents() {
 	dashboard.addEventListener("click", function () {
 		// closeSidebar();
 		renderDashboard();
-	})
+	});
 
 	sidebarDivs.map((div) => {
     div.addEventListener("click", (e) => {

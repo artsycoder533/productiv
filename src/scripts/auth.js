@@ -8,6 +8,7 @@ import { renderDashboard } from "./dashboard";
 
 const container = document.querySelector(".container");
 const dashboard = document.getElementById("dashboard");
+let firstLogin = false;
 
 function showLogin() {
   //clearUI();
@@ -62,6 +63,7 @@ function showLogin() {
   addAuthEvents();
     return container;
 }
+
 
 function addLoginScreen() {
   const sidebar = document.querySelector(".sidebar");
@@ -140,10 +142,11 @@ function addAuthEvents() {
               hideLogin();
               clearUI();
               console.log("user loggin in");
+              setLoginStatus(true);
               //document.location.reload();
               //renderDashboard();
               //dashboard.click();
-               dashboard.click();
+              //  dashboard.click();
             }).catch((err) => {
                 console.log(err.message);
             });
@@ -155,6 +158,7 @@ function addAuthEvents() {
           console.log("user signed out");
           showLogin();
           form.reset();
+          setLoginStatus(false);
           document.location.reload();
         }).catch((err) => {
             console.log(err.message);
@@ -163,6 +167,7 @@ function addAuthEvents() {
       
   }
   
+ 
 
     function signupUser(e) {
         e.preventDefault;
@@ -178,9 +183,10 @@ function addAuthEvents() {
             addUserName(username);
             hideLogin();
             console.log("user siged up");
+            setLoginStatus(true);
             //document.location.reload();
             //renderDashboard();
-           dashboard.click();
+          //  dashboard.click();
           })
           .catch((err) => {
             console.log(err.message);
@@ -243,4 +249,12 @@ function formValidation(active) {
     //if active is signup
 }
 
-export { showLogin, addAuthEvents, getUsername, dashboard };
+ function getLoginStatus() {
+   return firstLogin;
+}
+ 
+function setLoginStatus(mode) {
+  firstLogin = mode;
+}
+
+export { showLogin, addAuthEvents, getUsername, dashboard, getLoginStatus, setLoginStatus };

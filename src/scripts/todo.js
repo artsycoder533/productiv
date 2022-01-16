@@ -3,7 +3,7 @@ import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { resetInboxCount, showInbox, updateInboxCount } from "./inbox.js";
-import { getUsername } from "./auth.js";
+import { dashboard, getUsername, getLoginStatus, setLoginStatus } from "./auth.js";
 import {
   getFirestore,
   doc,
@@ -45,10 +45,10 @@ async function getAllData(username) {
   todos = [];
   //reset inbox count
   resetInboxCount();
-	querySnapshot.forEach((doc) => {
-	  //empty inbox and todos
+  querySnapshot.forEach((doc) => {
+    //empty inbox and todos
 		
-   // console.log(doc.data());
+    // console.log(doc.data());
     if (
       doc.data().dueDate <= getTodaysDate() &&
       doc.data().status === "unread"
@@ -56,9 +56,15 @@ async function getAllData(username) {
       inbox.push(doc.data());
       updateInboxCount("add");
     }
-		todos.push(doc.data());
-		//console.log(todos.length);
+    todos.push(doc.data());
   });
+    	//console.log(todos.length);
+  // if first login or signup
+  if (getLoginStatus() === true) {
+    console.log("first login");
+    dashboard.click();
+    setLoginStatus(false);
+  }
 }
 
 
