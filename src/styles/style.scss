@@ -545,6 +545,8 @@ footer{
     z-index: -1;
     overflow-y: scroll;
     border-bottom: 1px dotted lightgray;
+    display: grid;
+    
 }
 
 
@@ -563,7 +565,7 @@ footer{
     display: grid;
     gap: 1rem;
     // max-width: 600px;
-    
+    overflow-y: scroll;
 }
 
 .todo, 
