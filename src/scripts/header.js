@@ -31,6 +31,18 @@ function closeSidebar() {
 	}
 }
 
+//check size to toggle sidebar
+function checkScreenSize() {
+	//if mobile close sidebar
+	if (window.outerWidth > 992) {
+		return;
+	}
+	//if desktop keep it open
+	else {
+		closeSidebar();
+	}
+}
+
 function uploadPic() {
 	const headerUpload = document.querySelector(".header__upload");
 	headerUpload.classList.toggle("visible");
@@ -50,4 +62,4 @@ function readUrl() {
 	profileContainer.click();
 }
 
-export { addHeaderEvents, addUserName, closeSidebar };
+export { addHeaderEvents, addUserName, closeSidebar, checkScreenSize };
