@@ -2,13 +2,14 @@ import {
   createElementWithClass,
   createTextElementWithClass,
 } from "./createElement";
-import { closeSidebar } from "./header";
+import { checkScreenSize, closeSidebar } from "./header";
 
 const container = document.querySelector(".container");
 
 function renderCalculator() {
   clearUI();
-  closeSidebar();
+  //closeSidebar();
+  checkScreenSize();
   
   const wrapper = createElementWithClass("div", "calc__wrapper");
   const body = createTextElementWithClass("div", "calc__container");
