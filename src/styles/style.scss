@@ -111,9 +111,13 @@ a {
     display: none;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 992px){
     .header__username{
         display: block;
+    }
+
+    .header__controls i {
+        // display: none;
     }
 }
 
