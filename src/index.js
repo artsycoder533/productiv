@@ -17,6 +17,8 @@ const auth = getAuth();
 
 document.body.appendChild(showLogin());
 
+const date = document.getElementById("footerDate");
+date.textContent = new Date().getFullYear();
 window.addEventListener("DOMContentLoaded", () => {
   //addAuthEvents();
   addSidebarEvents();
