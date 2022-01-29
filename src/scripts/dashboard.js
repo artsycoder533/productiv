@@ -2,12 +2,14 @@ import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks, getA
 import { auth } from "..";
 import { getUsername } from "./auth";
 import { getQuotes, quoteObj } from "./quotes";
+import { checkScreenSize } from "./header";
 
 const container = document.querySelector(".container");
 //const dashCount = getDashboardCounts();
 
 
 function renderDashboard() {
+  checkScreenSize();
     console.log("dashboard clicked");
     //getAllData(getUsername());
     clearTasksUI();
