@@ -3,7 +3,7 @@ import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
 import { renderTodo } from "./renderTodo.js";
 import { resetInboxCount, showInbox, updateInboxCount } from "./inbox.js";
-import { dashboard, getUsername, getLoginStatus, setLoginStatus } from "./auth.js";
+import { dashboard, getUsername, getLoginStatus, setLoginStatus, getStatus, changeStatus } from "./auth.js";
 import {
   getFirestore,
   doc,
@@ -70,6 +70,67 @@ async function getAllData(username) {
     // getStatus();
     setLoginStatus(false);
   }
+  // else {
+  //   //if status is dashboard
+  //   console.log(getStatus());
+  //   const allTasks = document.getElementById("all");
+  //   const today = document.getElementById("today");
+  //   const upcoming = document.getElementById("upcoming");
+  //   const overdue = document.getElementById("overdue");
+  //   const workLink = document.getElementById("work");
+  //   const homeLink = document.getElementById("home");
+  //   const miscLink = document.getElementById("miscellaneous");
+  //   const inbox = document.getElementById("inbox");
+  //   const calculator = document.getElementById("calculator");
+  //   const pomodoro = document.getElementById("pomodoro");
+  //   switch (getStatus()) {
+  //     case "dashboard":
+  //       dashboard.click();
+  //       break;
+  //     case "allTasks":
+  //       allTasks.click();
+  //       break;
+  //     case "today":
+  //       today.click();
+  //       break;
+  //     case "upcoming":
+  //       upcoming.click();
+  //       break;
+  //     case "overdue":
+  //       overdue.click();
+  //       break;
+  //     case "inbox":
+  //       inbox.click();
+  //       break;
+  //     case "calculator":
+  //       calculator.click();
+  //       break;
+  //     case "pomodoro":
+  //       pomodoro.click();
+  //       break;
+  //     case "work":
+  //       workLink.click();
+  //       break;
+  //     case "home":
+  //       homeLink.click();
+  //       break;
+  //     case "misc":
+  //       miscLink.click();
+  //       break;
+  //     default:
+  //       return;
+  //   }
+    //inbox
+    //work
+    //home
+    //miscellaneous
+    //all
+    //due
+    //upcoming
+    //overdue
+    //calculator
+    //pomodoro
+  //}
 }
 
 
@@ -269,6 +330,7 @@ function sortTodosByProject(e) {
   const sortedByProject = todos.filter((todo) => {
     for (const prop in todo) {
       if (todo[prop] === e.currentTarget.id) {
+        prop === "work" ? changeStatus("work") : prop === "home" ? changeStatus("home") : changeStatus("misc");
         return todo;
       }
     }
@@ -283,14 +345,17 @@ function sortTodosByTask(e) {
   let sortedTodos = [];
   if (e.currentTarget.id === "today") {
     sortedTodos = todos.filter((todo) => {
+      changeStatus("today");
       return todo.dueDate === getTodaysDate();
     });
   } else if (e.currentTarget.id === "overdue") {
     sortedTodos = todos.filter((todo) => {
+      changeStatus("overdue");
       return todo.dueDate < getTodaysDate();
     });
   } else if (e.currentTarget.id === "upcoming") {
     sortedTodos = todos.filter((todo) => {
+      changeStatus("upcoming");
       return todo.dueDate > getTodaysDate();
     });
   }
@@ -303,6 +368,7 @@ function showAllTasks(e) {
   checkScreenSize();
   renderTasksHeader(e.currentTarget.id);
   renderTasksUI(todos);
+  changeStatus("all");
 }
 
 function getTodoById(id) {
@@ -373,6 +439,7 @@ function getInbox() {
   //showAllTasks();
   checkScreenSize();
   showInbox(inbox);
+  changeStatus("inbox");
 }
 
 //get # tasks

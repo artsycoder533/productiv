@@ -11,6 +11,8 @@ const container = document.querySelector(".container");
 const dashboard = document.getElementById("dashboard");
 let firstLogin = false;
 
+let status = "";
+
 function showLogin() {
   //clearUI();
   addLoginScreen();
@@ -65,6 +67,13 @@ function showLogin() {
     return container;
 }
 
+function getStatus() {
+  return status;
+}
+
+function changeStatus(page) {
+  status = page;
+}
 
 function addLoginScreen() {
   const sidebar = document.querySelector(".sidebar");
@@ -258,4 +267,4 @@ function setLoginStatus(mode) {
   firstLogin = mode;
 }
 
-export { showLogin, addAuthEvents, getUsername, dashboard, getLoginStatus, setLoginStatus };
+export { showLogin, addAuthEvents, getUsername, dashboard, getLoginStatus, setLoginStatus, getStatus, changeStatus };

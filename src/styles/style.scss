@@ -739,6 +739,12 @@ footer{
     left: 0;
 }
 
+@media screen and (min-width: 767px){
+    .inbox__button {
+        left:20%;
+    }
+}
+
 .bold{
     font-weight: bold;
 }   

@@ -1,3 +1,4 @@
+import { changeStatus } from "./auth";
 import { createElementWithClass, createTextElementWithClass } from "./createElement";
 import { checkScreenSize, closeSidebar } from "./header";
 
@@ -10,6 +11,7 @@ function getPomodoro() {
   //closeSidebar();
   checkScreenSize();
   clearUI();
+  changeStatus("pomodoro");
 
   const title = createTextElementWithClass("h2", "pomodoro__title", "Pomodoro");
     container.appendChild(title);

@@ -6,6 +6,7 @@ import { displaySettings } from "./settings.js";
 import { closeSidebar } from "./header.js";
 import { renderDashboard } from "./dashboard.js";
 import { getQuotes } from "./quotes.js";
+import { changeStatus } from "./auth.js";
 
 
 const sidebarDivs = [...document.querySelectorAll(".sidebar__link")];
@@ -45,6 +46,7 @@ function addSidebarEvents() {
 		// closeSidebar();
 		renderDashboard();
 		getQuotes();
+		changeStatus("dashboard");
 	});
 
 	sidebarDivs.map((div) => {
@@ -84,4 +86,4 @@ function closeSubMenus() {
 	});
 }
 
-export { addSidebarEvents};
+export { addSidebarEvents, workLink, homeLink, miscLink};

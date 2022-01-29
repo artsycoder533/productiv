@@ -1,3 +1,4 @@
+import { changeStatus } from "./auth";
 import {
   createElementWithClass,
   createTextElementWithClass,
@@ -10,7 +11,7 @@ function renderCalculator() {
   clearUI();
   //closeSidebar();
   checkScreenSize();
-  
+  changeStatus("calculator");
   const wrapper = createElementWithClass("div", "calc__wrapper");
   const body = createTextElementWithClass("div", "calc__container");
   body.innerHTML = `
