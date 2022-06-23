@@ -14,6 +14,7 @@ function renderTasksHeader(taskId) {
 }
 
 function renderTasksUI(tasks) {
+  console.log(tasks);
   tasks.map((task) => {
     const { title, description, dueDate, priority, project, id } = task;
     const todos = document.querySelector(".todos");

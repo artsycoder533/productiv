@@ -1,5 +1,5 @@
 import { createElementWithClass } from "./createElement";
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth";
 import { auth } from "..";
 import { addUserName } from "./header";
 import { getAllData } from "./todo";

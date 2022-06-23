@@ -292,8 +292,8 @@ class Todos {
   }
 }
 
-function populateTodo(e) {
-  e.preventDefault();
+function populateTodo() {
+  //e.preventDefault();
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
   const date = document.getElementById("date").value;
@@ -311,6 +311,7 @@ function populateTodo(e) {
     status
   );
 
+  console.log(newTodo);
   todos.push(newTodo);
   addDocumentCustomID(title, description, date, priority, project, id, status);
   if (date === getTodaysDate()) {
@@ -365,6 +366,7 @@ function sortTodosByTask(e) {
 
 function showAllTasks(e) {
   //closeSidebar();
+  getAllData(getUsername());
   checkScreenSize();
   renderTasksHeader(e.currentTarget.id);
   renderTasksUI(todos);

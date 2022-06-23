@@ -75,7 +75,8 @@ function validateForm(e) {
         }, 3000);
     }
     else {
-        populateTodo(e);
+        //populateTodo(e);
+        populateTodo();
     }
 }
 

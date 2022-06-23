@@ -86,13 +86,16 @@ container.appendChild(deleteAll);
 }
 
 function deleteSelected(todos) {
+  console.log(todos);
     const container = document.querySelector(".container");
     const kids = container.children;
     const containerChildren = Array.from(kids);
-    containerChildren.forEach((child, index) => {
+  containerChildren.forEach((child, index) => {
+      
         if (child.children[0]) {
-            if (child.children[0].checked) {
-                deleteMessage(child.dataset.id, child);
+          if (child.children[0].checked) {
+              console.log(child, "child");
+                deleteMessage(Number(child.dataset.id), child);
                 if (child.children[1].classList.contains("bold")) {
                     updateInboxCount("subtract");
                 }
@@ -106,6 +109,7 @@ function deleteMessage(id, todo) {
     const container = document.querySelector(".container");
     const message = document.querySelector(".inbox");
   todo.remove();
+  console.log(id, todo, "delete message called");
   deleteInboxMessage(id);
   getInbox();
 }

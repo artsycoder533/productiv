@@ -9,6 +9,7 @@ const container = document.querySelector(".container");
 
 
 function renderDashboard() {
+  console.log(getUsername())
   checkScreenSize();
     console.log("dashboard clicked");
     //getAllData(getUsername());
