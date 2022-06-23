@@ -27,6 +27,8 @@ function reloadActivePage() {
     const projects = document.getElementById("projects");
     const tasks = document.getElementById("tasks");
     const widgets = document.getElementById("widgets");
+    const title = document.querySelector(".task__title");
+    const all = document.getElementById("all");
     if (display.textContent === "Dashboard") {
         dashboard.click();
     }
@@ -37,8 +39,13 @@ function reloadActivePage() {
         projects.click();
     }
     else if (display.textContent === "Tasks") {
+        reload()
         tasks.click();
+        all.click();
     }
+    // else if (display.textContent === "Tasks") {
+    //     tasks.click();
+    // }
     else if (display.textContent === "Widgets") {
         widgets.click();
     }

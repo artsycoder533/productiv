@@ -419,11 +419,11 @@ function updateTodo(
 
 function deleteTodo(id) {
   todos.forEach((todo, index) => {
-    console.log(todo);
-    if (todo.id === id) {
+    console.log(id, Number(todo.id));
+    if (String(todo.id) === id) {
       todos.splice(index, 1);
       console.log("here");
-      deleteDocument(id);
+      deleteDocument(String(id));
     }
   });
 }
