@@ -4,9 +4,11 @@ import { createElementWithClass } from "./createElement.js";
 const container = document.querySelector(".container");
 
 function renderTasksHeader(taskId) {
+  console.log(taskId);
   clearTasksUI();
   const taskTitle = createElementWithClass("h2", "task__title");
   taskId === "today" ? taskTitle.textContent = "Due Today" : taskTitle.textContent = taskId;
+  taskId === "all" ? taskTitle.textContent = "All Tasks" : taskTitle.textContent = taskId;
   const container = document.querySelector(".container");
   const todos = createElementWithClass("section", "todos");
   container.appendChild(taskTitle);
