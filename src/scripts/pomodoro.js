@@ -13,7 +13,7 @@ function getPomodoro() {
   clearUI();
   changeStatus("pomodoro");
 
-  const title = createTextElementWithClass("h2", "pomodoro__title", "Pomodoro");
+  const title = createTextElementWithClass("h2", "task__title", "Pomodoro");
     container.appendChild(title);
     
     const pomodoroContainer = createElementWithClass("div", "pomodoro__container");

@@ -12,6 +12,8 @@ function renderCalculator() {
   //closeSidebar();
   checkScreenSize();
   changeStatus("calculator");
+  const title = createTextElementWithClass("h2", "task__title", "Calculator");
+  container.appendChild(title);
   const wrapper = createElementWithClass("div", "calc__wrapper");
   const body = createTextElementWithClass("div", "calc__container");
   body.innerHTML = `

@@ -27,6 +27,8 @@ function reloadActivePage() {
     const projects = document.getElementById("projects");
     const tasks = document.getElementById("tasks");
     const widgets = document.getElementById("widgets");
+    const calculator = document.getElementById("calculator");
+    const pomodoro = document.getElementById("pomodoro");
     const title = document.querySelector(".task__title");
     const all = document.getElementById("all");
     const today = document.getElementById("upcoming");
@@ -59,7 +61,13 @@ function reloadActivePage() {
         }
     }
     else if (display.textContent === "Widgets") {
-      widgets.click();
+        widgets.click();
+        if (title.textContent === "Calculator") {
+            calculator.click();
+        }
+        if (title.textContent === "Pomodoro") {
+            pomodoro.click();
+        }
     }
 }
 
