@@ -29,6 +29,10 @@ function reloadActivePage() {
     const widgets = document.getElementById("widgets");
     const title = document.querySelector(".task__title");
     const all = document.getElementById("all");
+    const today = document.getElementById("upcoming");
+    const upcoming = document.getElementById("upcoming");
+    const overdue = document.getElementById("overdue");
+
     if (display.textContent === "Dashboard") {
         dashboard.click();
     }
@@ -39,15 +43,23 @@ function reloadActivePage() {
         projects.click();
     }
     else if (display.textContent === "Tasks") {
-        reload()
+      reload();
         tasks.click();
-        all.click();
+        if (title.textContent === "All") {
+            all.click();
+        } 
+        if (title.textContent === "Due Today") {
+            today.click();
+        }
+        if (title.textContent === "Upcoming") {
+            upcoming.click();
+        }
+        if (title.textContent === "Overdue") {
+            overdue.click();
+        }
     }
-    // else if (display.textContent === "Tasks") {
-    //     tasks.click();
-    // }
     else if (display.textContent === "Widgets") {
-        widgets.click();
+      widgets.click();
     }
 }
 
