@@ -595,6 +595,11 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.overdue .todo__date::after {
+  
 }
 // .todo__priority {
 //   padding: 0.20rem .4rem;
@@ -614,6 +619,12 @@ footer{
 
 .normal {
     background: lightgreen;
+}
+
+.overdue {
+    
+    color: red;
+    font-weight: bold;
 }
 
 .todo__delete, .todo__edit, .todo__more {
