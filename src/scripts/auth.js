@@ -1,8 +1,9 @@
 import { createElementWithClass } from "./createElement";
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getAuth} from "firebase/auth";
 import { auth } from "..";
 import { addUserName } from "./header";
 import { getAllData } from "./todo";
+import {getStorage, ref} from 'firebase/storage'
 import { renderDashboard } from "./dashboard";
 import { render } from "sass";
 // import { render } from "sass";
@@ -155,6 +156,7 @@ function addAuthEvents() {
               setLoginStatus(true);
               //document.location.reload();
               //renderDashboard();
+          
               //dashboard.click();
               //  dashboard.click();
             }).catch((err) => {
@@ -215,17 +217,20 @@ function addAuthEvents() {
   }
   
 
-    onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("auth state changed");
-        addUserName(user.displayName);
+        setLoginStatus(true);
+        // addUserName(user.displayName);
         hideLogin();
         clearUI();
+        
             //loginScreen.classList.remove("display");
           //loginScreen.classList.add("hide");
        getAllData(user.displayName);
         //document.location.reload();
-       //dashboard.click();
+        //dashboard.click();
+       // dashboard.click();
       }
       // else {
       //   logoutUser();
@@ -266,5 +271,7 @@ function formValidation(active) {
 function setLoginStatus(mode) {
   firstLogin = mode;
 }
+
+//photo upload
 
 export { showLogin, addAuthEvents, getUsername, dashboard, getLoginStatus, setLoginStatus, getStatus, changeStatus };

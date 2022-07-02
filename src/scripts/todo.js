@@ -13,13 +13,14 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
+  query,
   getDocs,
   onSnapshot,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { checkScreenSize, closeSidebar } from "./header.js";
 import { getQuotes } from "./quotes.js";
-import { addDashboardEvents } from "./dashboard.js";
+import { addDashboardEvents, renderDashboard } from "./dashboard.js";
 
 let inbox = [];
 
@@ -41,35 +42,55 @@ let todos = [];
 
 async function getAllData(username) {
   console.log("get all data called", username);
-  const querySnapshot = await getDocs(collection(db, `${username}tasks`));
-	console.log(querySnapshot);
-	inbox = [];
-  todos = [];
+  const q = query(collection(db, `${username}tasks`));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    inbox = [];
+    todos = [];
+    querySnapshot.forEach((doc) => {
+      //empty inbox and todos
+
+      // console.log(doc.data());
+      if (
+        doc.data().dueDate <= getTodaysDate() &&
+        doc.data().status === "unread"
+      ) {
+        inbox.push(doc.data());
+        updateInboxCount("add");
+      }
+      todos.push(doc.data());
+    });
+    console.log("get login status", getLoginStatus());
+    if (getLoginStatus() === true) {
+      console.log("first login");
+      dashboard.click();
+      addDashboardEvents();
+      getQuotes();
+      // getStatus();
+      setLoginStatus(false);
+    }
+  })
+  //const querySnapshot = await getDocs(collection(db, `${username}tasks`));
+	//console.log(querySnapshot);
+	// inbox = [];
+  // todos = [];
   //reset inbox count
   resetInboxCount();
-  querySnapshot.forEach((doc) => {
-    //empty inbox and todos
+  // querySnapshot.forEach((doc) => {
+  //   //empty inbox and todos
 		
-    // console.log(doc.data());
-    if (
-      doc.data().dueDate <= getTodaysDate() &&
-      doc.data().status === "unread"
-    ) {
-      inbox.push(doc.data());
-      updateInboxCount("add");
-    }
-    todos.push(doc.data());
-  });
+  //   // console.log(doc.data());
+  //   if (
+  //     doc.data().dueDate <= getTodaysDate() &&
+  //     doc.data().status === "unread"
+  //   ) {
+  //     inbox.push(doc.data());
+  //     updateInboxCount("add");
+  //   }
+  //   todos.push(doc.data());
+  // });
     	//console.log(todos.length);
   // if first login or signup
-  if (getLoginStatus() === true) {
-    console.log("first login");
-    dashboard.click();
-    addDashboardEvents();
-    getQuotes();
-    // getStatus();
-    setLoginStatus(false);
-  }
+  
   // else {
   //   //if status is dashboard
   //   console.log(getStatus());
