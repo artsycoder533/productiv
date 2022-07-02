@@ -221,7 +221,7 @@ function addAuthEvents() {
       if (user) {
         console.log("auth state changed");
         setLoginStatus(true);
-        // addUserName(user.displayName);
+        addUserName(user.displayName);
         hideLogin();
         clearUI();
         

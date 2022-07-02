@@ -46,6 +46,7 @@ async function getAllData(username) {
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     inbox = [];
     todos = [];
+    resetInboxCount();
     querySnapshot.forEach((doc) => {
       //empty inbox and todos
 
@@ -68,13 +69,14 @@ async function getAllData(username) {
       // getStatus();
       setLoginStatus(false);
     }
+    //
   })
   //const querySnapshot = await getDocs(collection(db, `${username}tasks`));
 	//console.log(querySnapshot);
 	// inbox = [];
   // todos = [];
   //reset inbox count
-  resetInboxCount();
+  //resetInboxCount();
   // querySnapshot.forEach((doc) => {
   //   //empty inbox and todos
 		
