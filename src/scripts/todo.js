@@ -14,6 +14,7 @@ import {
   deleteDoc,
   addDoc,
   query,
+  orderBy,
   getDocs,
   onSnapshot,
 } from "firebase/firestore";
@@ -42,7 +43,7 @@ let todos = [];
 
 async function getAllData(username) {
   console.log("get all data called", username);
-  const q = query(collection(db, `${username}tasks`));
+  const q = query(collection(db, `${username}tasks`), orderBy("dueDate"));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     inbox = [];
     todos = [];
