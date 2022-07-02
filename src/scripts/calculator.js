@@ -10,6 +10,8 @@ const container = document.querySelector(".container");
 function renderCalculator() {
   clearUI();
   //closeSidebar();
+  const display = document.querySelector(".header__display");
+  display.textContent = "Widgets";
   checkScreenSize();
   changeStatus("calculator");
   const title = createTextElementWithClass("h2", "task__title", "Calculator");

@@ -46,7 +46,7 @@ function reloadActivePage() {
     }
     else if (display.textContent === "Tasks") {
       reload();
-        tasks.click();
+        //tasks.click();
         if (title.textContent === "All") {
             all.click();
         } 

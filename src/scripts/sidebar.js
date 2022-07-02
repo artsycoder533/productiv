@@ -57,8 +57,13 @@ function addSidebarEvents() {
 }
 
 function openSubMenu(e) {
-    const display = document.querySelector(".header__display");
-	display.textContent = e.currentTarget.dataset.id;
+	//closeSubMenus();
+	const display = document.querySelector(".header__display");
+	console.log(e.currentTarget.dataset.id);
+	if (e.currentTarget.dataset.id === "Dashboard" || e.currentTarget.dataset.id === "Inbox") {
+		display.textContent = e.currentTarget.dataset.id;
+	}
+    //display.textContent = e.currentTarget.dataset.id;
 	removeActiveLinks(e);
 	closeSubMenus();
 	if (e.currentTarget.nextElementSibling) {
@@ -77,13 +82,16 @@ function removeActiveLinks() {
 
 function closeSubMenus() {
 	const submenus = [...document.querySelectorAll(".sidebar__sublinks")];
-	submenus.map((menu) => {
+	submenus.forEach((menu) => {
+		// if (menu.classList.contains("showSub")) {
+		// 	return;
+		// } else {
+		// 	menu.classList.remove("showSub");
+		// }
 		if (menu.classList.contains("showSub")) {
-			return;
-		} else {
 			menu.classList.remove("showSub");
 		}
 	});
 }
 
-export { addSidebarEvents, workLink, homeLink, miscLink};
+export { addSidebarEvents, workLink, homeLink, miscLink, openSubMenu};

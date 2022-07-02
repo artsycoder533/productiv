@@ -9,6 +9,8 @@ let count = 0;
 
 function getPomodoro() {
   //closeSidebar();
+  const display = document.querySelector(".header__display");
+  display.textContent = "Widgets";
   checkScreenSize();
   clearUI();
   changeStatus("pomodoro");

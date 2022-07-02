@@ -22,6 +22,7 @@ import { initializeApp } from "firebase/app";
 import { checkScreenSize, closeSidebar } from "./header.js";
 import { getQuotes } from "./quotes.js";
 import { addDashboardEvents, renderDashboard } from "./dashboard.js";
+import {openSubMenu} from "./sidebar.js";
 
 let inbox = [];
 
@@ -351,6 +352,8 @@ function populateTodo() {
 
 function sortTodosByProject(e) {
   //closeSidebar();
+  const display = document.querySelector(".header__display");
+  display.textContent = "Projects";
   checkScreenSize();
   const sortedByProject = todos.filter((todo) => {
     for (const prop in todo) {
@@ -366,6 +369,9 @@ function sortTodosByProject(e) {
 
 function sortTodosByTask(e) {
   //closeSidebar();
+ 
+  const display = document.querySelector(".header__display");
+  display.textContent = "Tasks";
   checkScreenSize();
   let sortedTodos = [];
   if (e.currentTarget.id === "today") {
@@ -390,6 +396,8 @@ function sortTodosByTask(e) {
 
 function showAllTasks(e) {
   //closeSidebar();
+  const display = document.querySelector(".header__display");
+  display.textContent = "Tasks";
   getAllData(getUsername());
   checkScreenSize();
   renderTasksHeader(e.currentTarget.id);
