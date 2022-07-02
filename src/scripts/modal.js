@@ -1,5 +1,6 @@
 import { reload } from "firebase/auth";
-import { populateTodo } from "./todo.js";
+import { getAllData, populateTodo } from "./todo.js";
+import { getUsername } from "./auth.js";
 
 function addButtonEvents() {
   const addBtn = document.getElementById("add");
@@ -36,10 +37,12 @@ function reloadActivePage() {
     const overdue = document.getElementById("overdue");
     
     console.log("display content...", display.textContent);
-    console.log("title content....", title.textContent);
+   // console.log("title content....", title.textContent);
 
-  if (display.textContent === "Dashboard") {
-    dashboard.click();
+    if (display.textContent === "Dashboard") {
+        console.log("on dashboard page!");
+        dashboard.click();
+        getAllData(getUsername());
     return;
   } else if (display.textContent === "Inbox") {
     inbox.click();
