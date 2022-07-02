@@ -15,9 +15,9 @@ function renderTodo(title, description, date, priority, project, id) {
   const todo__date = createElementWithClass("div", "todo__date");
   const date1 = createTextElementWithClass("small", "date", date);
   //check for overdue dates
-    if (date1.textContent <= getTodaysDate()) {
+    if (date1.textContent < getTodaysDate()) {
         date1.classList.add("overdue");
-        date1.textContent += ' OVERDUE !!';
+        date1.textContent = date + ' OVERDUE !!';
     }
   todo__date.appendChild(date1);
   const todo__project = createTextElementWithClass(

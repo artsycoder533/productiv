@@ -4,7 +4,7 @@ const url = "https://type.fit/api/quotes";
 async function getQuotes() {
     const quote = document.querySelector(".quote-text");
     const author = document.querySelector(".author");
-    console.log(quote, author);
+   // console.log(quote, author);
   const response = await fetch(url);
   const quotes = await response.json();
   let filteredQuotes = quotes.filter((quote) => {

@@ -374,6 +374,7 @@ function sortTodosByTask(e) {
   display.textContent = "Tasks";
   checkScreenSize();
   let sortedTodos = [];
+  console.log("inside sortTodosByTasks ...", e.currentTarget);
   if (e.currentTarget.id === "today") {
     sortedTodos = todos.filter((todo) => {
       changeStatus("today");
@@ -390,13 +391,15 @@ function sortTodosByTask(e) {
       return todo.dueDate > getTodaysDate();
     });
   }
-  renderTasksHeader(e.currentTarget.id);
+  renderTasksHeader(getStatus());
+ // renderTasksHeader(e.currentTarget.id);
   renderTasksUI(sortedTodos);
 }
 
 function showAllTasks(e) {
   //closeSidebar();
   const display = document.querySelector(".header__display");
+  console.log("current target inside showAllTasks....", e.currentTarget.id);
   display.textContent = "Tasks";
   getAllData(getUsername());
   checkScreenSize();
@@ -500,13 +503,13 @@ function getUpcomingTasks() {
 //get overdue tasks
 function getOverdueTasks() {
 	getAllData(getUsername());
-	console.log("overdue todos", todos);
+//	console.log("overdue todos", todos);
 	let count;
   const overdue = todos.filter((todo) => {
     console.log(todo.dueDate < getTodaysDate());
     return todo.dueDate < getTodaysDate();
   });
-  console.log("overdue tasks", overdue);
+ // console.log("overdue tasks", overdue);
   overdue.length > 0 ? (count = overdue.length) : (count = 0);
   return count;
 }
