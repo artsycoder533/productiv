@@ -662,6 +662,17 @@ footer{
     text-overflow: ellipsis;
 }
 
+.complete {
+    width: 40px;
+    height: 40px;
+    accent-color: black;
+    border: 2px solid red;
+}
+
+.disabled {
+    background: lightgray;
+}
+
 @media screen and (min-width: 992px){
     .todo__title{
         //width: 100%;

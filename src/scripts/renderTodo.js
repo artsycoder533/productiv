@@ -1,4 +1,4 @@
-import { createElementWithClass, createTextElementWithClass, createElementWithAttribute } from "./createElement.js";
+import { createElementWithClass, createTextElementWithClass, createElementWithAttribute, createInputElement } from "./createElement.js";
 import { getTodaysDate, toggleModal } from "./modal.js";
 import { getTodoById, updateTodo, deleteTodo, getADocument} from "./todo.js";
 
@@ -6,8 +6,12 @@ const todos = createElementWithClass("section", "todos");
 
 function renderTodo(title, description, date, priority, project, id) {
   const todo__container = createElementWithClass("div", "todo__container");
-  todo__container.setAttribute("data-id", id);
-  const todo = createElementWithClass("article", "todo");
+    todo__container.setAttribute("data-id", id);
+    const complete = createInputElement("input", "checkbox", "complete", "complete");
+    complete.classList.add("complete");
+    complete.addEventListener("click", disableTodo);
+    const todo = createElementWithClass("article", "todo");
+    todo.appendChild(complete);
   const todo__date = createElementWithClass("div", "todo__date");
   const date1 = createTextElementWithClass("small", "date", date);
   //check for overdue dates
@@ -89,6 +93,11 @@ function renderTodo(title, description, date, priority, project, id) {
   todo__details.appendChild(todo__description);
   todo__container.appendChild(todo__details);
   return todo__container;
+}
+
+function disableTodo(e) {
+    const checkbox = document.querySelector("complete");
+    e.currentTarget.parentElement.classList.toggle("disabled");
 }
 
 function showDetails(e) {
