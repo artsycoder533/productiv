@@ -11,7 +11,7 @@
 
 ## Description
 
-Productiv is dashboard application that solves the problem of having to switch between multiple applications to maintain productivity. A user is able to add tasks organized by project type as well as date. To aid the user in keeping deadlines, tasks are automatically added to the inbox that are due the current day. Productiv also includes widgets such as a Pomodoro Timer and calculator.
+Productiv is a dashboard application that solves the problem of having to switch between multiple applications to maintain productivity. A user is able to add tasks organized by project type as well as date. To aid the user in keeping deadlines, tasks are automatically added to the inbox that are due the current day. Productiv also includes widgets such as a Pomodoro Timer and calculator.
 
 ### Built With
 - Html5
@@ -29,7 +29,7 @@ Productiv is dashboard application that solves the problem of having to switch b
 
 - Live Site URL: [https://artsycoder533.github.io/productiv/](https://artsycoder533.github.io/productiv/)
 - Repository URL: [https://github.com/artsycoder533/productiv.git](https://github.com/artsycoder533/productiv.git)
-- Video Demo on Youtube: [https://youtube.com/playlist?list=PL2WqH02famSWoIjSa2kHPvw6u7Qzsmshx](https://youtube.com/playlist?list=PL2WqH02famSWoIjSa2kHPvw6u7Qzsmshx)
+- Video Demo Playlist on Youtube: [https://youtube.com/playlist?list=PL2WqH02famSWoIjSa2kHPvw6u7Qzsmshx](https://youtube.com/playlist?list=PL2WqH02famSWoIjSa2kHPvw6u7Qzsmshx)
 
 ## My Process
 

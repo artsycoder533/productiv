@@ -4,12 +4,20 @@ import { getTodoById, updateTodo, deleteTodo, getADocument} from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
-function renderTodo(title, description, date, priority, project, id) {
+function renderTodo(title, description, date, priority, project, id, completed) {
   const todo__container = createElementWithClass("div", "todo__container");
     todo__container.setAttribute("data-id", id);
     const complete = createInputElement("input", "checkbox", "complete", "complete");
     complete.classList.add("complete");
-    complete.addEventListener("click", disableTodo);
+  complete.addEventListener("click", (e) => {
+    disableTodo(e, id);
+  });
+  if (completed === true) {
+    complete.classList.add("disabled");
+  }
+  else {
+    complete.classList.remove("disabled");
+  }
     const todo = createElementWithClass("article", "todo");
     todo.appendChild(complete);
   const todo__date = createElementWithClass("div", "todo__date");
@@ -95,9 +103,16 @@ function renderTodo(title, description, date, priority, project, id) {
   return todo__container;
 }
 
-function disableTodo(e) {
+function disableTodo(e, id) {
     const checkbox = document.querySelector("complete");
-    e.currentTarget.parentElement.classList.toggle("disabled");
+  e.currentTarget.parentElement.classList.toggle("disabled");
+  //toggle completed todo status
+  let todo = getTodoById(id);
+  const completeStatus = !todo.complete;
+  console.log(completeStatus);
+  todo = { ...todo, completeStatus };
+  const { title, description, dueDate, priority, project, status, completed } = todo;
+  updateTodo(title, dueDate, priority, project, todo.id, status, completed);
 }
 
 function showDetails(e) {

@@ -167,7 +167,8 @@ async function addDocument(
   priority,
   project,
   id,
-  status
+  status,
+  completed
 ) {
   const ref = collection(db, `${getUsername()}tasks`);
   const docref = await addDoc(ref, {
@@ -178,6 +179,7 @@ async function addDocument(
     project: project,
     id: id,
     status: status,
+    completed: completed
   });
 }
 
@@ -189,7 +191,8 @@ async function addDocumentCustomID(
   priority,
   project,
   id,
-  status
+  status,
+  completed
 ) {
   const ref = doc(db, `${getUsername()}tasks`, String(id));
   await setDoc(ref, {
@@ -200,6 +203,7 @@ async function addDocumentCustomID(
     project: project,
     id: id,
     status: status,
+    completed: completed
   });
 }
 
@@ -214,6 +218,7 @@ async function getADocument() {
     priority.value = docSnap.data().priority;
     project.value = docSnap.data().project;
     id.value = docSnap.data().id;
+    completed.value = docSnap.data().completed;
   }
 }
 
@@ -225,9 +230,11 @@ async function updateDocument(
   priority,
   project,
   id,
-  status
+  status,
+  completed
 ) {
   const ref = doc(db, `${getUsername()}tasks`, String(id));
+  console.log(title, description, dueDate, priority, project, id, status, completed);
   await updateDoc(ref, {
     title: title,
     description: description,
@@ -236,6 +243,7 @@ async function updateDocument(
     project: project,
     id: id,
     status: status,
+    completed: completed
   });
 }
 
@@ -250,7 +258,7 @@ async function deleteDocument(id) {
 }
 
 class Todos {
-  constructor(title, description, dueDate, priority, project, id, status) {
+  constructor(title, description, dueDate, priority, project, id, status, completed) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -258,6 +266,7 @@ class Todos {
     this.project = project;
     this.id = id;
     this.status = status;
+    this.completed = completed;
   }
 
   getTitle() {
@@ -326,6 +335,7 @@ function populateTodo() {
   const project = document.getElementById("project").value;
   const id = Math.random();
   const status = "unread";
+  const completed = false;
   const newTodo = new Todos(
     title,
     description,
@@ -333,12 +343,13 @@ function populateTodo() {
     priority,
     project,
     id,
-    status
+    status,
+    completed
   );
 
   console.log(newTodo);
   todos.push(newTodo);
-  addDocumentCustomID(title, description, date, priority, project, id, status);
+  addDocumentCustomID(title, description, date, priority, project, id, status, completed);
   if (date === getTodaysDate()) {
     inbox.unshift(newTodo);
     updateInboxCount("add");
@@ -426,7 +437,8 @@ function updateTodo(
   priority,
   project,
   id,
-  status
+  status,
+  completed
 ) {
   todos.forEach((todo) => {
     console.log(todo.id, id);
@@ -443,12 +455,14 @@ function updateTodo(
       todo.priority = priority;
       todo.project = project;
       todo.status = status;
+      todo.completed = completed
     }
     console.log(todo);
+    console.log("completed todo, :", todo.completed, completed)
   });
-  console.log(title, description, dueDate, priority, project, id, status);
+  console.log(title, description, dueDate, priority, project, id, status, completed);
   console.log(todos);
-  updateDocument(title, description, dueDate, priority, project, id, status);
+  updateDocument(title, description, dueDate, priority, project, id, status, completed);
   //getAllData();
 }
 
