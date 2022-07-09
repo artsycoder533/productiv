@@ -76,17 +76,23 @@ function addDashboardEvents() {
   const overdueTasks = document.querySelector(".dashboard-overdue");
   const todaysTask = document.querySelector(".dashboard-today");
 
+  const tasksSidebar = document.getElementById("tasks");
+
   tasks.addEventListener("click", function () {
     allTasks.click();
+    tasksSidebar.click();
   });
   unread.addEventListener("click", function () {
     upcoming.click();
+    tasksSidebar.click();
   });
    todaysTask.addEventListener("click", function () {
      today.click();
+     tasksSidebar.click();
    });
    overdueTasks.addEventListener("click", function () {
      overdue.click();
+     tasksSidebar.click();
    });
 }
 

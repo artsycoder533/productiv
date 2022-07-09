@@ -25,7 +25,8 @@ function renderProjectUI(projects) {
 						project.dueDate,
 						project.priority,
 						project.project,
-						project.id
+                        project.id,
+                        project.completed
 					)
         );
         container.appendChild(todos);

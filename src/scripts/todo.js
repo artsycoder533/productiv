@@ -62,7 +62,6 @@ async function getAllData(username) {
       }
       todos.push(doc.data());
     });
-    console.log("get login status", getLoginStatus());
     if (getLoginStatus() === true) {
       console.log("first login");
       dashboard.click();

@@ -25,10 +25,10 @@ function renderTasksHeader(taskId) {
 function renderTasksUI(tasks) {
  // console.log(tasks);
   tasks.map((task) => {
-    const { title, description, dueDate, priority, project, id } = task;
+    const { title, description, dueDate, priority, project, id, completed } = task;
     const todos = document.querySelector(".todos");
     todos.appendChild(
-      renderTodo(title, description, dueDate, priority, project, id)
+      renderTodo(title, description, dueDate, priority, project, id, completed)
     );
     container.appendChild(todos);
   });

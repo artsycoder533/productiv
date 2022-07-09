@@ -12,14 +12,15 @@ function renderTodo(title, description, date, priority, project, id, completed) 
   complete.addEventListener("click", (e) => {
     disableTodo(e, id);
   });
-  if (completed === true) {
-    complete.classList.add("disabled");
-  }
-  else {
-    complete.classList.remove("disabled");
-  }
+  console.log("inside render completed = ", completed);
     const todo = createElementWithClass("article", "todo");
-    todo.appendChild(complete);
+  todo.appendChild(complete);
+    if (completed === true) {
+      todo.classList.add("disabled");
+      complete.checked = true;
+    } else {
+      todo.classList.remove("disabled");
+    }
   const todo__date = createElementWithClass("div", "todo__date");
   const date1 = createTextElementWithClass("small", "date", date);
   //check for overdue dates
@@ -108,11 +109,12 @@ function disableTodo(e, id) {
   e.currentTarget.parentElement.classList.toggle("disabled");
   //toggle completed todo status
   let todo = getTodoById(id);
-  const completeStatus = !todo.complete;
-  console.log(completeStatus);
-  todo = { ...todo, completeStatus };
+  console.log("before--->", todo.completed);
+  const completeStatus = !todo.completed;
+  console.log("after------>", completeStatus);
+  todo.completed = completeStatus;
   const { title, description, dueDate, priority, project, status, completed } = todo;
-  updateTodo(title, dueDate, priority, project, todo.id, status, completed);
+  updateTodo(title, description,dueDate, priority, project, todo.id, status, completed);
 }
 
 function showDetails(e) {
