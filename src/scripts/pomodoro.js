@@ -1,6 +1,6 @@
 import { changeStatus } from "./auth";
 import { createElementWithClass, createTextElementWithClass } from "./createElement";
-import { checkScreenSize, closeSidebar } from "./header";
+import { checkScreenSize } from "./header";
 
 const container = document.querySelector(".container");
 let startingMinutes = 25;
@@ -8,7 +8,6 @@ let time = startingMinutes * 60;
 let count = 0;
 
 function getPomodoro() {
-  //closeSidebar();
   const display = document.querySelector(".header__display");
   display.textContent = "Widgets";
   checkScreenSize();

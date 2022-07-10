@@ -1,33 +1,51 @@
-import { createElementWithClass, createTextElementWithClass, createElementWithAttribute, createInputElement } from "./createElement.js";
+import {
+  createElementWithClass,
+  createTextElementWithClass,
+  createElementWithAttribute,
+  createInputElement,
+} from "./createElement.js";
 import { getTodaysDate, toggleModal } from "./modal.js";
-import { getTodoById, updateTodo, deleteTodo, getADocument} from "./todo.js";
+import { getTodoById, updateTodo, deleteTodo } from "./todo.js";
 
 const todos = createElementWithClass("section", "todos");
 
-function renderTodo(title, description, date, priority, project, id, completed) {
+function renderTodo(
+  title,
+  description,
+  date,
+  priority,
+  project,
+  id,
+  completed
+) {
   const todo__container = createElementWithClass("div", "todo__container");
-    todo__container.setAttribute("data-id", id);
-    const complete = createInputElement("input", "checkbox", "complete", "complete");
-    complete.classList.add("complete");
+  todo__container.setAttribute("data-id", id);
+  const complete = createInputElement(
+    "input",
+    "checkbox",
+    "complete",
+    "complete"
+  );
+  complete.classList.add("complete");
   complete.addEventListener("click", (e) => {
     disableTodo(e, id);
   });
-  console.log("inside render completed = ", completed);
-    const todo = createElementWithClass("article", "todo");
+
+  const todo = createElementWithClass("article", "todo");
   todo.appendChild(complete);
-    if (completed === true) {
-      todo.classList.add("disabled");
-      complete.checked = true;
-    } else {
-      todo.classList.remove("disabled");
-    }
+  if (completed === true) {
+    todo.classList.add("disabled");
+    complete.checked = true;
+  } else {
+    todo.classList.remove("disabled");
+  }
   const todo__date = createElementWithClass("div", "todo__date");
   const date1 = createTextElementWithClass("small", "date", date);
   //check for overdue dates
-    if (date1.textContent < getTodaysDate()) {
-        date1.classList.add("overdue");
-        date1.textContent = date + ' OVERDUE !!';
-    }
+  if (date1.textContent < getTodaysDate()) {
+    date1.classList.add("overdue");
+    date1.textContent = date + " OVERDUE !!";
+  }
   todo__date.appendChild(date1);
   const todo__project = createTextElementWithClass(
     "div",
@@ -88,8 +106,6 @@ function renderTodo(title, description, date, priority, project, id, completed) 
   todo__buttons.appendChild(todo__delete);
   todo__content.append(todo__buttons);
   todo.appendChild(todo__content);
-
-  //todo.appendChild(todo__project);
   todo__container.appendChild(todo);
 
   // description
@@ -105,127 +121,145 @@ function renderTodo(title, description, date, priority, project, id, completed) 
 }
 
 function disableTodo(e, id) {
-    const checkbox = document.querySelector("complete");
   e.currentTarget.parentElement.classList.toggle("disabled");
   //toggle completed todo status
   let todo = getTodoById(id);
-  console.log("before--->", todo.completed);
   const completeStatus = !todo.completed;
-  console.log("after------>", completeStatus);
   todo.completed = completeStatus;
-  const { title, description, dueDate, priority, project, status, completed } = todo;
-  updateTodo(title, description,dueDate, priority, project, todo.id, status, completed);
+  const { title, description, dueDate, priority, project, status, completed } =
+    todo;
+  updateTodo(
+    title,
+    description,
+    dueDate,
+    priority,
+    project,
+    todo.id,
+    status,
+    completed
+  );
 }
 
 function showDetails(e) {
-    e.currentTarget.parentElement.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle(
-			"showDetails"
-		);
+  e.currentTarget.parentElement.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle(
+    "showDetails"
+  );
 }
 
 function deleteTodoUI(e) {
-    const todos = document.querySelector(".todos");
-    const todo =
-			e.currentTarget.parentElement.parentElement.parentElement.parentElement
-            .parentElement;
-    todos.removeChild(todo);
-    deleteTodo(todo.dataset.id);
+  const todos = document.querySelector(".todos");
+  const todo =
+    e.currentTarget.parentElement.parentElement.parentElement.parentElement
+      .parentElement;
+  todos.removeChild(todo);
+  deleteTodo(todo.dataset.id);
 }
 
 function editTodo(e) {
-    const form = document.getElementById("form");
-    const title = document.querySelector(".form__heading");
-    title.textContent = "Edit Task";
-	const todo2 = getTodoById(
-		e.currentTarget.parentElement.parentElement.parentElement.parentElement
-			.parentElement.dataset.id
-    );
-    console.log(todo2);
-    const modal = document.querySelector(".modal");
-    toggleModal();
-    form.elements.namedItem("title").value = todo2.title;
-    form.elements.namedItem("description").value = todo2.description;
-    form.elements.namedItem("priority").value = todo2.priority;
-    form.elements.namedItem("project").value = todo2.project;
-    form.elements.namedItem("date").value = todo2.dueDate;
-    //getADocument();
-    const createBtn = document.getElementById("create");
-    createBtn.classList.add("hide");
-    const updateBtn = document.getElementById("update");
-    updateBtn.classList.remove("hide");
-    updateBtn.addEventListener("click", () => {
-        const display = document.querySelector(".project__title");
-        console.log(display);
-        //get current project page youre on is the same as new project, re render UI
-        if (display) {
-            if (
-              form.elements.namedItem("project").value === display.textContent
-            ) {
-                console.log(todo2);
-              updateTodoUI(todo2);
-              toggleModal();
-              return;
-            }
-        }
-        
+  const form = document.getElementById("form");
+  const title = document.querySelector(".form__heading");
+  title.textContent = "Edit Task";
+  const todo2 = getTodoById(
+    e.currentTarget.parentElement.parentElement.parentElement.parentElement
+      .parentElement.dataset.id
+  );
+
+  const modal = document.querySelector(".modal");
+  toggleModal();
+  form.elements.namedItem("title").value = todo2.title;
+  form.elements.namedItem("description").value = todo2.description;
+  form.elements.namedItem("priority").value = todo2.priority;
+  form.elements.namedItem("project").value = todo2.project;
+  form.elements.namedItem("date").value = todo2.dueDate;
+  const createBtn = document.getElementById("create");
+  createBtn.classList.add("hide");
+  const updateBtn = document.getElementById("update");
+  updateBtn.classList.remove("hide");
+  updateBtn.addEventListener("click", () => {
+    const display = document.querySelector(".project__title");
+    //get current project page youre on is the same as new project, re render UI
+    if (display) {
+      if (form.elements.namedItem("project").value === display.textContent) {
+        updateTodoUI(todo2);
+        toggleModal();
+        return;
+      }
+    }
+
     updateTodoUI(todo2);
-        //const projectType = display.textContent;
-        const misc = document.getElementById("miscellaneous");
-        const home = document.getElementById("home");
-        const work = document.getElementById("work");
-        const title = form.elements.namedItem("title").value;
-        const description = form.elements.namedItem("description").value;
-        const priority = form.elements.namedItem("priority").value;
-        const project = form.elements.namedItem("project").value;
-        const date = form.elements.namedItem("date").value;
 
-        if (project === "work") {
-            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
-            toggleModal();
-            work.click();
-        }
-        if (project === "home") {
-            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
-            toggleModal();
-            home.click();
-        }
-        if (project === "miscellaneous") {
-            updateTodo(title, description, date, priority, project, todo2.id, todo2.status);
-            toggleModal();
-            misc.click();
-        }
-    });
-}
-
-function updateTodoUI(todo) {
-    const form = document.getElementById("form");
+    const misc = document.getElementById("miscellaneous");
+    const home = document.getElementById("home");
+    const work = document.getElementById("work");
     const title = form.elements.namedItem("title").value;
-    //const title = document.querySelector(".todo__title").value;
     const description = form.elements.namedItem("description").value;
     const priority = form.elements.namedItem("priority").value;
     const project = form.elements.namedItem("project").value;
     const date = form.elements.namedItem("date").value;
-    console.log(title, description, priority, project, date);
-    document.querySelector(".todo__title").textContent = title;
-    document.querySelector(".description").textContent = description;
-    document.querySelector(".priority").textContent = priority;
-   
-    if (priority === "normal") {
-        document.querySelector(".priority").classList.remove("high");
-        document.querySelector(".priority").classList.add("normal");
+
+    if (project === "work") {
+      updateTodo(
+        title,
+        description,
+        date,
+        priority,
+        project,
+        todo2.id,
+        todo2.status
+      );
+      toggleModal();
+      work.click();
     }
-    else if (priority === "high") {
-        document.querySelector(".priority").classList.remove("normal");
-        document.querySelector(".priority").classList.add("high");
+    if (project === "home") {
+      updateTodo(
+        title,
+        description,
+        date,
+        priority,
+        project,
+        todo2.id,
+        todo2.status
+      );
+      toggleModal();
+      home.click();
     }
-    document.querySelector(".todo__date").textContent = date;
-    document.querySelector(".description").textContent = description;
-    //console.log(document.querySelector(".todo__project"));
-    // document.querySelector(".todo__project").textContent = project;
-    // document.querySelector(".fulltitle").textContent = title;
-    console.log(todo.id);
-    updateTodo(title, description, date, priority, project, todo.id, todo.status);
-    //document.location.reload();
+    if (project === "miscellaneous") {
+      updateTodo(
+        title,
+        description,
+        date,
+        priority,
+        project,
+        todo2.id,
+        todo2.status
+      );
+      toggleModal();
+      misc.click();
+    }
+  });
 }
 
-export { renderTodo };
+function updateTodoUI(todo) {
+  const form = document.getElementById("form");
+  const title = form.elements.namedItem("title").value;
+  const description = form.elements.namedItem("description").value;
+  const priority = form.elements.namedItem("priority").value;
+  const project = form.elements.namedItem("project").value;
+  const date = form.elements.namedItem("date").value;
+  document.querySelector(".todo__title").textContent = title;
+  document.querySelector(".description").textContent = description;
+  document.querySelector(".priority").textContent = priority;
+
+  if (priority === "normal") {
+    document.querySelector(".priority").classList.remove("high");
+    document.querySelector(".priority").classList.add("normal");
+  } else if (priority === "high") {
+    document.querySelector(".priority").classList.remove("normal");
+    document.querySelector(".priority").classList.add("high");
+  }
+  document.querySelector(".todo__date").textContent = date;
+  document.querySelector(".description").textContent = description;
+  updateTodo(title, description, date, priority, project, todo.id, todo.status);
+}
+
+export { renderTodo, deleteTodoUI };

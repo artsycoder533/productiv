@@ -1,9 +1,15 @@
 import { toggleModal, getTodaysDate } from "./modal.js";
 import { renderProjectUI, renderProjectHeader } from "./projects.js";
 import { renderTasksUI, renderTasksHeader } from "./tasks.js";
-import { renderTodo } from "./renderTodo.js";
 import { resetInboxCount, showInbox, updateInboxCount } from "./inbox.js";
-import { dashboard, getUsername, getLoginStatus, setLoginStatus, getStatus, changeStatus } from "./auth.js";
+import {
+  dashboard,
+  getUsername,
+  getLoginStatus,
+  setLoginStatus,
+  getStatus,
+  changeStatus,
+} from "./auth.js";
 import {
   getFirestore,
   doc,
@@ -15,17 +21,14 @@ import {
   addDoc,
   query,
   orderBy,
-  getDocs,
   onSnapshot,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { checkScreenSize, closeSidebar } from "./header.js";
+import { checkScreenSize } from "./header.js";
 import { getQuotes } from "./quotes.js";
-import { addDashboardEvents, renderDashboard } from "./dashboard.js";
-import {openSubMenu} from "./sidebar.js";
+import { addDashboardEvents } from "./dashboard.js";
 
 let inbox = [];
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBPwH-PsSrwzFjr6v8LUMwbZkbFs8x7Uac",
@@ -43,7 +46,6 @@ const db = getFirestore();
 let todos = [];
 
 async function getAllData(username) {
-  console.log("get all data called", username);
   const q = query(collection(db, `${username}tasks`), orderBy("dueDate"));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     inbox = [];
@@ -51,8 +53,6 @@ async function getAllData(username) {
     resetInboxCount();
     querySnapshot.forEach((doc) => {
       //empty inbox and todos
-
-      // console.log(doc.data());
       if (
         doc.data().dueDate <= getTodaysDate() &&
         doc.data().status === "unread"
@@ -63,100 +63,13 @@ async function getAllData(username) {
       todos.push(doc.data());
     });
     if (getLoginStatus() === true) {
-      console.log("first login");
       dashboard.click();
       addDashboardEvents();
       getQuotes();
-      // getStatus();
       setLoginStatus(false);
     }
-    //
-  })
-  //const querySnapshot = await getDocs(collection(db, `${username}tasks`));
-	//console.log(querySnapshot);
-	// inbox = [];
-  // todos = [];
-  //reset inbox count
-  //resetInboxCount();
-  // querySnapshot.forEach((doc) => {
-  //   //empty inbox and todos
-		
-  //   // console.log(doc.data());
-  //   if (
-  //     doc.data().dueDate <= getTodaysDate() &&
-  //     doc.data().status === "unread"
-  //   ) {
-  //     inbox.push(doc.data());
-  //     updateInboxCount("add");
-  //   }
-  //   todos.push(doc.data());
-  // });
-    	//console.log(todos.length);
-  // if first login or signup
-  
-  // else {
-  //   //if status is dashboard
-  //   console.log(getStatus());
-  //   const allTasks = document.getElementById("all");
-  //   const today = document.getElementById("today");
-  //   const upcoming = document.getElementById("upcoming");
-  //   const overdue = document.getElementById("overdue");
-  //   const workLink = document.getElementById("work");
-  //   const homeLink = document.getElementById("home");
-  //   const miscLink = document.getElementById("miscellaneous");
-  //   const inbox = document.getElementById("inbox");
-  //   const calculator = document.getElementById("calculator");
-  //   const pomodoro = document.getElementById("pomodoro");
-  //   switch (getStatus()) {
-  //     case "dashboard":
-  //       dashboard.click();
-  //       break;
-  //     case "allTasks":
-  //       allTasks.click();
-  //       break;
-  //     case "today":
-  //       today.click();
-  //       break;
-  //     case "upcoming":
-  //       upcoming.click();
-  //       break;
-  //     case "overdue":
-  //       overdue.click();
-  //       break;
-  //     case "inbox":
-  //       inbox.click();
-  //       break;
-  //     case "calculator":
-  //       calculator.click();
-  //       break;
-  //     case "pomodoro":
-  //       pomodoro.click();
-  //       break;
-  //     case "work":
-  //       workLink.click();
-  //       break;
-  //     case "home":
-  //       homeLink.click();
-  //       break;
-  //     case "misc":
-  //       miscLink.click();
-  //       break;
-  //     default:
-  //       return;
-  //   }
-    //inbox
-    //work
-    //home
-    //miscellaneous
-    //all
-    //due
-    //upcoming
-    //overdue
-    //calculator
-    //pomodoro
-  //}
+  });
 }
-
 
 //add to firestore auto id
 async function addDocument(
@@ -178,7 +91,7 @@ async function addDocument(
     project: project,
     id: id,
     status: status,
-    completed: completed
+    completed: completed,
   });
 }
 
@@ -202,7 +115,7 @@ async function addDocumentCustomID(
     project: project,
     id: id,
     status: status,
-    completed: completed
+    completed: completed,
   });
 }
 
@@ -233,7 +146,7 @@ async function updateDocument(
   completed
 ) {
   const ref = doc(db, `${getUsername()}tasks`, String(id));
-  console.log(title, description, dueDate, priority, project, id, status, completed);
+
   await updateDoc(ref, {
     title: title,
     description: description,
@@ -242,7 +155,7 @@ async function updateDocument(
     project: project,
     id: id,
     status: status,
-    completed: completed
+    completed: completed,
   });
 }
 
@@ -257,7 +170,16 @@ async function deleteDocument(id) {
 }
 
 class Todos {
-  constructor(title, description, dueDate, priority, project, id, status, completed) {
+  constructor(
+    title,
+    description,
+    dueDate,
+    priority,
+    project,
+    id,
+    status,
+    completed
+  ) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -326,7 +248,6 @@ class Todos {
 }
 
 function populateTodo() {
-  //e.preventDefault();
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
   const date = document.getElementById("date").value;
@@ -346,9 +267,17 @@ function populateTodo() {
     completed
   );
 
-  console.log(newTodo);
   todos.push(newTodo);
-  addDocumentCustomID(title, description, date, priority, project, id, status, completed);
+  addDocumentCustomID(
+    title,
+    description,
+    date,
+    priority,
+    project,
+    id,
+    status,
+    completed
+  );
   if (date === getTodaysDate()) {
     inbox.unshift(newTodo);
     updateInboxCount("add");
@@ -361,14 +290,17 @@ function populateTodo() {
 }
 
 function sortTodosByProject(e) {
-  //closeSidebar();
   const display = document.querySelector(".header__display");
   display.textContent = "Projects";
   checkScreenSize();
   const sortedByProject = todos.filter((todo) => {
     for (const prop in todo) {
       if (todo[prop] === e.currentTarget.id) {
-        prop === "work" ? changeStatus("work") : prop === "home" ? changeStatus("home") : changeStatus("misc");
+        prop === "work"
+          ? changeStatus("work")
+          : prop === "home"
+          ? changeStatus("home")
+          : changeStatus("misc");
         return todo;
       }
     }
@@ -378,13 +310,10 @@ function sortTodosByProject(e) {
 }
 
 function sortTodosByTask(e) {
-  //closeSidebar();
- 
   const display = document.querySelector(".header__display");
   display.textContent = "Tasks";
   checkScreenSize();
   let sortedTodos = [];
-  console.log("inside sortTodosByTasks ...", e.currentTarget);
   if (e.currentTarget.id === "today") {
     sortedTodos = todos.filter((todo) => {
       changeStatus("today");
@@ -402,14 +331,11 @@ function sortTodosByTask(e) {
     });
   }
   renderTasksHeader(getStatus());
- // renderTasksHeader(e.currentTarget.id);
   renderTasksUI(sortedTodos);
 }
 
 function showAllTasks(e) {
-  //closeSidebar();
   const display = document.querySelector(".header__display");
-  console.log("current target inside showAllTasks....", e.currentTarget.id);
   display.textContent = "Tasks";
   getAllData(getUsername());
   checkScreenSize();
@@ -421,7 +347,6 @@ function showAllTasks(e) {
 function getTodoById(id) {
   const match = [];
   todos.forEach((todo) => {
-    console.log(typeof todo.id, typeof id);
     if (todo.id == id) {
       match.push(todo);
     }
@@ -440,37 +365,32 @@ function updateTodo(
   completed
 ) {
   todos.forEach((todo) => {
-    console.log(todo.id, id);
     if (todo.id === id) {
-      // todo.setTitle(title);
-      // todo.setDescription(description);
-      // todo.setDueDate(dueDate);
-      // todo.setPriority(priority);
-      // todo.setProject(project);
-      // todo.setStatus(status);
       todo.title = title;
       todo.description = description;
       todo.dueDate = dueDate;
       todo.priority = priority;
       todo.project = project;
       todo.status = status;
-      todo.completed = completed
+      todo.completed = completed;
     }
-    console.log(todo);
-    console.log("completed todo, :", todo.completed, completed)
   });
-  console.log(title, description, dueDate, priority, project, id, status, completed);
-  console.log(todos);
-  updateDocument(title, description, dueDate, priority, project, id, status, completed);
-  //getAllData();
+  updateDocument(
+    title,
+    description,
+    dueDate,
+    priority,
+    project,
+    id,
+    status,
+    completed
+  );
 }
 
 function deleteTodo(id) {
   todos.forEach((todo, index) => {
-    console.log(id, Number(todo.id));
     if (String(todo.id) === id) {
       todos.splice(index, 1);
-      console.log("here");
       deleteDocument(String(id));
     }
   });
@@ -485,8 +405,6 @@ function deleteInboxMessage(id) {
 }
 
 function getInbox() {
-  //closeSidebar();
-  //showAllTasks();
   checkScreenSize();
   showInbox(inbox);
   changeStatus("inbox");
@@ -494,17 +412,15 @@ function getInbox() {
 
 //get # tasks
 function getNumTasks() {
- getAllData(getUsername());
-	let count;
-	// console.log("todos", todos.length);
+  getAllData(getUsername());
+  let count;
   todos.length > 0 ? (count = todos.length) : (count = 0);
   return count;
 }
 
 //get unread tasks
 function getUpcomingTasks() {
-	getAllData(getUsername());
-	// console.log("todos", todos.length);
+  getAllData(getUsername());
   let count;
   const unread = todos.filter((todo) => {
     return todo.dueDate > getTodaysDate();
@@ -515,21 +431,17 @@ function getUpcomingTasks() {
 
 //get overdue tasks
 function getOverdueTasks() {
-	getAllData(getUsername());
-//	console.log("overdue todos", todos);
-	let count;
+  getAllData(getUsername());
+  let count;
   const overdue = todos.filter((todo) => {
-    console.log(todo.dueDate < getTodaysDate());
     return todo.dueDate < getTodaysDate();
   });
- // console.log("overdue tasks", overdue);
   overdue.length > 0 ? (count = overdue.length) : (count = 0);
   return count;
 }
 //get due today tasks
 function getTodaysNumTasks() {
-	getAllData(getUsername());
-	console.log("todos", todos.length);
+  getAllData(getUsername());
   let count;
   const today = todos.filter((todo) => {
     return todo.dueDate === getTodaysDate();
@@ -539,14 +451,12 @@ function getTodaysNumTasks() {
 }
 
 function getDashboardCounts() {
-	let dashboardCounts = [];
-	dashboardCounts[0] = getNumTasks();
-	dashboardCounts[1] = getUpcomingTasks();
-	dashboardCounts[2] = getOverdueTasks();
+  let dashboardCounts = [];
+  dashboardCounts[0] = getNumTasks();
+  dashboardCounts[1] = getUpcomingTasks();
+  dashboardCounts[2] = getOverdueTasks();
   dashboardCounts[3] = getTodaysNumTasks();
-  // dashboardCounts[4] = getQuotes();
-	console.log(dashboardCounts);
-	return dashboardCounts;
+  return dashboardCounts;
 }
 
 export {
@@ -563,8 +473,8 @@ export {
   updateDocument,
   getAllData,
   getNumTasks,
-	getTodaysNumTasks,
-	getUpcomingTasks,
-	getOverdueTasks,
-  getDashboardCounts
+  getTodaysNumTasks,
+  getUpcomingTasks,
+  getOverdueTasks,
+  getDashboardCounts,
 };

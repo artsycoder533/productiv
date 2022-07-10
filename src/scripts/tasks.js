@@ -2,19 +2,17 @@ import { renderTodo } from "./renderTodo.js";
 import { createElementWithClass } from "./createElement.js";
 
 const container = document.querySelector(".container");
+export const todosToDelete = [];
 
 function renderTasksHeader(taskId) {
-  console.log("inside render taks header...", taskId);
   clearTasksUI();
   const taskTitle = createElementWithClass("h2", "task__title");
   if (taskId === "today") {
     taskTitle.textContent = "Due Today";
-  }
-  else if (taskId === "all") {
+  } else if (taskId === "all") {
     taskTitle.textContent = "All Tasks";
-  }
-  else {
-    taskTitle.textContent = taskId
+  } else {
+    taskTitle.textContent = taskId;
   }
   const container = document.querySelector(".container");
   const todos = createElementWithClass("section", "todos");
@@ -23,9 +21,9 @@ function renderTasksHeader(taskId) {
 }
 
 function renderTasksUI(tasks) {
- // console.log(tasks);
   tasks.map((task) => {
-    const { title, description, dueDate, priority, project, id, completed } = task;
+    const { title, description, dueDate, priority, project, id, completed } =
+      task;
     const todos = document.querySelector(".todos");
     todos.appendChild(
       renderTodo(title, description, dueDate, priority, project, id, completed)

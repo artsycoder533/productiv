@@ -1,5 +1,4 @@
 import profile from "../assets/user.png";
-import { getStorage, ref, uploadBytes, getDownloadURL, uploadString } from "firebase/storage";
 
 function addHeaderEvents() {
 	const hamburgerBtn = document.getElementById("hamburger");
@@ -13,7 +12,6 @@ function addHeaderEvents() {
 }
 
 function addUserName(name) {
-	console.log(name);
 	const username = document.querySelector(".header__username");
 	username.textContent = name;
 }
@@ -57,7 +55,6 @@ function readUrl() {
 		reader.readAsDataURL(this.files[0]);
 		reader.addEventListener("load", () => {
 			profilePic.src = reader.result;
-			//console.log(profilePic.src);
 		});
 	}
 	profileContainer.click();

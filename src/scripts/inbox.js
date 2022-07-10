@@ -1,8 +1,8 @@
 import {
   createElementWithClass,
   createInputElement,
-    createTextElementWithClass,
-  createElementWithAttribute
+  createTextElementWithClass,
+  createElementWithAttribute,
 } from "./createElement";
 import { getTodaysDate } from "./modal";
 import { deleteInboxMessage, getInbox, updateDocument } from "./todo";
@@ -12,8 +12,8 @@ let count = 0;
 function showInbox(todos) {
   clearInboxUI();
   const container = document.querySelector(".container");
-    const title = createTextElementWithClass("h2", "inbox__title", "Inbox");
-    container.appendChild(title);
+  const title = createTextElementWithClass("h2", "inbox__title", "Inbox");
+  container.appendChild(title);
   if (todos.length === 0) {
     const status = createTextElementWithClass(
       "p",
@@ -21,95 +21,89 @@ function showInbox(todos) {
       "Your inbox is empty"
     );
     container.appendChild(title);
-      container.appendChild(status);
-      return container;
+    container.appendChild(status);
+    return container;
   } else {
     todos.map((todo) => {
-        const inbox = createElementWithClass("div", "inbox");
+      const inbox = createElementWithClass("div", "inbox");
       inbox.setAttribute("data-id", todo.id);
       const subject = createElementWithClass("p", "inbox__subject");
       if (todo.dueDate === getTodaysDate()) {
         subject.textContent = "You have a task that's due today";
-      }
-      else if (todo.dueDate < getTodaysDate()) {
+      } else if (todo.dueDate < getTodaysDate()) {
         subject.textContent = "You have a task that's overdue!";
       }
-        
-        const trashBtn = createElementWithAttribute(
-          "button",
-          "todo__delete",
-          "id",
-          "delete"
-        );
-        const trashIcon = createElementWithClass("i", "fas");
-        trashIcon.classList.add("fa-trash-alt");
+
+      const trashBtn = createElementWithAttribute(
+        "button",
+        "todo__delete",
+        "id",
+        "delete"
+      );
+      const trashIcon = createElementWithClass("i", "fas");
+      trashIcon.classList.add("fa-trash-alt");
       trashBtn.addEventListener("click", function (e) {
-            deleteMessage(todo.id, e.currentTarget.parentElement);
-        });
-        trashBtn.appendChild(trashIcon);
-        if (todo.status === "unread") {
-            subject.classList.add("bold");
-        }
-        if (todo.status === "read") {
-            subject.classList.remove("bold");
-        }
+        deleteMessage(todo.id, e.currentTarget.parentElement);
+      });
+      trashBtn.appendChild(trashIcon);
+      if (todo.status === "unread") {
+        subject.classList.add("bold");
+      }
+      if (todo.status === "read") {
+        subject.classList.remove("bold");
+      }
       const checkbox = createInputElement(
         "input",
         "checkbox",
         "checkbox",
         "checkbox"
-        );
-        checkbox.classList.add("checkbox");
-        
+      );
+      checkbox.classList.add("checkbox");
+
       subject.addEventListener("click", function () {
         showMessage(todo, subject.textContent, todos);
       });
       inbox.appendChild(checkbox);
-        inbox.appendChild(subject);
-        inbox.appendChild(trashBtn);
+      inbox.appendChild(subject);
+      inbox.appendChild(trashBtn);
 
-        container.appendChild(inbox);
-        
+      container.appendChild(inbox);
     });
-    }
-    const deleteAll = createTextElementWithClass(
-      "button",
-      "inbox__button",
-      "Delete Selected"
-    );
-    deleteAll.addEventListener("click", function () {
-      deleteSelected(todos);
-    });
-container.appendChild(deleteAll);
+  }
+  const deleteAll = createTextElementWithClass(
+    "button",
+    "inbox__button",
+    "Delete Selected"
+  );
+  deleteAll.addEventListener("click", function () {
+    deleteSelected(todos);
+  });
+  container.appendChild(deleteAll);
 
   return container;
 }
 
 function deleteSelected(todos) {
-  console.log(todos);
-    const container = document.querySelector(".container");
-    const kids = container.children;
-    const containerChildren = Array.from(kids);
+  const container = document.querySelector(".container");
+  const kids = container.children;
+  const containerChildren = Array.from(kids);
   containerChildren.forEach((child, index) => {
-      
-        if (child.children[0]) {
-          if (child.children[0].checked) {
-              console.log(child, "child");
-                deleteMessage(Number(child.dataset.id), child);
-                if (child.children[1].classList.contains("bold")) {
-                    updateInboxCount("subtract");
-                }
-            }
+    if (child.children[0]) {
+      if (child.children[0].checked) {
+        deleteMessage(Number(child.dataset.id), child);
+        if (child.children[1].classList.contains("bold")) {
+          updateInboxCount("subtract");
         }
-        getInbox();
-    });
+      }
+    }
+    getInbox();
+  });
 }
 
 function deleteMessage(id, todo) {
-    const container = document.querySelector(".container");
-    const message = document.querySelector(".inbox");
+  const container = document.querySelector(".container");
+  const message = document.querySelector(".inbox");
   todo.remove();
-  console.log(id, todo, "delete message called");
   deleteInboxMessage(id);
   getInbox();
 }
@@ -147,11 +141,11 @@ function showMessage(todo, subject, todos) {
     "button",
     "inbox__button",
     "Back To Inbox"
-    );
-    backToInbox.classList.add("button");
-    backToInbox.addEventListener("click", function () {
-        getInbox();
-    });
+  );
+  backToInbox.classList.add("button");
+  backToInbox.addEventListener("click", function () {
+    getInbox();
+  });
   message.appendChild(messageSubject);
   message.appendChild(messageTitle);
   message.appendChild(messagePriority);
@@ -159,10 +153,17 @@ function showMessage(todo, subject, todos) {
   message.appendChild(messageDescription);
   message.appendChild(backToInbox);
   container.appendChild(message);
-    updateInboxCount("subtract");
+  updateInboxCount("subtract");
   todo.status = "read";
-  updateDocument(todo.title, todo.description, todo.dueDate, todo.priority, todo.project, String(todo.id), todo.status);
-  console.log(todo);
+  updateDocument(
+    todo.title,
+    todo.description,
+    todo.dueDate,
+    todo.priority,
+    todo.project,
+    String(todo.id),
+    todo.status
+  );
   return container;
 }
 

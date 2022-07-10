@@ -1,20 +1,18 @@
-import { getNumTasks, getTodaysNumTasks, getUpcomingTasks, getOverdueTasks, getAllData, getDashboardCounts } from "./todo";
-import { auth } from "..";
+import {
+  getNumTasks,
+  getTodaysNumTasks,
+  getUpcomingTasks,
+  getOverdueTasks,
+} from "./todo";
 import { getUsername } from "./auth";
-import { getQuotes, quoteObj } from "./quotes";
 import { checkScreenSize } from "./header";
 
 const container = document.querySelector(".container");
-//const dashCount = getDashboardCounts();
-
 
 function renderDashboard() {
-  console.log(getUsername())
   checkScreenSize();
-    console.log("dashboard clicked");
-    //getAllData(getUsername());
-    clearTasksUI();
-    container.innerHTML = `
+  clearTasksUI();
+  container.innerHTML = `
     <div class="dashboard-wrapper">
   <p class="greeting">Hello <span class="username-greeting">${getUsername()}</span>,</p>
   <section class="quote-container">
@@ -57,13 +55,8 @@ function renderDashboard() {
 </div>
     `;
   addDashboardEvents();
-    return container;
+  return container;
 }
-
-// function getUsername() {
-//     console.log(auth);
-//     return;
-// }
 
 function addDashboardEvents() {
   const allTasks = document.getElementById("all");
@@ -86,14 +79,14 @@ function addDashboardEvents() {
     upcoming.click();
     tasksSidebar.click();
   });
-   todaysTask.addEventListener("click", function () {
-     today.click();
-     tasksSidebar.click();
-   });
-   overdueTasks.addEventListener("click", function () {
-     overdue.click();
-     tasksSidebar.click();
-   });
+  todaysTask.addEventListener("click", function () {
+    today.click();
+    tasksSidebar.click();
+  });
+  overdueTasks.addEventListener("click", function () {
+    overdue.click();
+    tasksSidebar.click();
+  });
 }
 
 function clearTasksUI() {

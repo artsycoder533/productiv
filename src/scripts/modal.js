@@ -34,15 +34,11 @@ function reloadActivePage() {
   const all = document.getElementById("all");
   const today = document.getElementById("today");
   const upcoming = document.getElementById("upcoming");
-    const overdue = document.getElementById("overdue");
-    
-    console.log("display content...", display.textContent);
-   // console.log("title content....", title.textContent);
+  const overdue = document.getElementById("overdue");
 
-    if (display.textContent === "Dashboard") {
-        console.log("on dashboard page!");
-        dashboard.click();
-        getAllData(getUsername());
+  if (display.textContent === "Dashboard") {
+    dashboard.click();
+    getAllData(getUsername());
     return;
   } else if (display.textContent === "Inbox") {
     inbox.click();
@@ -62,7 +58,6 @@ function reloadActivePage() {
     }
   } else if (display.textContent === "Tasks") {
     reload();
-    //tasks.click();
     if (title.textContent === "All") {
       all.click();
       return;
@@ -105,13 +100,11 @@ function validateForm(e) {
     }, 2000);
   }
   if (date < getTodaysDate()) {
-    console.log(date, getTodaysDate());
     dateError.textContent = "Date must not be in the past";
     setTimeout(function () {
       dateError.textContent = " ";
     }, 3000);
   } else {
-    //populateTodo(e);
     populateTodo();
   }
 }

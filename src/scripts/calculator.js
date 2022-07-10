@@ -3,13 +3,12 @@ import {
   createElementWithClass,
   createTextElementWithClass,
 } from "./createElement";
-import { checkScreenSize, closeSidebar } from "./header";
+import { checkScreenSize} from "./header";
 
 const container = document.querySelector(".container");
 
 function renderCalculator() {
   clearUI();
-  //closeSidebar();
   const display = document.querySelector(".header__display");
   display.textContent = "Widgets";
   checkScreenSize();
@@ -88,7 +87,7 @@ function calc() {
   btnOne.addEventListener("click", () => {
     populateDisplay(1);
   });
-  
+
   btnTwo.addEventListener("click", () => {
     populateDisplay(2);
   });

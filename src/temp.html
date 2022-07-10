@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Natasha Johnson" />
     <meta
@@ -16,8 +16,14 @@
                 current day. Productiv also includes widgets such as a Pomodoro
                 Timer and calculator."
     />
-    <meta property="og:image" content="https://artsycoder533.github.io/productiv/src/assets/productiv-desktop.png" />
-    <meta name="og:image:alt" content="Screenshot of Natasha Johnson's portfolio homepage">
+    <meta
+      property="og:image"
+      content="https://artsycoder533.github.io/productiv/src/assets/productiv-desktop.png"
+    />
+    <meta
+      name="og:image:alt"
+      content="Screenshot of Natasha Johnson's portfolio homepage"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Productiv | Login Screen" />
     <meta
@@ -30,205 +36,226 @@
                 current day. Productiv also includes widgets such as a Pomodoro
                 Timer and calculator."
     />
-    <meta property="og:url" content="https://artsycoder533.github.io/productiv/" />
-    <meta name="twitter:image" content="https://artsycoder533.github.io/productiv/src/assets/productiv-desktop.png">
-    <meta name="twitter:image:alt" content="Screenshot of the Productiv App Dashboard Screen">
+    <meta
+      property="og:url"
+      content="https://artsycoder533.github.io/productiv/"
+    />
+    <meta
+      name="twitter:image"
+      content="https://artsycoder533.github.io/productiv/src/assets/productiv-desktop.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Screenshot of the Productiv App Dashboard Screen"
+    />
     <title>Productiv</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-        <!-- header -->
-    <header class="header"> 
-        <section class="header__controls">
-            <i class="fas fa-bars" id="hamburger"></i>
-            <!-- <span class="header__title">Dashboard</span> -->
-        </section>
-        <section class="header__user">
-            <div class="header__title">
-                <h3 class="header__display"></h3>
-            </div>
-            <div class="header__right">
-                <span class="header__username"></span>
-                <div class="header__image">
-                    <img src="" alt="" id="profile">
-                </div>
-                <div class="header__upload">
-                    <label for="file">Change Profile Image</label>
-                    <input type="file" name="imageUpload" id="imgUpload" accept="image/png, image/jpeg">
-                </div>
-                <i class="fas fa-sign-out-alt" id="logout"></i>
-            </div>
-            
-        </section>
-        
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <section class="header__controls">
+        <i class="fas fa-bars" id="hamburger"></i>
+      </section>
+      <section class="header__user">
+        <div class="header__title">
+          <h3 class="header__display"></h3>
+        </div>
+        <div class="header__right">
+          <span class="header__username"></span>
+          <div class="header__image">
+            <img src="" alt="" id="profile" />
+          </div>
+          <div class="header__upload">
+            <label for="file">Change Profile Image</label>
+            <input
+              type="file"
+              name="imageUpload"
+              id="imgUpload"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          <i class="fas fa-sign-out-alt" id="logout"></i>
+        </div>
+      </section>
     </header>
-    
 
     <!-- sidebar navigation -->
     <nav class="sidebar">
-        <article class="sidebar__brand">
-            <span class="sidebar__company"><i class="fas fa-business-time"> Productiv</i> </span>
-        </article>
-        <ul class="sidebar__links">
-            <li>
-                <div class="sidebar__link" data-id="Dashboard">
-                    <a href="#">
-                        <i class="fas fa-th-large"></i>
-                        <span id="dashboard" class="sidebar__name">Dashboard</span>
-                    </a>
-                </div>
-            </li>
+      <article class="sidebar__brand">
+        <span class="sidebar__company"
+          ><i class="fas fa-business-time"> Productiv</i>
+        </span>
+      </article>
+      <ul class="sidebar__links">
+        <li>
+          <div class="sidebar__link" data-id="Dashboard">
+            <a href="#">
+              <i class="fas fa-th-large"></i>
+              <span id="dashboard" class="sidebar__name">Dashboard</span>
+            </a>
+          </div>
+        </li>
 
-            <li>
-                <div class="sidebar__link" data-id="Inbox">
-                    <a href="#">
-                        <i class="fas fa-inbox"></i>
-                        <span class="sidebar__name" id="inbox">Inbox</span>
-                    </a>
-                    <div class="notification">
-                        <div id="number"><span id="count"></span></div>
-                    </div>
-                </div>
-            </li>
+        <li>
+          <div class="sidebar__link" data-id="Inbox">
+            <a href="#">
+              <i class="fas fa-inbox"></i>
+              <span class="sidebar__name" id="inbox">Inbox</span>
+            </a>
+            <div class="notification">
+              <div id="number"><span id="count"></span></div>
+            </div>
+          </div>
+        </li>
 
-            <li>
-                <div class="sidebar__link" data-id="Projects" id="projects">
-                    <a href="#">
-                        <i class="fas fa-project-diagram"></i>
-                        <span class="sidebar__name">Projects</span>
-                    </a>
-                    <i class="fas fa-chevron-down sub"></i>
-                </div>
-                <ul class="sidebar__sublinks">
-                    <li><a href="#" id="work">Work</a></li>
-                    <li><a href="#" id="home">Home</a></li>
-                    <li><a href="#" id="miscellaneous">Miscellaneous</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="sidebar__link" data-id="Tasks" id="tasks">
-                    <a href="#">
-                        <i class="fas fa-tasks"></i>
-                        <span class="sidebar__name">Tasks</span>
-                    </a>
-                    <i class="fas fa-chevron-down sub"></i>
-                </div>
-                <ul class="sidebar__sublinks">
-                    <li><a href="#" id="all">All Tasks</a></li>
-                    <li><a href="#" id="today">Due Today</a></li>
-                    <li><a href="#" id="upcoming">Upcoming</a></li>
-                    <li><a href="#" id="overdue">Overdue</a></li>
-                </ul>
-            </li>
-            
+        <li>
+          <div class="sidebar__link" data-id="Projects" id="projects">
+            <a href="#">
+              <i class="fas fa-project-diagram"></i>
+              <span class="sidebar__name">Projects</span>
+            </a>
+            <i class="fas fa-chevron-down sub"></i>
+          </div>
+          <ul class="sidebar__sublinks">
+            <li><a href="#" id="work">Work</a></li>
+            <li><a href="#" id="home">Home</a></li>
+            <li><a href="#" id="miscellaneous">Miscellaneous</a></li>
+          </ul>
+        </li>
 
-            <!-- <li>
-                <div class="sidebar__link" data-id="Calendar">
-                    <a href="#">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span class="sidebar__name">Calendar</span>
-                    </a>
-                </div>
-            </li> -->
-            
-            <li>
-                <div class="sidebar__link" data-id="Widgets">
-                    <a href="#">
-                        <i class="fas fa-puzzle-piece"></i>
-                        <span class="sidebar__name">Widgets</span>
-                    </a>
-                    <i class="fas fa-chevron-down sub"></i>
-                </div>
-                <ul class="sidebar__sublinks">
-                    <!-- <li><a href="#">Weather</a></li> -->
-                    <li id="calculator"><a href="#">Calculator</a></li>
-                    <li id="pomodoro"><a href="#">Pomodoro</a></li>
-                </ul>
-            </li>
-            
-            <!-- <li>
-                <div class="sidebar__link" data-id="Settings">
-                    <a href="#">
-                        <i class="fas fa-cog"></i>
-                        <span id="settings" class="sidebar__name">Settings</span> 
-                    </a>
-                </div>
-            </li> -->
+        <li>
+          <div class="sidebar__link" data-id="Tasks" id="tasks">
+            <a href="#">
+              <i class="fas fa-tasks"></i>
+              <span class="sidebar__name">Tasks</span>
+            </a>
+            <i class="fas fa-chevron-down sub"></i>
+          </div>
+          <ul class="sidebar__sublinks">
+            <li><a href="#" id="all">All Tasks</a></li>
+            <li><a href="#" id="today">Due Today</a></li>
+            <li><a href="#" id="upcoming">Upcoming</a></li>
+            <li><a href="#" id="overdue">Overdue</a></li>
+          </ul>
+        </li>
 
-            <li>
-                <div class="sidebar__link" data-id="Logout">
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt" id="logout"></i>
-                        <span class="sidebar__name" id="sidebar__logout">Logout</span>
-                    </a>
-                </div>
-            </li>
-        </ul>
-        
+        <li>
+          <div class="sidebar__link" data-id="Widgets">
+            <a href="#">
+              <i class="fas fa-puzzle-piece"></i>
+              <span class="sidebar__name">Widgets</span>
+            </a>
+            <i class="fas fa-chevron-down sub"></i>
+          </div>
+          <ul class="sidebar__sublinks">
+            <li id="calculator"><a href="#">Calculator</a></li>
+            <li id="pomodoro"><a href="#">Pomodoro</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="sidebar__link" data-id="Logout">
+            <a href="#">
+              <i class="fas fa-sign-out-alt" id="logout"></i>
+              <span class="sidebar__name" id="sidebar__logout">Logout</span>
+            </a>
+          </div>
+        </li>
+      </ul>
     </nav>
 
     <!-- main content -->
     <main>
-        <div class="add__button">
-            <i class="fas fa-plus" id="add"></i>
-        </div>
-        <section class="container">
-        </section>
-        <footer>
-            <small class="footer__text">Copyright &copy; <span id="footerDate"></span></small>
-            <small class="footer__text">Created By: <a class="footer__link" href="https://natashajohnson.dev/" target="_blank"> Natasha Johnson</a></small>
-        </footer>
-        <div class="modal">
-            <div class="modal__container">
-                <form class="modal__form" id="form">
-                    <div class="form__group">
-                        <div class="form__title">
-                            <h3 class="form__heading"></h3>
-                        <span class="close" id="close"><i class="fas fa-times"></i></span>
-                        </div>
-                        <label for="title" class="float">Title:<span class="red">*</span></label>
-                        <input class="form__inputs" type="text" name="title" id="title">
-                        <small class="title__error"></small>
-                    </div>
-
-                    <div class="form__group">
-                        <label for="description" class="float">Description: (optional)</label>
-                        <textarea name="description" id="description" cols="20" rows="10"></textarea>
-                    </div>
-
-                    <div class="form__group">
-                        <label for="date">Due Date:<span class="red">*</span></label>
-                        <input class="form__inputs" type="date" id="date" name ="date">
-                        <small class="date__error"> </small>
-                    </div>
-
-                    <div class="form__group">
-                        <label for="priority">Choose a priority level:</label>
-                        <select name="priority" id="priority">
-                            <option value="normal">Normal (default)</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
-
-                    <div class="form__group">
-                        <label for="project">Add to project:</label>
-                        <select name="project" id="project">
-                            <option value="miscellaneous">Miscellaneous (default)</option>
-                            <option value="work">Work</option>
-                            <option value="home">Home</option>
-                        </select>
-                    </div>
-                    
-                        <button type="submit" id="create" class="form__button">Create</button>
-                        <button type="button" id="update" class="form__button hide">Update</button>
-                        <button type="button" id="cancel" class="form__button">Cancel</button>
-                   
-                    
-                </form>
+      <div class="add__button">
+        <i class="fas fa-plus" id="add"></i>
+      </div>
+      <section class="container"></section>
+      <footer>
+        <small class="footer__text"
+          >Copyright &copy; <span id="footerDate"></span
+        ></small>
+        <small class="footer__text"
+          >Created By:
+          <a
+            class="footer__link"
+            href="https://natashajohnson.dev/"
+            target="_blank"
+          >
+            Natasha Johnson</a
+          ></small
+        >
+      </footer>
+      <div class="modal">
+        <div class="modal__container">
+          <form class="modal__form" id="form">
+            <div class="form__group">
+              <div class="form__title">
+                <h3 class="form__heading"></h3>
+                <span class="close" id="close"
+                  ><i class="fas fa-times"></i
+                ></span>
+              </div>
+              <label for="title" class="float"
+                >Title:<span class="red">*</span></label
+              >
+              <input class="form__inputs" type="text" name="title" id="title" />
+              <small class="title__error"></small>
             </div>
 
+            <div class="form__group">
+              <label for="description" class="float"
+                >Description: (optional)</label
+              >
+              <textarea
+                name="description"
+                id="description"
+                cols="20"
+                rows="10"
+              ></textarea>
+            </div>
+
+            <div class="form__group">
+              <label for="date">Due Date:<span class="red">*</span></label>
+              <input class="form__inputs" type="date" id="date" name="date" />
+              <small class="date__error"> </small>
+            </div>
+
+            <div class="form__group">
+              <label for="priority">Choose a priority level:</label>
+              <select name="priority" id="priority">
+                <option value="normal">Normal (default)</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="form__group">
+              <label for="project">Add to project:</label>
+              <select name="project" id="project">
+                <option value="miscellaneous">Miscellaneous (default)</option>
+                <option value="work">Work</option>
+                <option value="home">Home</option>
+              </select>
+            </div>
+
+            <button type="submit" id="create" class="form__button">
+              Create
+            </button>
+            <button type="button" id="update" class="form__button hide">
+              Update
+            </button>
+            <button type="button" id="cancel" class="form__button">
+              Cancel
+            </button>
+          </form>
         </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>

@@ -1,12 +1,14 @@
 import { createElementWithClass } from "./createElement";
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getAuth} from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signOut,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "..";
 import { addUserName } from "./header";
 import { getAllData } from "./todo";
-import {getStorage, ref} from 'firebase/storage'
-import { renderDashboard } from "./dashboard";
-import { render } from "sass";
-// import { render } from "sass";
 
 const container = document.querySelector(".container");
 const dashboard = document.getElementById("dashboard");
@@ -15,10 +17,9 @@ let firstLogin = false;
 let status = "";
 
 function showLogin() {
-  //clearUI();
   addLoginScreen();
   const loginContainer = createElementWithClass("div", "login__container");
-  
+
   loginContainer.innerHTML = `
         <div class="form__container">
     <form action="" class="form">
@@ -31,16 +32,19 @@ function showLogin() {
       <div class="form2">
         <div class="form__section signup">
         <div class="form__group">
-          <input id="signup__email" type="text" class="form__input" placeholder="">
+          <input id="signup__email"name="email" type="text" class="form__input" placeholder="" required>
           <label class="form__label" for="email">Email</label>
+          <small class="email__signup"></small>
         </div>
         <div class="form__group">
-            <input id="signup__password" type="password" class="form__input" placeholder="">
+            <input id="signup__password" name="password" type="password" class="form__input" placeholder="" required minlength=8>
             <label class="form__label" for="password">Password</label>
+            <small class="password__signup"></small>
          </div>
         <div class="form__group">
-            <input id="username" type="text" class="form__input" placeholder="">
+            <input id="username" type="text" name="username" class="form__input" placeholder="" required>
             <label class="form__label" for="username">Username</label>
+            <small class="username__signup"></small>
         </div>
         <button type="submit" id="signup" class="form__button">Sign-Up</button>
         
@@ -48,12 +52,14 @@ function showLogin() {
         
        <div class="form__section login hide">
         <div class="form__group">
-          <input id="login__email" type="text" class="form__input" placeholder="">
-          <label class="form__label" for="email">Email</label>
+          <input id="login__email" type="text" name="login_email" class="form__input" placeholder="" required>
+          <label class="form__label" for="login_email">Email</label>
+          <small class="email__login"></small>
         </div>
         <div class="form__group">
-            <input id="login__password" type="password" class="form__input" placeholder="">
-            <label class="form__label" for="password">Password</label>
+            <input id="login__password" name="login_password" type="password" class="form__input" placeholder="" required minlength=8>
+            <label class="form__label" for="login_password">Password</label>
+            <small class="password__login"></small>
          </div>
         <button type="submit" id="login" class="form__button">Login</button>
         <button type="submit" id="demo" class="form__button">Login As Demo User</button>
@@ -65,7 +71,7 @@ function showLogin() {
     `;
   container.appendChild(loginContainer);
   addAuthEvents();
-    return container;
+  return container;
 }
 
 function getStatus() {
@@ -95,153 +101,133 @@ function hideLogin() {
 }
 
 function addAuthEvents() {
-    const form = document.querySelector(".form");
-    const signup = document.querySelector(".form__signup");
-    const login = document.querySelector(".form__login");
-    const cover = document.querySelector(".form__cover");
-    const signupForm = document.querySelector(".signup");
-    const loginForm = document.querySelector(".login");
-    const loginBtn = document.getElementById("login");
-    const signupBtn = document.getElementById("signup");
-    const logoutBtn = document.getElementById("logout");
-    const loginScreen = document.querySelector(".login__container");
+  const form = document.querySelector(".form");
+  const signup = document.querySelector(".form__signup");
+  const login = document.querySelector(".form__login");
+  const cover = document.querySelector(".form__cover");
+  const signupForm = document.querySelector(".signup");
+  const loginForm = document.querySelector(".login");
+  const loginBtn = document.getElementById("login");
+  const signupBtn = document.getElementById("signup");
+  const logoutBtn = document.getElementById("logout");
+  const loginScreen = document.querySelector(".login__container");
   const sidebarLogout = document.getElementById("sidebar__logout");
   const demo = document.getElementById("demo");
-    let loggedIn;
+  let loggedIn;
 
-    let active = "signup";
+  let active = "signup";
 
-    if (loggedIn) {
-        //loginScreen.classList.add("hide");
-    }
-
-    function addActiveLogin() {
-      // login.classList.add("active");
-      // signup.classList.remove("active");
-      console.log("login clicked");
-      cover.classList.add("moveRight");
-      cover.classList.remove("moveLeft");
-      loginForm.classList.remove("hide");
-      signupForm.classList.add("hide");
-      active = "login";
-    }
-
-    function addActiveSignup() {
-      // signup.classList.add("active");
-      // login.classList.remove("active");
-      console.log("signup clicked");
-      cover.classList.add("moveLeft");
-      cover.classList.remove("moveRight");
-      signupForm.classList.remove("hide");
-      loginForm.classList.add("hide");
-      active = "signup";
-    }
-
-    function loginUser(e) {
-        e.preventDefault();
-        //form validation
-        const email = document.getElementById("login__email").value;
-        const password = document.getElementById("login__password").value;
-        signInWithEmailAndPassword(auth, email, password)
-            .then((cred) => {
-              console.log("user logged in", cred.user.displayName);
-              addUserName(cred.user.displayName);
-              if (cred.user.photoURL) {
-                const profilePic = document.getElementById("profile");
-                profilePic.src = cred.user.photoURL;
-              }
-              hideLogin();
-              clearUI();
-              console.log("user loggin in");
-              setLoginStatus(true);
-              //document.location.reload();
-              //renderDashboard();
-          
-              //dashboard.click();
-              //  dashboard.click();
-            }).catch((err) => {
-                console.log(err.message);
-            });
-      
-    }
-
-    function logoutUser() {
-        signOut(auth).then(() => {
-          console.log("user signed out");
-          showLogin();
-          form.reset();
-          setLoginStatus(false);
-          document.location.reload();
-        }).catch((err) => {
-            console.log(err.message);
-        });
-        //make login screen show again
-      
+  if (loggedIn) {
+    //loginScreen.classList.add("hide");
   }
-  
- 
 
-    function signupUser(e) {
-        e.preventDefault;
-        const email = document.getElementById("signup__email").value;
-        const password = document.getElementById("signup__password").value;
-      const username = document.getElementById("username").value;
-      console.log(username);
-        //form validation
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((cred) => {
-            console.log(cred.user);
-            updateProfile(auth.currentUser, { displayName: username });
-            addUserName(username);
-            hideLogin();
-            console.log("user siged up");
-            setLoginStatus(true);
-            //document.location.reload();
-            //renderDashboard();
-          //  dashboard.click();
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      form.reset();
+  function addActiveLogin() {
+    cover.classList.add("moveRight");
+    cover.classList.remove("moveLeft");
+    loginForm.classList.remove("hide");
+    signupForm.classList.add("hide");
+    active = "login";
+  }
+
+  function addActiveSignup() {
+    cover.classList.add("moveLeft");
+    cover.classList.remove("moveRight");
+    signupForm.classList.remove("hide");
+    loginForm.classList.add("hide");
+    active = "signup";
+  }
+
+  function loginUser(e) {
+    e.preventDefault();
+    //form validation
+    const email = document.getElementById("login__email").value;
+    const password = document.getElementById("login__password").value;
+    // formValidation(email, password, "");
+    signInWithEmailAndPassword(auth, email, password)
+      .then((cred) => {
+        addUserName(cred.user.displayName);
+        if (cred.user.photoURL) {
+          const profilePic = document.getElementById("profile");
+          profilePic.src = cred.user.photoURL;
+        }
+        hideLogin();
+        clearUI();
+        setLoginStatus(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function logoutUser() {
+    signOut(auth)
+      .then(() => {
+        showLogin();
+        form.reset();
+        setLoginStatus(false);
+        document.location.reload();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function signupUser(e) {
+    e.preventDefault;
+    const emailWarning = document.querySelector(".email__signup");
+    const email = document.getElementById("signup__email").value;
+    const password = document.getElementById("signup__password").value;
+    const username = document.getElementById("username").value;
+    //form validation
+    // formValidation(email, password, username);
+    // if form validation is true
+    if (email && password && username) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((cred) => {
+          updateProfile(auth.currentUser, { displayName: username });
+          addUserName(username);
+          hideLogin();
+          setLoginStatus(true);
+          form.reset();
+          emailWarning.textContent = "";
+        })
+        .catch((err) => {
+          console.log(err.message);
+          if (err.message === "Firebase: Error (auth/email-already-in-use).") {
+            emailWarning.textContent = "Email already in use!";
+            return;
+          }
+        });
+    }
+    
   }
 
   function addDemoCredentials(e) {
     e.preventDefault();
     const email = document.getElementById("login__email");
     const password = document.getElementById("login__password");
-   // const username = document.getElementById("username");
     email.value = "demo@email.com";
     password.value = "demo1234";
-    //username.value = "demo1234";
   }
-  
 
   onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("auth state changed");
-        setLoginStatus(true);
-        addUserName(user.displayName);
-        hideLogin();
-        clearUI();
-        
-            //loginScreen.classList.remove("display");
-          //loginScreen.classList.add("hide");
-       getAllData(user.displayName);
-        //document.location.reload();
-        //dashboard.click();
-       // dashboard.click();
-      }
-      // else {
-      //   logoutUser();
-      // }
-    })
+    if (user) {
+      setLoginStatus(true);
+      addUserName(user.displayName);
+      hideLogin();
+      clearUI();
+      getAllData(user.displayName);
+    }
+    // else {
+    //   logoutUser();
+    // }
+  });
 
-    login.addEventListener("click", addActiveLogin);
-    signup.addEventListener("click", addActiveSignup);
-    loginBtn.addEventListener("click", loginUser);
-    signupBtn.addEventListener("click", signupUser);
-    logoutBtn.addEventListener("click", logoutUser);
+  login.addEventListener("click", addActiveLogin);
+  signup.addEventListener("click", addActiveSignup);
+  loginBtn.addEventListener("click", loginUser);
+  signupBtn.addEventListener("click", signupUser);
+  logoutBtn.addEventListener("click", logoutUser);
   sidebarLogout.addEventListener("click", logoutUser);
   demo.addEventListener("click", addDemoCredentials);
 }
@@ -259,19 +245,40 @@ function clearUI() {
   });
 }
 
-function formValidation(active) {
-    //if active is login
-    //if active is signup
+function formValidation(em, pass, user) {
+  const emailSignup = document.querySelector(".email__signup");
+  const passwordSignup = document.querySelector(".password__signup");
+  const usernameSignup = document.querySelector(".username__signup");
+  const emailLogin = document.querySelector(".email__login");
+  const passwordLogin = document.querySelector(".password__login");
+  
+  //if active is login
+  if (active === "login") {
+    
+  }
+  //if active is signup
+  if (active === "signup") {
+    if (em === "") {
+      emailSignup.textContent = "Email cannot be blank!";
+    }
+  }
 }
 
- function getLoginStatus() {
-   return firstLogin;
+function getLoginStatus() {
+  return firstLogin;
 }
- 
+
 function setLoginStatus(mode) {
   firstLogin = mode;
 }
 
-//photo upload
-
-export { showLogin, addAuthEvents, getUsername, dashboard, getLoginStatus, setLoginStatus, getStatus, changeStatus };
+export {
+  showLogin,
+  addAuthEvents,
+  getUsername,
+  dashboard,
+  getLoginStatus,
+  setLoginStatus,
+  getStatus,
+  changeStatus,
+};

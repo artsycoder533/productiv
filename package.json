@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:sass": "sass --watch dist",
     "build": "webpack --watch",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "deploy": "git add dist && git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",

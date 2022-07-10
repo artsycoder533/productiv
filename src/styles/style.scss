@@ -674,6 +674,12 @@ footer{
     background: lightgray;
 }
 
+.tasks__button {
+    background: red;
+    color: white;
+    position: absolute;
+}
+
 @media screen and (min-width: 992px){
     .todo__title{
         //width: 100%;
@@ -868,6 +874,14 @@ footer{
 }
 
 /* login form*/
+.email__login,
+.password__login,
+.username__login,
+.email__signup,
+.password__signup {
+    color: red;
+}
+
 .login__container {
  position: fixed;
   top: 0;
