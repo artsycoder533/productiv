@@ -13,6 +13,7 @@ import { getAllData } from "./todo";
 const container = document.querySelector(".container");
 const dashboard = document.getElementById("dashboard");
 let firstLogin = false;
+ let active = "signup";
 
 let status = "";
 
@@ -21,8 +22,8 @@ function showLogin() {
   const loginContainer = createElementWithClass("div", "login__container");
 
   loginContainer.innerHTML = `
-        <div class="form__container">
-    <form action="" class="form">
+  <div class="form__container">
+    <form class="form">
     <h2 class="login__title"><i class="fas fa-business-time"> Productiv</i></h2>
       <div class="form__wrapper">
         <div class="form__signup ">Sign Up</div>
@@ -32,37 +33,37 @@ function showLogin() {
       <div class="form2">
         <div class="form__section signup">
         <div class="form__group">
-          <input id="signup__email"name="email" type="text" class="form__input" placeholder="" required>
+          <input id="signup__email"name="email" type="text" class="form__input" placeholder="">
           <label class="form__label" for="email">Email</label>
           <small class="email__signup"></small>
         </div>
         <div class="form__group">
-            <input id="signup__password" name="password" type="password" class="form__input" placeholder="" required minlength=8>
+            <input id="signup__password" name="password" type="password" class="form__input" placeholder="">
             <label class="form__label" for="password">Password</label>
             <small class="password__signup"></small>
          </div>
         <div class="form__group">
-            <input id="username" type="text" name="username" class="form__input" placeholder="" required>
+            <input id="username" type="text" name="username" class="form__input" placeholder="">
             <label class="form__label" for="username">Username</label>
             <small class="username__signup"></small>
         </div>
-        <button type="submit" id="signup" class="form__button">Sign-Up</button>
+        <button type="" id="signup" class="form__button">Sign-Up</button>
         
       </div>
         
        <div class="form__section login hide">
         <div class="form__group">
-          <input id="login__email" type="text" name="login_email" class="form__input" placeholder="" required>
+          <input id="login__email" type="text" name="login_email" class="form__input" placeholder="">
           <label class="form__label" for="login_email">Email</label>
           <small class="email__login"></small>
         </div>
         <div class="form__group">
-            <input id="login__password" name="login_password" type="password" class="form__input" placeholder="" required minlength=8>
+            <input id="login__password" name="login_password" type="password" class="form__input" placeholder="">
             <label class="form__label" for="login_password">Password</label>
             <small class="password__login"></small>
          </div>
-        <button type="submit" id="login" class="form__button">Login</button>
-        <button type="submit" id="demo" class="form__button">Login As Demo User</button>
+        <button id="login" class="form__button">Login</button>
+        <button id="demo" class="form__button">Login As Demo User</button>
       </div>
       </div>
       </div>
@@ -115,8 +116,6 @@ function addAuthEvents() {
   const demo = document.getElementById("demo");
   let loggedIn;
 
-  let active = "signup";
-
   if (loggedIn) {
     //loginScreen.classList.add("hide");
   }
@@ -140,23 +139,37 @@ function addAuthEvents() {
   function loginUser(e) {
     e.preventDefault();
     //form validation
+    const emailLogin = document.querySelector(".email__login");
+    const passwordLogin = document.querySelector(".password__login");
     const email = document.getElementById("login__email").value;
     const password = document.getElementById("login__password").value;
-    // formValidation(email, password, "");
-    signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => {
-        addUserName(cred.user.displayName);
-        if (cred.user.photoURL) {
-          const profilePic = document.getElementById("profile");
-          profilePic.src = cred.user.photoURL;
-        }
-        hideLogin();
-        clearUI();
-        setLoginStatus(true);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    const result = formValidation(email, password, null);
+    if (result) {
+      if (active === "login") {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((cred) => {
+            addUserName(cred.user.displayName);
+            if (cred.user.photoURL) {
+              const profilePic = document.getElementById("profile");
+              profilePic.src = cred.user.photoURL;
+            }
+            hideLogin();
+            clearUI();
+            setLoginStatus(true);
+            emailLogin.textContent = "";
+            passwordLogin.textContent = "";
+          })
+          .catch((err) => {
+            console.log(err.message);
+            if (err.message === "Firebase: Error (auth/wrong-password).") {
+              passwordLogin.textContent = "Invalid password"
+            }
+            if (err.message === "Firebase: Error (auth/user-not-found).") {
+              emailLogin.textContent = "user not found";
+            }
+          });
+      }
+    } 
   }
 
   function logoutUser() {
@@ -173,33 +186,45 @@ function addAuthEvents() {
   }
 
   function signupUser(e) {
-    e.preventDefault;
-    const emailWarning = document.querySelector(".email__signup");
+    e.preventDefault();
+    const emailSignup = document.querySelector(".email__signup");
+    const passwordSignup = document.querySelector(".password__signup");
+    const usernameSignup = document.querySelector(".username__signup");
     const email = document.getElementById("signup__email").value;
     const password = document.getElementById("signup__password").value;
     const username = document.getElementById("username").value;
     //form validation
-    // formValidation(email, password, username);
-    // if form validation is true
-    if (email && password && username) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((cred) => {
-          updateProfile(auth.currentUser, { displayName: username });
-          addUserName(username);
-          hideLogin();
-          setLoginStatus(true);
-          form.reset();
-          emailWarning.textContent = "";
-        })
-        .catch((err) => {
-          console.log(err.message);
-          if (err.message === "Firebase: Error (auth/email-already-in-use).") {
-            emailWarning.textContent = "Email already in use!";
-            return;
+    const result = formValidation(email, password, username);
+    if (result) {
+      if (active === "signup") {
+            if (email && password && username) {
+              createUserWithEmailAndPassword(auth, email, password)
+                .then((cred) => {
+                  updateProfile(auth.currentUser, { displayName: username });
+                  addUserName(username);
+                  hideLogin();
+                  setLoginStatus(true);
+                  form.reset();
+                  emailSignup.textContent = "";
+                  passwordSignup.textContent = "";
+                  usernameSignup.textContent = "";
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                  if (
+                    err.message ===
+                    "Firebase: Error (auth/email-already-in-use)."
+                  ) {
+                    emailWarning.textContent = "Email already in use!";
+                    return;
+                  }
+                });
+            }
           }
-        });
     }
-    
+    else {
+      return;
+    }
   }
 
   function addDemoCredentials(e) {
@@ -218,9 +243,9 @@ function addAuthEvents() {
       clearUI();
       getAllData(user.displayName);
     }
-    // else {
-    //   logoutUser();
-    // }
+    else {
+      logoutUser();
+    }
   });
 
   login.addEventListener("click", addActiveLogin);
@@ -252,16 +277,45 @@ function formValidation(em, pass, user) {
   const emailLogin = document.querySelector(".email__login");
   const passwordLogin = document.querySelector(".password__login");
   
+  let status = false;
   //if active is login
   if (active === "login") {
-    
+    if (em === "") {
+      emailLogin.textContent = "Enter a valid email";
+      status = false;
+    }
+    if (pass === "") {
+      passwordLogin.textContent = "Invalid password";
+      status = false;
+    }
+    else {
+      status = true;
+      emailLogin.textContent = "";
+      passwordLogin.textContent = "";
+    }
   }
   //if active is signup
   if (active === "signup") {
     if (em === "") {
       emailSignup.textContent = "Email cannot be blank!";
+      status = false;
+    }
+    if (pass === "" || pass.length < 8) {
+      passwordSignup.textContent = "Password must be a minimum of 8 characters";
+      status = false;
+    }
+    if (user === "") {
+      usernameSignup.textContent = "Username cannot be blank";
+      status = false;
+    }
+    else {
+      status = true;
+      emailSignup.textContent = "";
+      passwordSignup.textContent = "";
+      usernameSignup.textContent = "";
     }
   }
+  return status
 }
 
 function getLoginStatus() {
