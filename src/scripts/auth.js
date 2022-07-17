@@ -229,10 +229,12 @@ function addAuthEvents() {
 
   function addDemoCredentials(e) {
     e.preventDefault();
+    const login = document.getElementById("login");
     const email = document.getElementById("login__email");
     const password = document.getElementById("login__password");
     email.value = "demo@email.com";
     password.value = "demo1234";
+    login.click();
   }
 
   onAuthStateChanged(auth, (user) => {
@@ -243,9 +245,9 @@ function addAuthEvents() {
       clearUI();
       getAllData(user.displayName);
     }
-    else {
-      logoutUser();
-    }
+    // else {
+    //   logoutUser();
+    // }
   });
 
   login.addEventListener("click", addActiveLogin);
