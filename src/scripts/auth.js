@@ -195,7 +195,6 @@ function addAuthEvents() {
     const username = document.getElementById("username").value;
     //form validation
     const result = formValidation(email, password, username);
-    console.log('result is ---->', result);
     if (result) {
       if (active === "signup") {
         if (email && password && username) {
@@ -281,7 +280,6 @@ function formValidation(em, pass, user) {
   let status = false;
   //if active is login
   if (active === "login") {
-    console.log('inside active login');
     if (em.trim() === "") {
       emailLogin.textContent = "Enter a valid email";
       status = false;
@@ -297,15 +295,12 @@ function formValidation(em, pass, user) {
   }
   //if active is signup
   if (active === "signup") {
-    console.log('inside active signup')
     const regex = /^([a-z\d\.-_]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-    console.log(regex.test(em));
     if (em.trim() === "" ) {
       emailSignup.textContent = "Email cannot be blank!";
       status = false;
     }
     else if (regex.test(em) === false) {
-      console.log("invalid email");
       emailSignup.textContent = "Please enter valid email!";
       status = false;
     }
@@ -317,7 +312,6 @@ function formValidation(em, pass, user) {
       usernameSignup.textContent = "Username cannot be blank";
       status = false;
     } else {
-      console.log("made it into the else");
       status = true;
       emailSignup.textContent = "";
       passwordSignup.textContent = "";
