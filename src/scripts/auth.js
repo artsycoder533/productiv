@@ -13,7 +13,7 @@ import { getAllData } from "./todo";
 const container = document.querySelector(".container");
 const dashboard = document.getElementById("dashboard");
 let firstLogin = false;
- let active = "signup";
+let active = "signup";
 
 let status = "";
 
@@ -162,14 +162,14 @@ function addAuthEvents() {
           .catch((err) => {
             console.log(err.message);
             if (err.message === "Firebase: Error (auth/wrong-password).") {
-              passwordLogin.textContent = "Invalid password"
+              passwordLogin.textContent = "Invalid password";
             }
             if (err.message === "Firebase: Error (auth/user-not-found).") {
               emailLogin.textContent = "user not found";
             }
           });
       }
-    } 
+    }
   }
 
   function logoutUser() {
@@ -195,34 +195,33 @@ function addAuthEvents() {
     const username = document.getElementById("username").value;
     //form validation
     const result = formValidation(email, password, username);
+    console.log('result is ---->', result);
     if (result) {
       if (active === "signup") {
-            if (email && password && username) {
-              createUserWithEmailAndPassword(auth, email, password)
-                .then((cred) => {
-                  updateProfile(auth.currentUser, { displayName: username });
-                  addUserName(username);
-                  hideLogin();
-                  setLoginStatus(true);
-                  form.reset();
-                  emailSignup.textContent = "";
-                  passwordSignup.textContent = "";
-                  usernameSignup.textContent = "";
-                })
-                .catch((err) => {
-                  console.log(err.message);
-                  if (
-                    err.message ===
-                    "Firebase: Error (auth/email-already-in-use)."
-                  ) {
-                    emailWarning.textContent = "Email already in use!";
-                    return;
-                  }
-                });
-            }
-          }
-    }
-    else {
+        if (email && password && username) {
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((cred) => {
+              updateProfile(auth.currentUser, { displayName: username });
+              addUserName(username);
+              hideLogin();
+              setLoginStatus(true);
+              form.reset();
+              emailSignup.textContent = "";
+              passwordSignup.textContent = "";
+              usernameSignup.textContent = "";
+            })
+            .catch((err) => {
+              console.log(err.message);
+              if (
+                err.message === "Firebase: Error (auth/email-already-in-use)."
+              ) {
+                emailWarning.textContent = "Email already in use!";
+                return;
+              }
+            });
+        }
+      }
+    } else {
       return;
     }
   }
@@ -278,19 +277,19 @@ function formValidation(em, pass, user) {
   const usernameSignup = document.querySelector(".username__signup");
   const emailLogin = document.querySelector(".email__login");
   const passwordLogin = document.querySelector(".password__login");
-  
+
   let status = false;
   //if active is login
   if (active === "login") {
-    if (em === "") {
+    console.log('inside active login');
+    if (em.trim() === "") {
       emailLogin.textContent = "Enter a valid email";
       status = false;
     }
-    if (pass === "") {
+    if (pass.trim() === "") {
       passwordLogin.textContent = "Invalid password";
       status = false;
-    }
-    else {
+    } else {
       status = true;
       emailLogin.textContent = "";
       passwordLogin.textContent = "";
@@ -298,26 +297,34 @@ function formValidation(em, pass, user) {
   }
   //if active is signup
   if (active === "signup") {
-    if (em === "") {
+    console.log('inside active signup')
+    const regex = /^([a-z\d\.-_]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+    console.log(regex.test(em));
+    if (em.trim() === "" ) {
       emailSignup.textContent = "Email cannot be blank!";
       status = false;
     }
-    if (pass === "" || pass.length < 8) {
+    else if (regex.test(em) === false) {
+      console.log("invalid email");
+      emailSignup.textContent = "Please enter valid email!";
+      status = false;
+    }
+    else if (pass.trim() === "" || pass.length < 8) {
       passwordSignup.textContent = "Password must be a minimum of 8 characters";
       status = false;
     }
-    if (user === "") {
+    else if (user.trim() === "") {
       usernameSignup.textContent = "Username cannot be blank";
       status = false;
-    }
-    else {
+    } else {
+      console.log("made it into the else");
       status = true;
       emailSignup.textContent = "";
       passwordSignup.textContent = "";
       usernameSignup.textContent = "";
     }
   }
-  return status
+  return status;
 }
 
 function getLoginStatus() {
