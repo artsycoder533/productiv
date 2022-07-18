@@ -13,7 +13,6 @@
 body {
     overflow: hidden;
     background: rgb(239, 242, 245);
-    // font-size: 1rem;
 }
 
 .dark {
@@ -63,18 +62,14 @@ a {
     align-items: center;
     gap: 1rem;
     z-index: 2;
-    /* width: 100%; */
 }
 
 .header__title {
-    /* border: 1px solid yellow; */
-    /* display: block; */
     width: 100%;
     text-align: center;
     color: white;
     display: grid;
     align-items: center;
-    /* border: 1px solid orange; */
 }
 
 .header__right {
@@ -85,14 +80,11 @@ a {
 }
 
 .header__controls i {
-    /* margin-left: 1.8rem; */
     min-width: 78px;
     text-align: center;
 }
 
 .header__user {
-    /* display: flex;
-    align-items: center; */
     display: grid;
     grid-template-columns: 1fr auto;
     width: 100%;
@@ -114,10 +106,6 @@ a {
 @media screen and (min-width: 992px){
     .header__username{
         display: block;
-    }
-
-    .header__controls i {
-        // display: none;
     }
 }
 
@@ -156,7 +144,6 @@ a {
     z-index: 2;
     border-radius: 1rem;
     visibility: hidden;
-    /* transform: translateX(100%); */
     transition: all 0.4s ease-in-out;
     opacity: 0;
 }
@@ -189,7 +176,6 @@ a {
     left: 0;
     height: 100%;
     width: 260px;
-    /* background: #11101d; */
     background: rgb(0, 0, 0);
     transition: all 0.3s ease-in-out;
     z-index: 1;
@@ -229,7 +215,6 @@ a {
 
 .sidebar__company i {
     height: 50px;
-    // min-width: 78px; 
     text-align: center;
     line-height: 50px;
 }
@@ -240,13 +225,8 @@ a {
 }
 
 .sidebar__links li {
-    // position: relative;
     list-style-type: none;
     transition: all 0.4s ease;
-}
-
-.sidebar__links li:hover {
-    /* background: yellow; */
 }
 
 .sidebar__links li i{
@@ -377,29 +357,22 @@ a {
     display: grid;
     place-items: center;
     z-index: 1;
-    /* opacity: 0; */
     overflow-y: scroll;
 } 
 
 
 .modal__container {
-    // position: fixed;
     max-width: 500px;
     width: 90%;
-    // height: 600px;
     height: 100%;
     display: flex;
-    align-items: center;
-    // height: 400px;
-    
+    align-items: center;    
 } 
  
 .showModal {
     width: 100vw;
     min-height: 100vh;
-    transform: translateX(0);
-    /* opacity: 1; */
-    
+    transform: translateX(0);   
 }
 
 /* form */
@@ -408,7 +381,6 @@ a {
     margin: 0 auto;
     max-width: 500px;
     width: 100%;
-    // height: 100%;
     padding: 2rem;
     background: white;
     display: grid;
@@ -429,8 +401,6 @@ a {
 }
 
 .close {
-    // position: relative;
-    // left: 95%;
     font-size: 2rem;
     color: red;
     cursor: pointer;
@@ -474,7 +444,6 @@ input[type=date]{
 .modal__form .form__inputs, 
 .modal__form textarea
 .modal__form select {
-    // margin-bottom: 1rem;
     padding: 0.5rem;
 }
 
@@ -534,14 +503,13 @@ footer{
 }
 
 /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #555;
-// }
+::-webkit-scrollbar-thumb:hover {
+  border: 1px solid white;
+}
 
 /* container */
 .container {
     position: fixed;
-    //left: 260px;
     top: 50px;
     width: 100%;
     height: calc(100vh - 50px);
@@ -549,7 +517,6 @@ footer{
     z-index: -1;
     overflow-y: scroll;
     border-bottom: 1px dotted lightgray;
-    //display: grid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -571,7 +538,6 @@ footer{
 .todos {
     display: grid;
     gap: 1rem;
-    // max-width: 600px;
     overflow-y: scroll;
 }
 
@@ -580,7 +546,6 @@ footer{
     max-width: 600px;
     width: 90vw;
     margin: 0 auto;
-    //cursor: pointer;
     padding: 0.5rem;
     background: white;
 }
@@ -597,15 +562,6 @@ footer{
     align-items: center;
     position: relative;
 }
-
-.overdue .todo__date::after {
-  
-}
-// .todo__priority {
-//   padding: 0.20rem .4rem;
-//   border-radius: 1rem;
-//   letter-spacing: 1px;
-// } 
 
 .priority {
   padding: 0.20rem .4rem;
@@ -682,7 +638,6 @@ footer{
 
 @media screen and (min-width: 992px){
     .todo__title{
-        //width: 100%;
         white-space:unset;
         overflow:visible;
         text-overflow:unset;
@@ -694,7 +649,6 @@ footer{
 
 .showDetails {
   display: grid;
-//   max-width: 90vw;
   border-top: 1px dotted lightgray;
 }
 
@@ -890,7 +844,6 @@ footer{
   height: calc(100vh - 80px);
   background: linear-gradient(to bottom right, black 0%, black 35%, white 35%, white 65%, red 65%, red 100%);
   color: red;
-  //mix-blend-mode: difference;
   display: grid;
   place-items: center;
   z-index: 1;
@@ -964,7 +917,6 @@ footer{
 .form{
   display: grid;
   padding: 2rem;
-  //padding: 3rem 4rem;
   gap: 2rem;
   position: relative;
 }
@@ -1004,9 +956,6 @@ footer{
   transition: all 0.3s;
 }
 
-// h1 {
-//   text-align: center;
-// }
 
 .form__button {
   padding: 0.65rem;
@@ -1087,41 +1036,11 @@ footer{
     cursor: pointer;
 }
 
-//settings
-.settings{
-  display: grid;
-  max-width: 500px;
-  width: 90vw;
-  margin: 0 auto;
-}
-
-.settings__form{
-  padding: 1rem;
-  gap: 1rem;
-  display: grid;
-  background: white;
-}
-
-.settings__wrapper{
-  width: 100%;
-}
-
-.settings__button{
-    padding: 0.75rem;
-    background: red;
-    color: white;
-    font-weight: bold;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
 // dashboard
 .dashboard-wrapper {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-//   height: 100%;
   padding: 2rem;
   align-items: center;
   text-align: left;
@@ -1161,7 +1080,6 @@ blockquote {
 .dashboard {
   display: grid;
   grid-template-columns: 1fr;
-//   height: 100vh;
   height: 100%;
   width: 100%;
   gap: 2rem;
