@@ -284,6 +284,9 @@ function formValidation(em, pass, user) {
       emailLogin.textContent = "Enter a valid email";
       status = false;
     }
+    else {
+      emailLogin.textContent = "";
+    }
     if (pass.trim() === "") {
       passwordLogin.textContent = "Invalid password";
       status = false;
@@ -304,11 +307,14 @@ function formValidation(em, pass, user) {
       emailSignup.textContent = "Please enter valid email!";
       status = false;
     }
-    else if (pass.trim() === "" || pass.length < 8) {
+    else {
+      emailSignup.textContent = "";
+    }
+    if (pass.trim() === "" || pass.length < 8) {
       passwordSignup.textContent = "Password must be a minimum of 8 characters";
       status = false;
     }
-    else if (user.trim() === "") {
+    if (user.trim() === "") {
       usernameSignup.textContent = "Username cannot be blank";
       status = false;
     } else {
