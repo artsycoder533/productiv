@@ -17,6 +17,7 @@ Productiv is a dashboard application that solves the problem of having to switch
 - Firebase Firestore
 - Firease Authentication
 - Quotes API
+- Async/Await
 
 ### Screenshots
 
